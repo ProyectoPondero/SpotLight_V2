@@ -1,10 +1,13 @@
+import Soporte from './components/soporte'
 import './styles/App.css'
 
 function App() {
 
   return (
     <>
-      <h1>hello world!</h1>
+    <Soporte/>
+
+      <h1>hello world!/ALGO</h1>
     </>
   )
 }
