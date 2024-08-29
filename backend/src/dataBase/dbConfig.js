@@ -1,20 +1,13 @@
-import { Sequelize } from "sequelize";
+import mongoose from "mongoose";
 
-// Database connection from Sequelize
-export const sequelize = new Sequelize(
-    'spotbeta', // Database name
-    'root',
-    '', {
-    host: 'localhost', // Database host
-    dialect: 'mysql'    // Database dialect
-});
+const url = "mongodb://localhost:27017/spotbeta";
 
-// Test connection
 export const connectDB = async () => {
     try {
-        await sequelize.sync();
-        console.log('Conexión establecida con la base de datos');
+        await mongoose.connect(url);
+        console.log("Se conectó a la base de datos:", mongoose.connection.name);
+        return mongoose.connection;
     } catch (error) {
-        console.error('No se a podido establecer la conección:', error);
+        console.error("Error al conectar a la base de datos", error);
     }
 };

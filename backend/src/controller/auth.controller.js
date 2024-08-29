@@ -1,57 +1,49 @@
-import userService from '../services/user.service.js';
+import { userService } from '../services/user.service.js';
 
-// Variables
-const authCtrl = {};
+export const authCtrl = {};
 
-// Functions
-
-// Register a new user
+// Registrar nuevo usuario
 authCtrl.register = async (req, res) => {
     const { userName, email, password } = req.body;
-// Try to create a new user
     try {
         const newUser = await userService.createUser({
             userName,
             email,
             password
         });
-// If the user already exists
+        // Comprobando si el usuario ya existe
         if (newUser instanceof Error) {
             return res.status(400).json({ message: newUser.message });
         }
-// If the user is created
+        // Si el usuario fue creado
         res.status(201).json({
             message: 'Usuario creado correctamente',
             data: newUser
         });
-// If there is an error
+        // Capturando errores
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: 'Error del servidor' });
     };
 };
 
-// Login a user
+// Loguear un usuario
 authCtrl.login = async (req, res) => {
     const { email, password } = req.body;
-// Try to log in
     try {
         const user = await userService.login(email, password);
-// If the user does not exist
+        // Comprobando si el usuario no existe
         if (user instanceof Error) {
             return res.status(400).json({ message: user.message });
         }
-// If the user exists
+        // Si el usuario existe
         res.status(200).json({
             message: 'Usuario logeado correctamente',
             data: user
         });
-// If there is an error
+        // Capturando errores
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: 'Error del servidor' });
     }
 }
-
-// Export
-export default authCtrl;

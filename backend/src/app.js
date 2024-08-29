@@ -2,10 +2,10 @@ import express from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import cors from 'cors';
-import authRoutes from './router/auth.routes.js';
+import { authRoutes } from './router/auth.routes.js';
 import { connectDB } from "./dataBase/dbConfig.js";
 
-// Initializations
+// Inicializacion
 const app = express();
 const PORT = 3000;
 
@@ -16,13 +16,11 @@ app.use(morgan('dev'));
 app.use(helmet());
 app.use(cors());
 
-// Routes
+// Ruras
 app.use('/api/user', authRoutes);
-
-// Connect to DB
-connectDB()
 
 // Server
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    connectDB()
+    console.log(`Server is running on port ${PORT} 🚀`);
 });
