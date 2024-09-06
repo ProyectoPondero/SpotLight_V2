@@ -1,10 +1,13 @@
 import './styles/App.css'
+import FormUploadfile from './components/FormUploadfile'
 
 function App() {
 
   return (
     <>
-      <h1>hello world!</h1>
+      <div className="App">
+        <FormUploadfile />
+      </div>
     </>
   )
 }

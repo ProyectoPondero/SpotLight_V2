@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 import { authRoutes } from './router/auth.routes.js';
 import { connectDB } from "./dataBase/dbConfig.js";
+import { imagesRoutes } from './router/img.routes.js';
 
 // Inicializacion
 const app = express();
@@ -18,6 +19,7 @@ app.use(cors());
 
 // Ruras
 app.use('/api/user', authRoutes);
+app.use('/img', imagesRoutes);
 
 // Server
 app.listen(PORT, () => {
