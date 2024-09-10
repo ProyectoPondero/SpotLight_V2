@@ -24,10 +24,9 @@ imagesCtrl.uploadImg = async (req, res) => {
             await fs.unlink(req.files.file.tempFilePath);
         }
         // Enviar una respuesta de éxito al cliente
-        res.status(200).send({ message: 'Imagen exitosamente.', image });
+        res.status(200).send({ message: 'Imagen subida exitosamente.', image });
     } catch (err) {
         // Manejar errores y enviar una respuesta de error al cliente
-        console.error('Error al subir la imagen:', err);
         res.status(500).send({ message: 'Error al subir la imagen.', error: err });
     }
 };
