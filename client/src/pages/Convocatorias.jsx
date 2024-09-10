@@ -26,30 +26,33 @@ const Convocatorias = () => {
   }, []);
 
   return (
-    <div className="p-32" id="convocatorias-container">
+    <div className="pt-24 pb-40 px-40 w-auto p-0 flex flex-wrap gap-4" id="convocatorias-container">
       {convocatorias.length > 0 ? (
         convocatorias.map((convocatoria, index) => (
           <article key={index} className="articuloCartas">
-            <div className="contenedorCartas">
-              <div className="contenidoCarta">
-                <h2 className="tituloConvocatoria">{convocatoria.titulo}</h2>
-                <p className="parrafoConvocatoria">{convocatoria.bajada}</p>
+            <div className="contenedorCartas w-96 bg-gradient-to-b from-violet-300 rounded">
+              <div className="contenidoCarta flex items-center flex-col gap-4 p-4">
+                <h2 className="tituloConvocatoria font-bold text-lg text-black">{convocatoria.titulo}</h2>
+                <p className="parrafoConvocatoria font-normal">{convocatoria.bajada}</p>
                 <img
-                  className="imagenConvocatoria"
+                  className="imagenConvocatoria max-w-40 rounded"
                   src={convocatoria.imagen}
                   alt={convocatoria.titulo}
                 />
               </div>
-              <a
-                className="linkConvocatoria"
-                type="button"
-                href={convocatoria.link}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Más información
-              </a>
+              <div className='flex justify-center'>
+                <a
+                  className="linkConvocatoria bg-red-500 hover:bg-yellow-400 hover:text-blue-950 p-1 rounded text-white font-bold"
+                  type="button"
+                  href={convocatoria.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Más información
+                </a>
+              </div>
             </div>
+
           </article>
         ))
       ) : (

@@ -4,27 +4,26 @@ import Convocatorias from './pages/Convocatorias.Jsx';
 import { Home } from './pages/Home.jsx';
 import { Perfil } from './pages/Perfil.Jsx';
 import { Header } from './components/Header.jsx';
-import { Aside } from './components/Aside.jsx';
-
+import Footer from './components/Footer.jsx';
+import FormularioSoporte from './pages/Soporte.jsx';
 
 function App() {
   return (
     <Router>
       <Header />
-      <div className="flex">
-        <div className="w-2/12 bg-gray-900 min-h-screen flex justify-center fixed top-20">
-          <Aside />
-        </div>
-        <main className="w-10/12 ml-80">
+      <div className="flex justify-center">
+        <main className="flex justify-center bg-gray-200 min-h-screen w-screen">
           <Routes>
             <Route path="/home" element={<Home />} />
             <Route path="/Perfil" element={<Perfil />} />
             <Route path="/Convocatorias" element={<Convocatorias />} />
+            <Route path="/soporte" element={<FormularioSoporte />} />
           </Routes>
         </main>
       </div>
-    </Router>
+      {window.location.pathname !== '/home' && <Footer />}
 
+    </Router>
   );
 }
 
