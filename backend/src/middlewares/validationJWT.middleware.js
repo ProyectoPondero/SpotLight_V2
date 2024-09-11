@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { JWT_KEY } from '../configs/env.config.js';
-import { connectDB } from '../dataBase/dbConfig.js';
+import { connectDB } from '../dataBase/dataBase.js';
 import { userModel } from '../models/user.model.js';
 
 // Middleware para verificar el token JWT

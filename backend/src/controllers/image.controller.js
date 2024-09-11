@@ -1,4 +1,4 @@
-import { uploadImg } from "../utils/cloudinary.utils.js";
+import { uploadImg } from "../utils/cloudinary.util.js";
 import { imgModel } from "../models/img.model.js";
 import fs from 'fs-extra';
 

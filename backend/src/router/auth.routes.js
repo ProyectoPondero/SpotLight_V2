@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { validarJWT } from '../middlewares/validationJWT.middleware.js';
-import { authCtrl } from '../controller/auth.controller.js';
+import { authCtrl } from '../controllers/auth.controller.js';
 
 // Inicializacion
 export const authRoutes = Router();
