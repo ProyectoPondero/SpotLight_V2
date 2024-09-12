@@ -2,10 +2,10 @@ import React from 'react'
 
 export const Perfil = () =>{
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 mt-">
       <section className="bg-white shadow-md rounded-lg overflow-hidden">
         {/* Header */}
-        <div className="relative">
+        <div className="relative button">
           <div className="h-48 bg-blue-500"></div>
           <div className="absolute inset-0 flex justify-center items-center -bottom-12">
             <div className="w-24 h-24 rounded-full overflow-hidden shadow-lg">

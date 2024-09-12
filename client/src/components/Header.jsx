@@ -1,8 +1,9 @@
 import React from 'react'
-import Dropdown from './Botones';
+import Dropdown from './buttons/botones';
 
 
-export default  Header = () => {
+
+export const  Header = () => {
 return (
     <>
     <header className="flex w-screen bg-gray-900 px-4 h-16 z-1 fixed border-b-2 border-red-400">
