@@ -11,7 +11,7 @@ export default function FormUploadfile() {
                     e.preventDefault();
 
                     const formData = new FormData();
-                    formData.append('file', file);
+                    formData.append('img', file);
 
                     try {
                         const response = await fetch('http://localhost:3368/img/upload', {
