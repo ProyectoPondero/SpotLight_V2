@@ -5,19 +5,19 @@ import { Home } from './pages/Home.jsx';
 import { Perfil } from './pages/Perfil.Jsx';
 import { Header } from './components/Header.jsx';
 import Footer from './components/Footer.jsx';
-import FormularioSoporte from './pages/Soporte.jsx';
+import { Soporte } from './pages/Soporte.jsx';
 
 function App() {
   return (
     <Router>
       <Header />
       <div className="flex justify-center">
-        <main className="flex justify-center bg-gray-200 min-h-screen w-screen">
+        <main className="bg-gray-200 min-h-screen w-screen">
           <Routes>
             <Route path="/home" element={<Home />} />
             <Route path="/Perfil" element={<Perfil />} />
             <Route path="/Convocatorias" element={<Convocatorias />} />
-            <Route path="/soporte" element={<FormularioSoporte />} />
+            <Route path="/soporte" element={<Soporte />} />
           </Routes>
         </main>
       </div>

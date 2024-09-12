@@ -1,65 +1,35 @@
-import React, { useState } from 'react';
+import React from 'react'
 
-const FormularioSoporte = () => {
-    const [asunto, setAsunto] = useState('');
-    const [comentarios, setComentarios] = useState('');
-    const [aceptarTerminos, setAceptarTerminos] = useState(false);
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (aceptarTerminos) {
-            // Aquí puedes manejar el envío del formulario
-            console.log("Formulario enviado con los datos:", { asunto, comentarios, aceptarTerminos });
-        } else {
-            alert("Por favor, acepta los términos y condiciones.");
-        }
-    };
-
+export const Soporte = () => {
     return (
-        <article className="formulario m-40 flex items-center bg-red-600">
-            <div className="imagenFormulario"></div>
-            <form id="formularioSoporte" className='p-4' onSubmit={handleSubmit}>
-                <section className="asuntoSoporte">
-                    <label htmlFor="Asunto">Asunto</label>
-                    <select
-                        className="selectSoporte"
-                        name="Asunto"
-                        value={asunto}
-                        onChange={(e) => setAsunto(e.target.value)}
-                    >
-                        <option value="">Elige un Asunto...</option>
-                        <option value="Errores del Sitio Web">Errores del Sitio Web</option>
-                        <option value="Consultas">Consultas</option>
-                        <option value="Sugerencias">Sugerencias</option>
-                    </select>
-                </section>
-                <section className="seccionComentarios">
-                    <label htmlFor="Comentarios">Comentarios</label>
-                    <textarea
-                        className="textoSoporte"
-                        name="Comentarios"
-                        value={comentarios}
-                        onChange={(e) => setComentarios(e.target.value)}
-                        required
-                        minLength="25"
-                    ></textarea>
-                </section>
-                <section>
-                    <input
-                        className="checkbox"
-                        type="checkbox"
-                        checked={aceptarTerminos}
-                        onChange={() => setAceptarTerminos(!aceptarTerminos)}
-                        required
-                    />
-                    <span>Acepta los términos y condiciones.</span>
-                </section>
-                <div className="botonSubmit">
-                    <input type="submit" value="Enviar" />
+        <div className='pt-24 min-h-screen p-2 bg-hero-pattern bg-cover'>
+            <div className='mt-20 flex justify-center'>
+                <div className='flex border-3 rounded bg-gray-50 justify-center h-96'>
+                    <img className='rounded w-3/6 h-6/6' src="/src/assets/img/soporte.png" alt="" />
+                    <form className='flex flex-col gap-4 p-4 pt-10' action="">
+                        <article className='flex flex-col gap-2'>
+                            <label className='font-semibold text-lg' for="asunto">¿Cuál es tu asunto?</label>
+                            <select className='p-2 border shadow border-gray-300' name="opciones" id="">
+                                <option value="1">Sugerencia</option>
+                                <option value="2">Reporte</option>
+                                <option value="3">Consultas</option>
+                            </select>
+                        </article>
+                        <article className='flex flex-col gap-2'>
+                            <label className='font-semibold text-lg' for="mensaje">¿En qué piensas?</label>
+                            <textarea className='h-24 borded shadow-md p-2 border-gray-700 rounded' name="mensaje" id=""></textarea>
+                        </article>
+                        <article className='flex items-center gap-1'>
+                            <input type="checkbox" id="checkbox1" name="checkbox1" value="option1" />
+                            <label for="checkbox1">He leído y acepto los términos y condiciones</label>
+                        </article>
+                        <article>
+                            <button type="submit" className='bg-blue-500 hover:bg-blue-700 text-white w-full py-2 rounded'>Enviar</button>
+                        </article>
+                    </form>
                 </div>
-            </form>
-        </article>
-    );
-};
+            </div>
+        </div>
+    )
+}
 
-export default FormularioSoporte;
