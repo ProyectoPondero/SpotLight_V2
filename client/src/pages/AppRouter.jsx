@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PrivateRoutes from "./private/PrivateRoutes";
 import PublicRoutes from "./public/PublicRoutes";
+import { Login } from "../views/login/Login";
+import { Register } from "../views/register/Register";
 
 const AppRouter = () => {
     return (
@@ -10,12 +12,12 @@ const AppRouter = () => {
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                 </Route>
-                <Route element={<PrivateRoutes />}>
+                {/* <Route element={<PrivateRoutes />}>
                     <Route path="/home" element={<Home />} />
                     <Route path="/message" element={<Message />} />
                     <Route path="/support" element={<Support />} />
                     <Route path="/profile" element={<Profile />} />
-                </Route>
+                </Route> */}
             </Routes>
         </BrowserRouter>
     );
