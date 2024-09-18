@@ -22,9 +22,9 @@ const Dropdown = () => {
         >
             {/* Botón que controla el dropdown */}
             <button
-                className="inline-flex justify-center w-full rounded-md shadow-sm px-4 py-1  hover:bg-gray-800 text-white hover:text-yellow-500 hover:font-bold "
+                className="rounded px-2 flex items-end hover:bg-gray-300 dark:hover:bg-gray-800 dark:hover:text-yellow-500 hover:font-bold py-1 "
             >
-                <p className="text-lg p-1 w-24">Descubre</p>
+                <p className="text-lg px-2 flex items-end w-24">Descubre</p>
                 <svg
                     className="-mr-1 ml-2 h-5 w-5 mt-1"
                     xmlns="http://www.w3.org/2000/svg"

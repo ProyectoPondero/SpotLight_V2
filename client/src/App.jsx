@@ -6,6 +6,7 @@ import { Perfil } from './pages/Perfil.Jsx';
 import { Header } from './components/Header.jsx';
 import Footer from './components/Footer.jsx';
 import { Soporte } from './pages/Soporte.jsx';
+import './styles/app.css'
 
 function App() {
   return (
