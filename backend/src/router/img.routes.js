@@ -5,3 +5,4 @@ import { imgUploadMiddleware } from "../middlewares/imgUpload.middleware.js";
 export const imagesRoutes = Router();
 
 imagesRoutes.post('/upload', imgUploadMiddleware, imagesCtrl.uploadImg);
+imagesRoutes.delete('/delete/:id', imagesCtrl.deleteImg);
