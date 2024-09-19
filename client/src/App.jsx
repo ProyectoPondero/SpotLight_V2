@@ -13,7 +13,7 @@ function App() {
     <Router>
       <Header />
       <div className="flex justify-center">
-        <main className="bg-gray-200 min-h-screen w-screen">
+        <main className="bg-slate-200 min-h-screen w-screen">
           <Routes>
             <Route path="/home" element={<Home />} />
             <Route path="/Perfil" element={<Perfil />} />
