@@ -37,17 +37,14 @@ authCtrl.login = async (req, res) => {
         if (user instanceof Error) {
             return res.status(400).json({ message: user.message });
         }
-
         // Generar token JWT
         const token = await generarJWT(user._id);
-
         // Almacenar el token en una cookie segura
         res.cookie('authToken', token, {
             httpOnly: true, // La cookie no es accesible desde JavaScript
             secure: false, // Cambiar a true en producción con HTTPS
             maxAge: 3600000 // Expiración en milisegundos (1 hora)
         });
-
         // Si el usuario existe
         res.status(200).json({
             message: 'Usuario logeado correctamente',

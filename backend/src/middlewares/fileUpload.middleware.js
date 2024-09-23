@@ -1,6 +1,6 @@
 import fileUpload from 'express-fileupload';
 
-export const imgUploadMiddleware = fileUpload({
+export const fileUploadMiddleware = fileUpload({
     useTempFiles: true,
     tempFileDir: './temp'
 });

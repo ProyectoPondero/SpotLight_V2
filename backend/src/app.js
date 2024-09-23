@@ -6,7 +6,7 @@ import cookieParser from 'cookie-parser';
 import { validateOrigins } from './configs/cors.config.js';
 import { corsMiddleware } from './middlewares/cors.middleware.js';
 import { authRoutes } from './router/auth.routes.js';
-import { imagesRoutes } from './router/img.routes.js';
+import { publicationRoutes } from './router/publication.routes.js';
 import { connectDB } from "./dataBase/dataBase.js";
 import { PORT } from './configs/env.config.js';
 
@@ -24,7 +24,7 @@ app.use(helmet());
 
 // Ruras
 app.use('/api/user', authRoutes);
-app.use('/img', imagesRoutes);
+app.use('/publication', publicationRoutes);
 
 // Server
 app.listen(PORT, () => {

@@ -8,12 +8,12 @@ cloudinary.config({
     secure: true
 });
 
-export async function uploadImg(filePath) {
+export async function uploadFile(filePath) {
     return await cloudinary.uploader.upload(filePath, {
         folder: 'Spotlight'
     });
 };
 
-export async function deleteImg(public_id) {
+export async function deleteFile(public_id) {
     return await cloudinary.uploader.destroy(public_id);
 };
