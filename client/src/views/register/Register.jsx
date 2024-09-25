@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { registerUser } from "../../services/auth.service.js";
 import { useNavigate, Link } from "react-router-dom";
 import "./register.css";
 
@@ -20,17 +21,9 @@ export const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:3368/api/user/register", {
-        method: "POST",
-        body: JSON.stringify(form),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const result = await registerUser(form);
 
-      const result = await response.json();
-
-      if (response.ok) {
+      if (result.success) {
         navigate("/login");
       }
     } catch (error) {
@@ -46,13 +39,13 @@ export const Register = () => {
       >
         <h2 className="text-2xl font-bold mb-6 text-center text-white">Registro</h2>
         <div className="mb-4">
-          <label className="block text-gray-300 text-sm font-bold mb-2" htmlFor="username">
+          <label className="block text-gray-300 text-sm font-bold mb-2" htmlFor="userName">
             Nombre de usuario
           </label>
           <input
             type="text"
-            name="username"
-            id="username"
+            name="userName"
+            id="userName"
             onChange={handleChange}
             className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-700 text-white"
           />

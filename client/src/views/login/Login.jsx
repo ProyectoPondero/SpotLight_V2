@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { userType } from "../../contexts/userTypes";
+import { loginUser } from "../../services/auth.service.js";
 import { Link } from "react-router-dom";
 import "./login.css";
 
@@ -8,8 +9,8 @@ export const Login = () => {
   const { stateDispatch } = useContext(UserContext);
 
   const [form, setForm] = useState({
-    usuario: "",
-    contrasenia: "",
+    email: "",
+    password: "",
   });
 
   const handleChange = ({ target }) => {
@@ -22,21 +23,13 @@ export const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const peticion = await fetch("http://localhost:3368/api/user/login", {
-      method: "POST",
-      body: JSON.stringify(form),
-      headers: {
-        "Content-type": "application/json",
-      },
-    });
+    const response = await loginUser(form);
 
-    const response = await peticion.json();
-
-    if (peticion.ok) {
+    if (response.ok) {
       stateDispatch({
         type: userType.logIn,
         token: response.token,
-        usuario: form.usuario,
+        usuario: form.email,
       });
     }
 
@@ -47,7 +40,7 @@ export const Login = () => {
     <main className="flex items-center justify-center min-h-screen bg-gray-900">
       <div className="w-full max-w-md bg-gray-800 p-8 rounded-lg shadow-md">
         <div className="mb-6 text-center">
-          <h2 className="text-2xl font-bold text-white">Login</h2>
+          <h2 className="text-2xl font-bold text-white">Inicio Sesión</h2>
         </div>
         <form className="" onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -65,12 +58,12 @@ export const Login = () => {
             />
           </div>
           <div className="relative mb-6">
-            <label htmlFor="contrasenia" className="block text-gray-300 text-sm font-bold mb-2">
+            <label htmlFor="password" className="block text-gray-300 text-sm font-bold mb-2">
               Contraseña
             </label>
             <input
-              id="contrasenia"
-              name="contrasenia"
+              id="password"
+              name="password"
               type="password"
               autoComplete="current-password"
               required

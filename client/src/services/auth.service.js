@@ -17,10 +17,10 @@ const fetchData = async (endpoint, options) => {
 };
 
 // Registrar usuario
-export const registerUser = async ({ userName, email, password, repeatPassword }) => {
+export const registerUser = async ({ userName, email, password }) => {
     return fetchData(URL + `register/`, {
         method: "POST",
-        body: JSON.stringify({ userName, email, password, repeatPassword }),
+        body: JSON.stringify({ userName, email, password }),
         headers: {
             "Content-Type": "application/json",
         },
