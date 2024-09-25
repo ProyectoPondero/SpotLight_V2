@@ -1,6 +1,6 @@
 import { API_URL } from "../config/env.config.js";
 
-const URL = API_URL + `/api/user`;
+const URL = API_URL + `api/user/`;
 
 // Función auxiliar para manejar las solicitudes fetch
 const fetchData = async (endpoint, options) => {
@@ -18,7 +18,7 @@ const fetchData = async (endpoint, options) => {
 
 // Registrar usuario
 export const registerUser = async ({ userName, email, password, repeatPassword }) => {
-    return fetchData(URL + `/register`, {
+    return fetchData(URL + `register/`, {
         method: "POST",
         body: JSON.stringify({ userName, email, password, repeatPassword }),
         headers: {
@@ -30,7 +30,7 @@ export const registerUser = async ({ userName, email, password, repeatPassword }
 
 // Loguear usuario
 export const loginUser = async ({ email, password }) => {
-    return fetchData(URL + `/login`, {
+    return fetchData(URL + `login/`, {
         method: "POST",
         body: JSON.stringify({ email, password }),
         headers: {
@@ -42,7 +42,7 @@ export const loginUser = async ({ email, password }) => {
 
 // Validar la sesion del usuario
 export const sessionUser = async () => {
-    return fetchData(URL + `/session`, {
+    return fetchData(URL + `session/`, {
         method: "GET",
         credentials: "include"
     });
@@ -50,7 +50,7 @@ export const sessionUser = async () => {
 
 // Desloguear usuario
 export const logoutUser = async () => {
-    return fetchData(URL + `/logout`, {
+    return fetchData(URL + `logout/`, {
         method: "POST",
         credentials: "include"
     });
