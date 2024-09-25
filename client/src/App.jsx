@@ -15,14 +15,14 @@ function App() {
       <div className="flex justify-center">
         <main className="bg-slate-200 dark:bg-gray-400 min-h-screen w-screen">
           <Routes>
-            <Route path="/home" element={<Home />} />
+            <Route path="/" element={<Home />} />
             <Route path="/Perfil" element={<Perfil />} />
             <Route path="/Convocatorias" element={<Convocatorias />} />
             <Route path="/soporte" element={<Soporte />} />
           </Routes>
         </main>
       </div>
-      {window.location.pathname !== '/home' && <Footer />}
+      {window.location.pathname !== '/' && <Footer />}
 
     </Router>
   );

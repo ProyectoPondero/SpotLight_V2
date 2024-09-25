@@ -46,7 +46,7 @@ export const Header = () => {
           <div className='hidden md:flex w-4/5 justify-between md:items-end'>
             <ul className='flex text-lg gap-1 font-bold dark:text-gray-100 relative top-1'>
               <li className='rounded px-2 flex items-end hover:bg-gray-300 dark:hover:bg-gray-800 dark:hover:text-yellow-500 hover:font-bold py-1'>
-                <a href="/home">Home</a>
+                <a href="/">Home</a>
               </li>
               <li className='rounded px-2 flex items-end hover:bg-gray-300 dark:hover:bg-gray-800 dark:hover:text-yellow-500 hover:font-bold py-1'>
                 <a href="/comunidad">Mensajes</a>
@@ -87,7 +87,7 @@ export const Header = () => {
                 </button>
               </li>
               <li className='rounded px-2 flex items-end hover:bg-gray-300 dark:hover:bg-gray-800 dark:hover:text-yellow-500 font-bold py-1'>
-                <a href="/home">Home</a>
+                <a href="/">Home</a>
               </li>
               <li className='rounded px-2 flex items-end hover:bg-gray-300 dark:hover:bg-gray-800 dark:hover:text-yellow-500 font-bold py-1'>
                 <a href="/soporte">Soporte</a>
