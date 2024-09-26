@@ -1,18 +1,19 @@
 import { useContext, useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
-import { userType } from "../../contexts/userTypes";
-import { loginUser } from "../../services/auth.service.js";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./login.css";
 
 export const Login = () => {
-  const { stateDispatch } = useContext(UserContext);
-
+  // Estado inicial del formulario
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
 
+  // Hook para la navegación
+  const navigate = useNavigate();
+
+  // Manejar cambios en los campos del formulario
   const handleChange = ({ target }) => {
     const { value, name } = target;
     setForm({
@@ -21,19 +22,17 @@ export const Login = () => {
     });
   };
 
+  // Obtener la función login del contexto de usuario
+  const { login } = useContext(UserContext);
+
+  // Manejar el envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await loginUser(form);
-
-    if (response.ok) {
-      stateDispatch({
-        type: userType.logIn,
-        token: response.token,
-        usuario: form.email,
-      });
+    const response = await login(form);
+    if (response) {
+      alert(response.data.userName);
+      return navigate("/home");
     }
-
-    alert(response.msg);
   };
 
   return (
@@ -42,7 +41,7 @@ export const Login = () => {
         <div className="mb-6 text-center">
           <h2 className="text-2xl font-bold text-white">Inicio Sesión</h2>
         </div>
-        <form className="" onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="email" className="block text-gray-300 text-sm font-bold mb-2">
               Correo electrónico

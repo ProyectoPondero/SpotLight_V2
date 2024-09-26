@@ -5,7 +5,10 @@ import "./register.css";
 
 // Componente de registro
 export const Register = () => {
+  // Hook para la navegación
   const navigate = useNavigate();
+
+  // Estado inicial del formulario
   const [form, setForm] = useState({});
 
   // Maneja los cambios en los campos del formulario
@@ -22,9 +25,8 @@ export const Register = () => {
     e.preventDefault();
     try {
       const result = await registerUser(form);
-
-      if (result.success) {
-        navigate("/login");
+      if (result) {
+        navigate("/");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -78,7 +80,7 @@ export const Register = () => {
           <div className="text-sm text-gray-300">
             ¿Ya tienes una cuenta?{" "}
             <Link
-              to="/login"
+              to="/"
               className="text-blue-400 hover:text-blue-600"
             >
               Inicia sesión

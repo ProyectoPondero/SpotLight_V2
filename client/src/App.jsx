@@ -1,27 +1,17 @@
-import './App.css'
-import { useReducer } from "react";
-import { UserContext } from './contexts/UserContext.jsx'
-import AppRouter from './pages/AppRouter.jsx'
-import { userReducer } from "./contexts/userReducer.js";
-
+import './App.css';
+import AppRouter from './pages/AppRouter.jsx';
+import { UserContextProvider } from './contexts/UserContexProvider.jsx';
 
 function App() {
-  // Función para obtener el token del usuario desde localStorage
-  const obtenerToken = () =>
-    JSON.parse(localStorage.getItem("userData")) || { isLogged: false };
-
-  // useReducer para manejar el estado del usuario con el reducer y el estado inicial
-  const [state, stateDispatch] = useReducer(userReducer, {}, obtenerToken);
   return (
-    <>
-      <UserContext.Provider value={{ state, stateDispatch }}>
-        <AppRouter />
-      </UserContext.Provider>
-    </>
-  )
+    // Proveedor de contexto de usuario
+    <UserContextProvider>
+      <AppRouter />
+    </UserContextProvider>
+  );
 }
 
-export default App
+export default App;
 
 // import './App.css'
 // import FormUploadfile from './components/FormUploadfile'
