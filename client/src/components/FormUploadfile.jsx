@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { uploadPublication } from '../services/publication.service.js';
+import { uploadPublication } from "../services/publication.service.js";
 
 export default function FormUploadfile() {
     const [file, setFile] = useState(null);
@@ -7,9 +7,9 @@ export default function FormUploadfile() {
     const [description, setDescription] = useState('');
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-900">
+        <>
             <form
-                className="bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4 w-1/2"
+                className=" dark:bg-gray-800 shadow-2xl rounded px-8 pt-6 pb-8 mb-4 w-4/5"
                 onSubmit={async (e) => {
                     e.preventDefault();
 
@@ -27,11 +27,10 @@ export default function FormUploadfile() {
                 }}
             >
                 <div className="mb-4">
-                    <div className="text-white text-2xl font-bold text-center mb-6">Nueva publicación</div>
                     <input
                         type='text'
                         placeholder='Título'
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-300 bg-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-black dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
                         value={title}
                         onChange={(e) => {
                             setTitle(e.target.value);
@@ -39,7 +38,7 @@ export default function FormUploadfile() {
                     />
                     <textarea
                         placeholder='Descripción'
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-300 bg-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
+                        className="shadow appearance-none border rounded w-full py-2 px-3  dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
                         value={description}
                         onChange={(e) => {
                             setDescription(e.target.value);
@@ -47,7 +46,7 @@ export default function FormUploadfile() {
                     />
                     <input
                         type='file'
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-300 bg-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
                         onChange={(e) => {
                             setFile(e.target.files[0]);
                         }}
@@ -62,6 +61,7 @@ export default function FormUploadfile() {
                     </button>
                 </div>
             </form>
-        </div>
+
+        </>
     );
 }
