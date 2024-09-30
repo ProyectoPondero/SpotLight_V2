@@ -10,16 +10,16 @@ export const Footer = () => {
                     {/* Sección de opciones a la izquierda */}
                     <div className="text-center mb-4 sm:mb-0 flex flex-col items-center gap-2 p-3">
                         <article className='flex items-center gap-3'>
-                            <img className='h-12 w-12' src="src/assets/img/spot.png" alt="IconoSpot" />
+                            <img className='h-12 w-12' src="/spotlight.ico" alt="IconoSpot" />
                             <h5 className="text-xl font-bold">Equipo SpotLight</h5>
                         </article>
                     </div>
 
                     <div className="flex flex-col w-auto gap-3 font-bold text-white p-2 items-center">
                         <div className='flex w-60 justify-around items-center'>
-                            <img className='w-12 h-12' src="/src/assets/img/sponsor.png" alt="" />
-                            <img className='h-12 w-12' src="/src/assets/img/ipf.png" alt="" />
-                            <img className='w-14 h-14' src="/src/assets/img/linkedin.png" alt="" />
+                            <img className='w-12 h-12' src="/src/assets/images/sponsor.png" alt="" />
+                            <img className='h-12 w-12' src="/src/assets/images/ipf.png" alt="" />
+                            <img className='w-14 h-14' src="/src/assets/images/linkedin.png" alt="" />
                         </div>
                         <span className=' box-border text-black dark:text-gray-200'>
                             SPONSORS DEL PROYECTO

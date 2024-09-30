@@ -11,7 +11,7 @@ export const Soporte = () => {
                     <div className='pt-24 min-h-screen p-2 bg-hero-pattern bg-cover'>
                         <div className='mt-20 flex justify-center'>
                             <div className='flex border-3 rounded bg-gray-50 justify-center h-96 p-4 py-0 dark:bg-gray-700'>
-                                <img className='rounded w-3/6 h-5/6 hidden md:block' src="/src/assets/img/soporte.png" alt="" />
+                                <img className='rounded w-3/6 h-5/6 hidden md:block' src="/src/assets/images/soporte.png" alt="" />
                                 <form className='flex flex-col  h-auto py-12 justify-around md:px-8 sm:p-4 lg:px-2' action="">
                                     <article className='flex flex-col gap-2 h-auto'>
                                         <label className='font-semibold text-lg dark:text-slate-100' for="asunto">¿Cuál es tu asunto?</label>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Dropdown from './Botones.jsx';
+import Dropdown from './Dropdown.jsx';
 
 export const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -30,7 +30,7 @@ export const Header = () => {
             <header className="flex w-full bg-slate-200 px-4 h-20 z-1 fixed border-b-1 dark:border-red-400 shadow-lg dark:shadow-none  dark:bg-gray-900">
                 <nav className='flex justify-evenly items-center px-4 w-screen gap-9'>
                     <div className='flex items-center font-bold text-black dark:text-gray-100'>
-                        <img className='h-10 md:h-12 p-1' src="./public/spotlight.ico" alt="icon Spot" />
+                        <img className='h-10 md:h-12 p-1' src="/spotlight.ico" alt="icon Spot" />
                         <h1 className='p-2 pl-2 md:text-2xl sm:text-xl'>Spotlight</h1>
                     </div>
 
@@ -58,7 +58,7 @@ export const Header = () => {
 
                         <div className='flex items-center gap-4'>
                             <button className='px-2 rounded-full h-8 flex items-center'>
-                                <Link to="/perfil">
+                                <Link to="/profile">
                                     <i className="fa-solid fa-user text-gray-500 hover:text-black dark:hover:text-white text-2xl"></i>
                                 </Link>
                             </button>
