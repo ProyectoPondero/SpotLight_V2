@@ -1,9 +1,7 @@
-import { userModel } from '../model/user.model.js';
+import { userModel } from '../models/user.model.js';
 import bcryptHelper from '../helpers/bcrypt.js';
 
 export const userService = {};
-
-// CRUD Functions
 
 // Crear nuevo usuario
 userService.createUser = async (user) => {

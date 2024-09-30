@@ -2,25 +2,32 @@ import express from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
+import { validateOrigins } from './configs/cors.config.js';
+import { corsMiddleware } from './middlewares/cors.middleware.js';
 import { authRoutes } from './router/auth.routes.js';
-import { connectDB } from "./dataBase/dbConfig.js";
+import { publicationRoutes } from './router/publication.routes.js';
+import { connectDB } from "./dataBase/dataBase.js";
+import { PORT } from './configs/env.config.js';
 
 // Inicializacion
 const app = express();
-const PORT = 3000;
 
 // Middlewares
 app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
+app.use(cors(validateOrigins));
+app.use(corsMiddleware);
 app.use(morgan('dev'));
+app.use(express.json());
+app.use(cookieParser());
 app.use(helmet());
-app.use(cors());
 
 // Ruras
 app.use('/api/user', authRoutes);
+app.use('/publication', publicationRoutes);
 
 // Server
 app.listen(PORT, () => {
     connectDB()
-    console.log(`Server is running on port ${PORT} 🚀`);
+    console.log(`Server corriendo en el puerto: ${PORT}🚀`);
 });
