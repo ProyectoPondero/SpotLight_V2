@@ -11,7 +11,7 @@ export const Footer = () => {
                     <div className="text-center mb-4 sm:mb-0 flex flex-col items-center gap-2 p-3">
                         <article className='flex items-center gap-3'>
                             <img className='h-12 w-12' src="/spotlight.ico" alt="IconoSpot" />
-                            <h5 className="text-xl font-bold">Equipo SpotLight</h5>
+                            <h5 className="text-xl font-bold">Equipo Spotlight</h5>
                         </article>
                     </div>
 

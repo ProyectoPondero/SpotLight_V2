@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Dropdown from './Dropdown.jsx';
-import { sessionUser } from '../services/auth.service.js';
+import { logoutUser } from '../services/auth.service.js';
 
 export const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -28,9 +28,14 @@ export const Header = () => {
         setMenuOpen(!menuOpen);
     };
 
+    const logoutButton = async () => {
+        await logoutUser();
+        window.location.href = '/';
+    };
+
     return (
         <>
-            <header className="flex w-screen bg-gray-200 h-20 z-1 fixed border-b-1 dark:border-red-400 shadow-lg dark:shadow-none  dark:bg-gray-900">
+            <header className="flex w-screen bg-gray-200 h-20 z-40 fixed border-b-1 dark:border-red-400 shadow-lg dark:shadow-none  dark:bg-gray-900">
                 <nav className='flex justify-evenly items-center  w-full gap-9 px-4'>
                     <div className='flex items-center font-bold text-black dark:text-gray-100'>
                         <img className='h-10 md:h-12 p-1' src="/spotlight.ico" alt="icon Spot" />
@@ -49,7 +54,7 @@ export const Header = () => {
                                 <Link to="/">Home</Link>
                             </li>
                             <li className='rounded px-2 flex items-end hover:bg-gray-300 dark:hover:bg-gray-800 dark:hover:text-yellow-500 hover:font-bold py-1'>
-                                <Link to="/comunidad">Mensajes</Link>
+                                <Link to="/messagge">Mensajes</Link>
                             </li>
                             <li className='rounded px-2 flex items-end hover:bg-gray-300 dark:hover:bg-gray-800 dark:hover:text-yellow-500 hover:font-bold py-1'>
                                 <Link to="/support">Soporte</Link>
@@ -65,7 +70,7 @@ export const Header = () => {
                                     <i className="fa-solid fa-user text-gray-500 hover:text-black dark:hover:text-white text-2xl"></i>
                                 </Link>
                             </button>
-                            <button className='bg-gray-800 hover:bg-red-500 text-gray-100 font-bold py-2 px-4 rounded border-1 border-red-800'>
+                            <button onClick={logoutButton} className='bg-gray-800 hover:bg-red-500 text-gray-100 font-bold py-2 px-4 rounded border-1 border-red-800'>
                                 Logout
                             </button>
                             <a onClick={toggleTheme} className='py-1 px-2 bg-gray-200 dark:bg-gray-900 rounded-full'>
@@ -80,19 +85,19 @@ export const Header = () => {
                         <ul className='flex flex-col items-center text-lg gap-4 p-4 shadow-lg bg-gray-200 dark:bg-gray-900 rounded'>
                             <li className='rounded p-2'>
                                 <button className='border border-red-600 px-2 rounded-full h-8 flex items-center'>
-                                    <Link to="/perfil">
+                                    <Link to="/profile">
                                         <i className="fa-solid fa-user text-red-600"></i>
                                     </Link>
                                 </button>
                             </li>
                             <li className='rounded px-2 flex items-end hover:bg-gray-300 dark:hover:bg-gray-800 dark:hover:text-yellow-500 font-bold py-1'>
-                                <Link to="/">Home</Link>
+                                <Link to="/home">Home</Link>
                             </li>
                             <li className='rounded px-2 flex items-end hover:bg-gray-300 dark:hover:bg-gray-800 dark:hover:text-yellow-500 font-bold py-1'>
                                 <Link to="/support">Soporte</Link>
                             </li>
                             <li className='rounded px-2 flex items-end hover:bg-gray-300 dark:hover:bg-gray-800 dark:hover:text-yellow-500 font-bold py-1'>
-                                <Link to="/comunidad">Mensajes</Link>
+                                <Link to="/messagge">Mensajes</Link>
                             </li>
                             <li className='rounded p-2 font-bold'>
                                 <Dropdown />

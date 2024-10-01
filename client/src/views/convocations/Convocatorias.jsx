@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Header } from '../../components/Header.jsx';
 import { Footer } from '../../components/Footer.jsx';
 
-const Convocatorias = () => {
+export const Convocatorias = () => {
     const [convocatorias, setConvocatorias] = useState([]); // Estado para almacenar las convocatorias
     const [error, setError] = useState(null); // Estado para manejar errores de fetch
 
@@ -71,5 +71,3 @@ const Convocatorias = () => {
         </>
     );
 };
-
-export default Convocatorias;

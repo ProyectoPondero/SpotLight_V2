@@ -6,7 +6,7 @@ import { Register } from "../views/register/Register";
 import { Home } from "../views/home/Home";
 import { Perfil } from "../views/profile/Perfil";
 import { Soporte } from "../views/support/Soporte";
-import Convocatorias from "../views/convocations/Convocatorias";
+import { Convocatorias } from "../views/convocations/Convocatorias";
 
 const AppRouter = () => {
     return (
