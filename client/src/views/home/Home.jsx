@@ -42,11 +42,11 @@ export const Home = () => {
                                 </a>
                             </ul>
                             <div className='flex flex-col items-center'>
-                                <img className='relative w-20 top-14 xl:left-2 animate-bounce' src="/src/assets/images/lampara_Pixar.png" alt="" />
-                                <h1 className='relative top-12 font-bold text-2xl text-gray-900 dark:text-gray-200'>S P O T L I G H T</h1>
+                                <img className='relative w-20 top-14 xl:left-2 animate-bounce contrast-150' src="/src/assets/images/lampara_Pixar.png" alt="" />
+                                <h1 className='relative top-12 font-bold text-2xl text-gray-900 dark:text-gray-200'>S P O T L I G HT</h1>
                             </div>
                         </div>
-                        
+
                         <div className='flex justify-center flex-col gap-8 col-span-5 h-full items-center px-2'> {/* Cambiado a h-full */}
                             <FormUploadfile />
                             <div className='w-full p-6 h-auto'>
@@ -59,16 +59,16 @@ export const Home = () => {
                                         <article key={index} className="mb-6 p-6 bg-gray-200 dark:bg-gray-900 rounded-lg flex flex-col shadow-xl ">
                                             <div className=' p-2 flex flex-row items-center gap-2 rounded-sm'>
                                                 <img className='w-10' src="/spotlight.ico" alt="" />
-                                                <h1 className='font-bold text-black text-1xl dark:text-gray-200'>Anonimous</h1>                                  
+                                                <h1 className='font-bold text-black text-lg dark:text-gray-200'>{"@" + publication.author}</h1>
                                             </div>
-                                                <h2 className="text-2xl font-bold mb-2 h-auto px-6 break-words text-black dark:text-gray-200 ">{publication.title}</h2>
-                                                <p className="text-gray-700 dark:text-gray-200 mb-4 h-auto px-6 break-words">{publication.description}</p>
+                                            <h2 className="text-2xl font-bold mb-2 h-auto px-6 break-words text-black dark:text-gray-200 ">{publication.title}</h2>
+                                            <p className="text-gray-700 dark:text-gray-200 mb-4 h-auto px-6 break-words">{publication.description}</p>
                                             <div className='w-full flex justify-center'>
-                                            <img
-                                                src={publication.secure_url}
-                                                alt={publication.title}
-                                                className=" rounded-lg w-2/6"
-                                            />
+                                                <img
+                                                    src={publication.secure_url}
+                                                    alt={publication.title}
+                                                    className=" rounded-lg w-2/6"
+                                                />
                                             </div>
                                         </article>
                                     ))

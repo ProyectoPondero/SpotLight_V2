@@ -5,6 +5,10 @@ const publicationSchema = new Schema({
         type: String,
         require: true
     },
+    author: {
+        type: String,
+        require: true
+    },
     description: {
         type: String,
         require: false

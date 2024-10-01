@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Dropdown from './Dropdown.jsx';
+import { sessionUser } from '../services/auth.service.js';
 
 export const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const [theme, setTheme] = useState('light');
+
 
     useEffect(() => {
         const savedTheme = window.localStorage.getItem('theme') || 'light';
@@ -13,6 +15,7 @@ export const Header = () => {
         }
         setTheme(savedTheme);
     }, []);
+
 
     const toggleTheme = () => {
         const newTheme = theme === 'dark' ? 'light' : 'dark';

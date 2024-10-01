@@ -12,21 +12,21 @@ const AppRouter = () => {
     return (
         <BrowserRouter>
             <Routes>
-                {/* Rutas públicas */}
+                {/* Rutas públicas: Accesibles solo si el usuario NO está autenticado */}
                 <Route element={<PublicRoutes />}>
                     <Route path="/" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                 </Route>
-                {/* Rutas privadas */}
+
+                {/* Rutas privadas: Solo accesibles si el usuario está autenticado */}
                 <Route element={<PrivateRoutes />}>
                     <Route path="/home" element={<Home />} />
-                    {/* <Route path="/messagge" element={<Message />} /> */}
                     <Route path="/support" element={<Soporte />} />
                     <Route path="/profile" element={<Perfil />} />
                     <Route path="/convocations" element={<Convocatorias />} />
                 </Route>
             </Routes>
-        </BrowserRouter >
+        </BrowserRouter>
     );
 };
 
