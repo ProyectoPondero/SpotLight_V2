@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { Header } from "../../components/Header";
-import { Footer } from "../../components/Footer";
 
 export const Perfil = () => {
-    // Cargar datos desde localStorage o usar valores predeterminados
     const getInitialInfo = () => {
         const savedInfo = localStorage.getItem("userInfo");
         return savedInfo
@@ -12,50 +10,39 @@ export const Perfil = () => {
                 direccion: "San Hilario, Formosa, Argentina",
                 telefono: "3704040642",
                 email: "ejemplo@correo.com",
-                fotoPerfil: "", // Nueva propiedad para la foto de perfil
+                fotoPerfil: "",
             };
     };
 
     const [info, setInfo] = useState(getInitialInfo);
-    const [imagePreview, setImagePreview] = useState(info.fotoPerfil); // Estado para mostrar la imagen
+    const [imagePreview, setImagePreview] = useState(info.fotoPerfil);
 
-    // Manejar cambios en los inputs
     const handleChange = (e) => {
         const { name, value } = e.target;
         setInfo((prevInfo) => {
-            const updatedInfo = {
-                ...prevInfo,
-                [name]: value,
-            };
-            // Guardar en localStorage
+            const updatedInfo = { ...prevInfo, [name]: value };
             localStorage.setItem("userInfo", JSON.stringify(updatedInfo));
             return updatedInfo;
         });
     };
 
-    // Manejar subida de imagen
     const handleImageUpload = (e) => {
         const file = e.target.files[0];
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            const base64Image = reader.result;
-            setInfo((prevInfo) => {
-                const updatedInfo = {
-                    ...prevInfo,
-                    fotoPerfil: base64Image,
-                };
-                // Guardar en localStorage
-                localStorage.setItem("userInfo", JSON.stringify(updatedInfo));
-                return updatedInfo;
-            });
-            setImagePreview(base64Image); // Mostrar la imagen seleccionada
-        };
         if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                const base64Image = reader.result;
+                setInfo((prevInfo) => {
+                    const updatedInfo = { ...prevInfo, fotoPerfil: base64Image };
+                    localStorage.setItem("userInfo", JSON.stringify(updatedInfo));
+                    return updatedInfo;
+                });
+                setImagePreview(base64Image);
+            };
             reader.readAsDataURL(file);
         }
     };
 
-    // socialLinks no necesita cambios
     const socialLinks = [
         {
             href: "https://www.facebook.com/emiliojoaquin.ortizmalich",
@@ -84,30 +71,25 @@ export const Perfil = () => {
                 <main className="flex justify-center bg-gray-200 min-h-screen w-screen">
                     <div className="container mx-auto p-4 mt-28">
                         <section className="bg-white shadow-2xl rounded-lg overflow-hidden dark:bg-gray-900">
-                            {/* Header */}
                             <div className="sticky">
                                 <div className="p-2 flex justify-center items-center -bottom-12">
                                     <div className="w-24 h-24 rounded-full overflow-hidden shadow-lg dark:bg-white border-2">
                                         <img
-                                            src={imagePreview || "../assets/img/spot.png"} // Mostrar imagen subida o predeterminada
+                                            src={imagePreview || "../assets/img/spot.png"}
                                             alt="Foto de perfil"
                                         />
                                     </div>
                                 </div>
                             </div>
-
-                            {/* Body */}
                             <div className="mt-3 p-1 dark:bg-gray-900">
                                 <div className="text-center">
                                     <h3 className="text-2xl font-bold text-gray-800 dark:text-white">
-                                        {info.nombre || "Nombre por defecto"} {/* Editable */}
+                                        {info.nombre || "Nombre por defecto"}
                                     </h3>
                                     <p className="text-black mt-2 dark:text-white">
-                                        {info.descripcion || "Descripción por defecto"} {/* Editable */}
+                                        {info.descripcion || "Descripción por defecto"}
                                     </p>
                                 </div>
-
-                                {/* Info */}
                                 <div className="mt-8 flex flex-col md:flex-row justify-evenly">
                                     <ul className="text-gray-700 space-y-4 md:w-1/2 dark:bg-gray-900 dark:text-white bg-white p-6 rounded-lg">
                                         <li className="flex items-center">
@@ -123,9 +105,8 @@ export const Perfil = () => {
                                             <span>Email: {info.email}</span>
                                         </li>
                                     </ul>
-
                                     <div className="p-4">
-                                        <h2 className="dark:text-white ">Editar información</h2>
+                                        <h2 className="dark:text-white">Editar información</h2>
                                         <button
                                             className="bg-blue-500 text-white px-4 py-2 rounded"
                                             onClick={() => document.getElementById('my_modal_2').showModal()}
@@ -134,87 +115,81 @@ export const Perfil = () => {
                                         </button>
                                     </div>
                                 </div>
-
-                                {/* Modal para editar el perfil */}
                                 <dialog id="my_modal_2" className="modal">
-                                    <div className="modal-box">
-                                        <h3 className="font-bold text-lg">Editar Perfil</h3>
+                                    <div className="modal-box bg-white dark:bg-gray-800 border dark:border-gray-700 text-gray-900 dark:text-white p-6 rounded-lg shadow-lg relative">
+
+                                        <h3 className="font-bold text-lg mb-4">Editar Perfil</h3>
                                         <form className="space-y-4">
                                             <div>
-                                                <label className="block">Nombre:</label>
+                                                <label className="block text-sm font-medium mb-1">Nombre:</label>
                                                 <input
                                                     type="text"
                                                     name="nombre"
                                                     value={info.nombre || ""}
                                                     onChange={handleChange}
-                                                    className="w-full border rounded p-2"
+                                                    className="w-full border rounded p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                                                 />
                                             </div>
                                             <div>
-                                                <label className="block">Descripción:</label>
+                                                <label className="block text-sm font-medium mb-1">Descripción:</label>
                                                 <input
                                                     type="text"
                                                     name="descripcion"
                                                     value={info.descripcion || ""}
                                                     onChange={handleChange}
-                                                    className="w-full border rounded p-2"
+                                                    className="w-full border rounded p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                                                 />
                                             </div>
                                             <div>
-                                                <label className="block">Dirección:</label>
+                                                <label className="block text-sm font-medium mb-1">Dirección:</label>
                                                 <input
                                                     type="text"
                                                     name="direccion"
                                                     value={info.direccion}
                                                     onChange={handleChange}
-                                                    className="w-full border rounded p-2"
+                                                    className="w-full border rounded p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                                                 />
                                             </div>
                                             <div>
-                                                <label className="block">Teléfono:</label>
+                                                <label className="block text-sm font-medium mb-1">Teléfono:</label>
                                                 <input
                                                     type="text"
                                                     name="telefono"
                                                     value={info.telefono}
                                                     onChange={handleChange}
-                                                    className="w-full border rounded p-2"
+                                                    className="w-full border rounded p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                                                 />
                                             </div>
                                             <div>
-                                                <label className="block">Email:</label>
+                                                <label className="block text-sm font-medium mb-1">Email:</label>
                                                 <input
                                                     type="email"
                                                     name="email"
                                                     value={info.email}
                                                     onChange={handleChange}
-                                                    className="w-full border rounded p-2"
+                                                    className="w-full border rounded p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                                                 />
                                             </div>
                                             <div>
-                                                <label className="block">Foto de perfil:</label>
+                                                <label className="block text-sm font-medium mb-1">Foto de perfil:</label>
                                                 <input
                                                     type="file"
                                                     accept="image/*"
                                                     onChange={handleImageUpload}
-                                                    className="w-full border rounded p-2"
+                                                    className="w-full border rounded p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                                                 />
                                             </div>
                                         </form>
-                                        <div className="mt-4 flex justify-end">
-                                            <button className="bg-red-500 text-white px-4 py-2 rounded mr-2" onClick={() => document.getElementById('my_modal_2').close()}>
+                                        <div className="mt-6 flex justify-end space-x-2">
+                                            <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition duration-200" onClick={() => document.getElementById('my_modal_2').close()}>
                                                 Cancelar
                                             </button>
-                                            <button className="bg-green-500 text-white px-4 py-2 rounded" onClick={() => document.getElementById('my_modal_2').close()}>
+                                            <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition duration-200" onClick={() => document.getElementById('my_modal_2').close()}>
                                                 Guardar
                                             </button>
                                         </div>
                                     </div>
-                                    <form method="dialog" className="modal-backdrop">
-                                        <button>close</button>
-                                    </form>
                                 </dialog>
-
-                                {/* Social Media */}
                                 <div className="mt-8 flex justify-center space-x-4">
                                     {socialLinks.map((link, index) => (
                                         <a
