@@ -31,14 +31,14 @@ const Convocatorias = () => {
         <>
             <Header />
             <div className="flex justify-center">
-                <main className="bg-slate-200 dark:bg-gray-400 min-h-screen w-screen">
-                    <div className="pt-24 pb-40 px-40 w-auto p-0 flex flex-wrap gap-4 bg-gray-100 justify-center" id="convocatorias-container">
+                <main className="bg-slate-200 dark:bg-gray-700 min-h-screen w-full">
+                    <div className="pt-24 pb-40 px-4 w-auto p-0 flex flex-wrap gap-4 bg-slate-200 dark:bg-gray-700 justify-center" id="convocatorias-container">
                         {convocatorias.length > 0 ? (
                             convocatorias.map((convocatoria, index) => (
                                 <article key={index} className="articuloCartas">
-                                    <div className="contenedorCartas w-96 bg-gradient-to-b dark:from-violet-200 rounded from-slate-400">
-                                        <div className="contenidoCarta flex items-center flex-col gap-4 p-4">
-                                            <h2 className="tituloConvocatoria font-bold text-lg text-gray-900 dark:text-black">{convocatoria.titulo}</h2>
+                                    <div className="contenedorCartas w-80 shadow-xl p-3 dark:bg-gray-400 bg-gray-200 rounded h-auto">
+                                        <div className="contenidoCarta h-auto flex items-center flex-col gap-4 p-4">
+                                            <h2 className="tituloConvocatoria font-bold text-lg text-gray-700 dark:text-gray-900">{convocatoria.titulo}</h2>
                                             <p className="parrafoConvocatoria font-normal">{convocatoria.bajada}</p>
                                             <img
                                                 className="imagenConvocatoria max-w-40 rounded"

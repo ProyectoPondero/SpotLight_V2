@@ -27,8 +27,8 @@ export const Header = () => {
 
     return (
         <>
-            <header className="flex w-full bg-slate-200 px-4 h-20 z-1 fixed border-b-1 dark:border-red-400 shadow-lg dark:shadow-none  dark:bg-gray-900">
-                <nav className='flex justify-evenly items-center px-4 w-screen gap-9'>
+            <header className="flex w-screen bg-gray-200 h-20 z-1 fixed border-b-1 dark:border-red-400 shadow-lg dark:shadow-none  dark:bg-gray-900">
+                <nav className='flex justify-evenly items-center  w-full gap-9 px-4'>
                     <div className='flex items-center font-bold text-black dark:text-gray-100'>
                         <img className='h-10 md:h-12 p-1' src="/spotlight.ico" alt="icon Spot" />
                         <h1 className='p-2 pl-2 md:text-2xl sm:text-xl'>Spotlight</h1>
@@ -36,7 +36,7 @@ export const Header = () => {
 
                     <div className="md:hidden">
                         <button onClick={toggleMenu} className="focus:outline-none">
-                            <i className={`fa-solid ${menuOpen ? 'fa-times' : 'fa-bars'} text-white text-3xl`}></i>
+                            <i className={`fa-solid ${menuOpen ? 'fa-times' : 'fa-bars'} text-black dark:text-white text-3xl`}></i>
                         </button>
                     </div>
 
@@ -65,7 +65,7 @@ export const Header = () => {
                             <button className='bg-gray-800 hover:bg-red-500 text-gray-100 font-bold py-2 px-4 rounded border-1 border-red-800'>
                                 Logout
                             </button>
-                            <a onClick={toggleTheme} className='py-1 px-2 bg-slate-200 dark:bg-gray-900 rounded-full'>
+                            <a onClick={toggleTheme} className='py-1 px-2 bg-gray-200 dark:bg-gray-900 rounded-full'>
                                 {theme === 'dark' ? <i class="fa-solid fa-sun text-2xl text-white font-semibold hover:text-yellow-500"></i> : <i class="fa-solid fa-moon text-2xl font-semibold text-black hover:text-blue-900 "></i>}
                             </a>
                         </div>
@@ -74,7 +74,7 @@ export const Header = () => {
 
                 {menuOpen && (
                     <div className="md:hidden dark:bg-gray-900 w-full dark:text-gray-100 pt-20">
-                        <ul className='flex flex-col items-center text-lg gap-4 p-4 shadow-lg bg-slate-200 dark:bg-gray-900 rounded'>
+                        <ul className='flex flex-col items-center text-lg gap-4 p-4 shadow-lg bg-gray-200 dark:bg-gray-900 rounded'>
                             <li className='rounded p-2'>
                                 <button className='border border-red-600 px-2 rounded-full h-8 flex items-center'>
                                     <Link to="/perfil">
