@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Dropdown = () => {
     // Estado para controlar si el menú dropdown está abierto o cerrado
@@ -49,27 +50,27 @@ const Dropdown = () => {
                     aria-labelledby="options-menu"
                 >
                     <div className="py-1" role="none">
-                        <a
-                            href="/convocatorias"
+                        <Link
+                            to="/convocations"
                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             role="menuitem"
                         >
                             Convocatorias
-                        </a>
-                        <a
-                            href="/comunidad"
+                        </Link>
+                        <Link
+                            to="/comunidad"
                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             role="menuitem"
                         >
                             Comunidad
-                        </a>
-                        <a
-                            href="/about"
+                        </Link>
+                        <Link
+                            to="/about"
                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             role="menuitem"
                         >
                             Sobre Nosotros
-                        </a>
+                        </Link>
                     </div>
                 </div>
             )}

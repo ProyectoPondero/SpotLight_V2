@@ -1,30 +1,30 @@
-import { Schema, model } from "mongoose";
+import { Schema, model } from 'mongoose';
 
-const publicationSchema = new Schema({
-    title: {
-        type: String,
-        require: true
-    },
-    author: {
+const profileSchema = new Schema({
+    name: {
         type: String,
         require: true
     },
     description: {
         type: String,
-        require: false
+        require: true
     },
-    user: {
+    address: {
         type: String,
         require: true
     },
-    public_id: {
+    phoneNumber: {
         type: String,
         require: true
     },
-    secure_url: {
+    email: {
+        type: String,
+        require: true
+    },
+    avatar: {
         type: String,
         require: true
     }
 });
 
-export const publicationModel = model('publication', publicationSchema);
+export const profileModel = model('Profile', profileSchema);

@@ -19,6 +19,7 @@ publicationCtrl.uploadPublication = async (req, res) => {
         // Crear una instancia del modelo publicationModel con los datos de la publicación
         const newPublication = new publicationModel({
             user: user._id,
+            author: user.userName,
             title: title,
             description: description,
             public_id: result.public_id,
