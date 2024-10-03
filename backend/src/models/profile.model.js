@@ -7,23 +7,28 @@ const profileSchema = new Schema({
     },
     description: {
         type: String,
-        require: true
+        require: false
     },
     address: {
         type: String,
-        require: true
+        require: false
     },
     phoneNumber: {
         type: String,
-        require: true
+        require: false
     },
     email: {
         type: String,
         require: true
     },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        require: true
+    },
     avatar: {
         type: String,
-        require: true
+        require: false
     }
 });
 

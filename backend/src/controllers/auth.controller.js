@@ -16,6 +16,8 @@ authCtrl.register = async (req, res) => {
         if (newUser instanceof Error) {
             return res.status(400).json({ message: newUser.message });
         }
+        //Generar el perfil del usuario
+        await userService.createProfile(newUser._id, newUser.userName, newUser.email);
         // Si el usuario fue creado
         res.status(201).json({
             message: 'Usuario creado correctamente',

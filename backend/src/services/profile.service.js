@@ -29,9 +29,9 @@ profileServices.deleteProfile = async (userId) => {
     }
 }
 
-profileServices.getPublications = async (userId) => {
+profileServices.getPublications = async (user) => {
     try {
-        return await profileModel.findOne({ userId: userId }).populate('publications');
+        return await profileModel.findOne({ user: user }).populate('publications');
     }
     catch (error) {
         console.log(error);

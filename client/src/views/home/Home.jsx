@@ -38,7 +38,7 @@ export const Home = () => {
                         {/* Contenido */}
                         <div className='flex justify-center flex-col gap-8 col-span-5 h-full items-center px-2'>
                             <FormUploadfile onNewPublication={handleNewPublication} />
-                            <div className='w-7/12 h-auto'>
+                            <div className='w-7/12 h-auto flex flex-col-reverse'>
                                 {loading ? (
                                     <p className="dark:text-gray-300">Cargando publicaciones...</p>
                                 ) : error ? (

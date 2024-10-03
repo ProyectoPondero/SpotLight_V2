@@ -14,7 +14,8 @@ const publicationSchema = new Schema({
         require: false
     },
     user: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: 'User',
         require: true
     },
     public_id: {

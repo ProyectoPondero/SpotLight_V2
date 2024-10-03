@@ -7,9 +7,9 @@ export const Perfil = () => {
         return savedInfo
             ? JSON.parse(savedInfo)
             : {
-                direccion: "San Hilario, Formosa, Argentina",
-                telefono: "3704040642",
-                email: "ejemplo@correo.com",
+                direccion: "",
+                telefono: "",
+                email: "",
                 fotoPerfil: "",
             };
     };

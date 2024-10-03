@@ -1,4 +1,5 @@
 import { userModel } from '../models/user.model.js';
+import { profileModel } from '../models/profile.model.js';
 import bcryptHelper from '../helpers/bcrypt.js';
 
 export const userService = {};
@@ -20,6 +21,27 @@ userService.createUser = async (user) => {
             throw new Error('No se a podido crear el usuario');
         }
         return newUser;
+    } catch (error) {
+        return error;
+    }
+};
+
+// Crear perfil de usuario
+userService.createProfile = async (_id, userName, email) => {
+    try {
+        const newProfile = await profileModel.create({
+            name: userName,
+            description: null,
+            address: null,
+            phoneNumber: null,
+            email: email,
+            user: _id,
+            avatar: null
+        });
+        if (!newProfile) {
+            throw new Error('No se a podido crear el perfil');
+        }
+        return newProfile;
     } catch (error) {
         return error;
     }
