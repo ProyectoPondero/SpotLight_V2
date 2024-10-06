@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { getPublications } from '../services/publication.service.js';
 
-export const usePublications = (refreshFlag) => { // Recibe el refreshFlag como dependencia
+export const usePublications = (refreshFlag) => {
     const [publications, setPublications] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -21,7 +21,7 @@ export const usePublications = (refreshFlag) => { // Recibe el refreshFlag como 
         };
 
         fetchPublications();
-    }, [refreshFlag]); // El hook se ejecutará cada vez que cambie el valor de refreshFlag
+    }, [refreshFlag]);
 
     return { publications, loading, error };
 };
