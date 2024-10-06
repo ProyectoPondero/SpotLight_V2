@@ -72,3 +72,22 @@ authCtrl.logout = async (req, res) => {
         return res.status(500).json({ message: 'Error Inesperado' });
     }
 };
+
+//Hice este controlador para obtener los datos del usuario
+authCtrl.getUserDetails = async (req, res) => {
+    try {
+        if (!req.user) {
+            return res.status(401).json({ message: 'No autenticado' });
+        }
+
+        // Devuelve el ID y el nombre de usuario
+        return res.json({
+            userId: req.user._id,
+            userName: req.user.userName,
+            email: req.user.email
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Error del servidor' });
+    }
+};

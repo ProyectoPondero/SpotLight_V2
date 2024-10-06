@@ -11,16 +11,12 @@ export const Aside = () => {
                                     <li className='hidden lg:block'>Archivo</li>
                                 </a>
                                 <a href="" className='flex justify-center items-center gap-2 hover:text-xl hover:bg-gray-300 p-1 dark:hover:bg-gray-800 rounded'>
-                                    <i className="fa-solid fa-address-book text-red-500"></i>
-                                    <li className='hidden lg:block'>Contactos</li>
-                                </a>
-                                <a href="" className='flex justify-center items-center gap-2 hover:text-xl hover:bg-gray-300 p-1 dark:hover:bg-gray-800 rounded'>
-                                    <i className="fa-solid fa-floppy-disk text-red-500"></i>
-                                    <li className='hidden lg:block'>Guardados</li>
-                                </a>
-                                <a href="" className='flex justify-center items-center gap-2 hover:text-xl hover:bg-gray-300 p-1 dark:hover:bg-gray-800 rounded'>
                                     <i className="fa-solid fa-star text-red-500"></i>
                                     <li className='hidden lg:block'>Favoritos</li>
+                                </a>
+                                <a href="" className='flex justify-center items-center gap-2 hover:text-xl hover:bg-gray-300 p-1 dark:hover:bg-gray-800 rounded'>
+                                    <i className="fa-solid fa-address-book text-red-500"></i>
+                                    <li className='hidden lg:block'>Contactos</li>
                                 </a>
                                 <a href="" className='flex justify-center items-center gap-2 hover:text-xl hover:bg-gray-300 p-1 dark:hover:bg-gray-800 rounded'>
                                     <i className="fa-solid fa-book text-red-500"></i>

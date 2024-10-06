@@ -51,3 +51,11 @@ userService.getUserByEmail = async (email) => {
         console.log(error);
     }
 };
+// En user.service.js
+userService.getUserById = async (id) => {
+    try {
+        return await userModel.findById(id); // Asegúrate de que estés usando Mongoose o tu ORM
+    } catch (error) {
+        console.log(error);
+    }
+};
