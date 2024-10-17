@@ -3,8 +3,9 @@ import { profileModel } from '../models/profile.model.js';
 export const profileServices = {};
 
 profileServices.getProfile = async (userId) => {
+    console.log(userId);
     try {
-        return await profileModel.findOne({ userId: userId });
+        return await profileModel.findOne({ user: userId });
     }
     catch (error) {
         console.log(error);
@@ -13,7 +14,8 @@ profileServices.getProfile = async (userId) => {
 
 profileServices.updateProfile = async (userId, profile) => {
     try {
-        return await profileModel.findOneAndUpdate({ userId: userId }, profile, { new: true });
+        console.log(profile)
+        return await profileModel.findOneAndUpdate({ user: userId }, profile, { new: true });
     }
     catch (error) {
         console.log(error);

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Header } from "../../components/Header";
+import { Header } from "../../components/Header.jsx";
 import { getProfile, modifyProfile } from "../../services/profile.service.js";
 
 export const Perfil = () => {
@@ -21,12 +21,12 @@ export const Perfil = () => {
                 const profileData = await getProfile();
                 if (profileData) {
                     const safeProfileData = {
-                        direccion: profileData.direccion || "",
-                        telefono: profileData.telefono || "",
+                        direccion: profileData.address || "",
+                        telefono: profileData.phoneNumber || "",
                         email: profileData.email || "",
-                        fotoPerfil: profileData.fotoPerfil || "",
-                        nombre: profileData.nombre || "Nombre por defecto",
-                        descripcion: profileData.descripcion || "Descripción por defecto",
+                        fotoPerfil: profileData.avatar || "",
+                        nombre: profileData.name || "Nombre por defecto",
+                        descripcion: profileData.description || "Descripción por defecto",
                     };
                     setInfo(safeProfileData);
                     setImagePreview(safeProfileData.fotoPerfil);
@@ -79,11 +79,25 @@ export const Perfil = () => {
     };
 
     if (loading) {
-        return <div>Cargando...</div>;
+        return (
+            <>
+                <Header />
+                <div className="flex justify-center items-center min-h-screen">
+                    <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
+                </div>
+            </>
+        );
     }
 
     if (error) {
-        return <div>{error}</div>;
+        return (
+            <>
+                <Header />
+                <div className="flex justify-center items-center min-h-screen">
+                    <div className="text-red-500">{error}</div>
+                </div>
+            </>
+        );
     }
 
     const socialLinks = [
