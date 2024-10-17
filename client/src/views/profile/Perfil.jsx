@@ -1,29 +1,54 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Header } from "../../components/Header";
+import { getProfile, modifyProfile } from "../../services/profile.service.js";
 
 export const Perfil = () => {
-    const getInitialInfo = () => {
-        const savedInfo = localStorage.getItem("userInfo");
-        return savedInfo
-            ? JSON.parse(savedInfo)
-            : {
-                direccion: "",
-                telefono: "",
-                email: "",
-                fotoPerfil: "",
-            };
-    };
+    const [info, setInfo] = useState({
+        direccion: "",
+        telefono: "",
+        email: "",
+        fotoPerfil: "",
+        nombre: "Nombre por defecto",
+        descripcion: "Descripción por defecto",
+    });
+    const [imagePreview, setImagePreview] = useState("");
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-    const [info, setInfo] = useState(getInitialInfo);
-    const [imagePreview, setImagePreview] = useState(info.fotoPerfil);
+    useEffect(() => {
+        const fetchProfile = async () => {
+            try {
+                const profileData = await getProfile();
+                if (profileData) {
+                    const safeProfileData = {
+                        direccion: profileData.direccion || "",
+                        telefono: profileData.telefono || "",
+                        email: profileData.email || "",
+                        fotoPerfil: profileData.fotoPerfil || "",
+                        nombre: profileData.nombre || "Nombre por defecto",
+                        descripcion: profileData.descripcion || "Descripción por defecto",
+                    };
+                    setInfo(safeProfileData);
+                    setImagePreview(safeProfileData.fotoPerfil);
+                } else {
+                    console.warn("Perfil vacío o nulo recibido");
+                }
+            } catch (error) {
+                console.error("Error al obtener el perfil:", error);
+                setError("Error al obtener el perfil");
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchProfile();
+    }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setInfo((prevInfo) => {
-            const updatedInfo = { ...prevInfo, [name]: value };
-            localStorage.setItem("userInfo", JSON.stringify(updatedInfo));
-            return updatedInfo;
-        });
+        setInfo((prevInfo) => ({
+            ...prevInfo,
+            [name]: value,
+        }));
     };
 
     const handleImageUpload = (e) => {
@@ -32,16 +57,34 @@ export const Perfil = () => {
             const reader = new FileReader();
             reader.onloadend = () => {
                 const base64Image = reader.result;
-                setInfo((prevInfo) => {
-                    const updatedInfo = { ...prevInfo, fotoPerfil: base64Image };
-                    localStorage.setItem("userInfo", JSON.stringify(updatedInfo));
-                    return updatedInfo;
-                });
+                setInfo((prevInfo) => ({
+                    ...prevInfo,
+                    fotoPerfil: base64Image,
+                }));
                 setImagePreview(base64Image);
             };
             reader.readAsDataURL(file);
         }
     };
+
+    const handleSave = async () => {
+        try {
+            await modifyProfile(info);
+            alert("Perfil actualizado con éxito");
+        } catch (error) {
+            console.error("Error al actualizar el perfil:", error);
+            alert("Hubo un error al actualizar el perfil");
+        }
+        document.getElementById('my_modal_2').close();
+    };
+
+    if (loading) {
+        return <div>Cargando...</div>;
+    }
+
+    if (error) {
+        return <div>{error}</div>;
+    }
 
     const socialLinks = [
         {
@@ -84,10 +127,10 @@ export const Perfil = () => {
                             <div className="mt-3 p-1 dark:bg-gray-900">
                                 <div className="text-center">
                                     <h3 className="text-2xl font-bold text-gray-800 dark:text-white">
-                                        {info.nombre || "Nombre por defecto"}
+                                        {info.nombre}
                                     </h3>
                                     <p className="text-black mt-2 dark:text-white">
-                                        {info.descripcion || "Descripción por defecto"}
+                                        {info.descripcion}
                                     </p>
                                 </div>
                                 <div className="mt-8 flex flex-col md:flex-row justify-evenly">
@@ -117,7 +160,6 @@ export const Perfil = () => {
                                 </div>
                                 <dialog id="my_modal_2" className="modal">
                                     <div className="modal-box bg-white dark:bg-gray-800 border dark:border-gray-700 text-gray-900 dark:text-white p-6 rounded-lg shadow-lg relative">
-
                                         <h3 className="font-bold text-lg mb-4">Editar Perfil</h3>
                                         <form className="space-y-4">
                                             <div>
@@ -184,7 +226,7 @@ export const Perfil = () => {
                                             <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition duration-200" onClick={() => document.getElementById('my_modal_2').close()}>
                                                 Cancelar
                                             </button>
-                                            <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition duration-200" onClick={() => document.getElementById('my_modal_2').close()}>
+                                            <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition duration-200" onClick={handleSave}>
                                                 Guardar
                                             </button>
                                         </div>
