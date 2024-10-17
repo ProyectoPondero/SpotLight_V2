@@ -4,7 +4,7 @@ export const profileServices = {};
 
 profileServices.getProfile = async (userId) => {
     try {
-        return await profileModel.findOne({ userId: userId });
+        return await profileModel.findOne({ user: userId });
     }
     catch (error) {
         console.log(error);
@@ -13,7 +13,7 @@ profileServices.getProfile = async (userId) => {
 
 profileServices.updateProfile = async (userId, profile) => {
     try {
-        return await profileModel.findOneAndUpdate({ userId: userId }, profile, { new: true });
+        return await profileModel.findOneAndUpdate({ user: userId }, profile, { new: true });
     }
     catch (error) {
         console.log(error);
@@ -22,7 +22,7 @@ profileServices.updateProfile = async (userId, profile) => {
 
 profileServices.deleteProfile = async (userId) => {
     try {
-        return await profileModel.findOneAndDelete({ userId: userId });
+        return await profileModel.findOneAndDelete({ user: userId });
     }
     catch (error) {
         console.log(error);
