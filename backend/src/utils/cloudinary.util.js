@@ -17,3 +17,9 @@ export async function uploadFile(filePath) {
 export async function deleteFile(public_id) {
     return await cloudinary.uploader.destroy(public_id);
 };
+
+export async function uploadAvatar(filePath) {
+    return await cloudinary.uploader.upload(filePath, {
+        folder: 'Spotlight/avatars'
+    });
+};

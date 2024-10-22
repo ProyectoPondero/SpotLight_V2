@@ -13,7 +13,7 @@ profileCtrl.getProfile = async (req, res) => {
 
 profileCtrl.updateProfile = async (req, res) => {
     try {
-        const profile = await profileServices.updateProfile(req.user._id, req.body);
+        const profile = await profileServices.updateProfile(req.user._id, req.body, req.file);
         res.status(200).json(profile);
     } catch (error) {
         res.status(500).json({ message: error.message });
