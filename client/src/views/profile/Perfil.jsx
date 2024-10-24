@@ -8,12 +8,24 @@ export const Perfil = () => {
         telefono: "",
         email: "",
         fotoPerfil: "",
-        nombre: "Nombre por defecto",
-        descripcion: "Descripción por defecto",
+        nombre: "",
+        descripcion: "",
     });
+
+    // Estado temporal para los cambios del formulario
+    const [tempInfo, setTempInfo] = useState({
+        direccion: "",
+        telefono: "",
+        email: "",
+        fotoPerfil: "",
+        nombre: "",
+        descripcion: "",
+    });
+
     const [imagePreview, setImagePreview] = useState("");
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [showInfo, setShowInfo] = useState(false);
 
     useEffect(() => {
         const fetchProfile = async () => {
@@ -29,6 +41,7 @@ export const Perfil = () => {
                         descripcion: profileData.description || "Descripción por defecto",
                     };
                     setInfo(safeProfileData);
+                    setTempInfo(safeProfileData);  // Inicializa el estado temporal con los datos actuales
                     setImagePreview(safeProfileData.fotoPerfil);
                 } else {
                     console.warn("Perfil vacío o nulo recibido");
@@ -45,7 +58,7 @@ export const Perfil = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setInfo((prevInfo) => ({
+        setTempInfo((prevInfo) => ({
             ...prevInfo,
             [name]: value,
         }));
@@ -57,7 +70,7 @@ export const Perfil = () => {
             const reader = new FileReader();
             reader.onloadend = () => {
                 const base64Image = reader.result;
-                setInfo((prevInfo) => ({
+                setTempInfo((prevInfo) => ({
                     ...prevInfo,
                     fotoPerfil: base64Image,
                 }));
@@ -69,8 +82,11 @@ export const Perfil = () => {
 
     const handleSave = async () => {
         try {
-            await modifyProfile(info);
+            // Actualiza el estado principal solo al guardar
+            setInfo(tempInfo);
+            await modifyProfile(tempInfo);
             alert("Perfil actualizado con éxito");
+            setShowInfo(true);
         } catch (error) {
             console.error("Error al actualizar el perfil:", error);
             alert("Hubo un error al actualizar el perfil");
@@ -181,7 +197,7 @@ export const Perfil = () => {
                                                 <input
                                                     type="text"
                                                     name="nombre"
-                                                    value={info.nombre || ""}
+                                                    value={tempInfo.nombre || ""}
                                                     onChange={handleChange}
                                                     className="w-full border rounded p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                                                 />
@@ -191,7 +207,7 @@ export const Perfil = () => {
                                                 <input
                                                     type="text"
                                                     name="descripcion"
-                                                    value={info.descripcion || ""}
+                                                    value={tempInfo.descripcion || ""}
                                                     onChange={handleChange}
                                                     className="w-full border rounded p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                                                 />
@@ -201,7 +217,7 @@ export const Perfil = () => {
                                                 <input
                                                     type="text"
                                                     name="direccion"
-                                                    value={info.direccion}
+                                                    value={tempInfo.direccion}
                                                     onChange={handleChange}
                                                     className="w-full border rounded p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                                                 />
@@ -211,7 +227,7 @@ export const Perfil = () => {
                                                 <input
                                                     type="text"
                                                     name="telefono"
-                                                    value={info.telefono}
+                                                    value={tempInfo.telefono}
                                                     onChange={handleChange}
                                                     className="w-full border rounded p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                                                 />
@@ -221,41 +237,47 @@ export const Perfil = () => {
                                                 <input
                                                     type="email"
                                                     name="email"
-                                                    value={info.email}
+                                                    value={tempInfo.email}
                                                     onChange={handleChange}
                                                     className="w-full border rounded p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                                                 />
                                             </div>
                                             <div>
-                                                <label className="block text-sm font-medium mb-1">Foto de perfil:</label>
+                                                <label className="block text-sm font-medium mb-1">Foto de Perfil:</label>
                                                 <input
                                                     type="file"
-                                                    accept="image/*"
+                                                    name="fotoPerfil"
                                                     onChange={handleImageUpload}
                                                     className="w-full border rounded p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                                                 />
                                             </div>
                                         </form>
-                                        <div className="mt-6 flex justify-end space-x-2">
-                                            <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition duration-200" onClick={() => document.getElementById('my_modal_2').close()}>
-                                                Cancelar
-                                            </button>
-                                            <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition duration-200" onClick={handleSave}>
+                                        <div className="modal-action flex justify-evenly ">
+                                            <button
+                                                onClick={handleSave}
+                                                className="btn btn-success bg-green-500 border-1 p-2 mt-4"
+                                            >
                                                 Guardar
+                                            </button>
+                                            <button
+                                                className="btn bg-red-500 border-1 p-2 mt-4"
+                                                onClick={() => document.getElementById('my_modal_2').close()}
+                                            >
+                                                Cancelar
                                             </button>
                                         </div>
                                     </div>
                                 </dialog>
-                                <div className="mt-8 flex justify-center space-x-4">
+                                <div className="py-4 flex justify-center space-x-4">
                                     {socialLinks.map((link, index) => (
                                         <a
                                             key={index}
                                             href={link.href}
+                                            className={`dark:text-white ${link.hoverColor}`}
                                             target="_blank"
                                             rel="noreferrer"
-                                            className={`${link.color} ${link.hoverColor}`}
                                         >
-                                            <i className={`${link.icon} text-2xl`}></i>
+                                            <i className={`${link.icon} ${link.color} text-xl`}></i>
                                         </a>
                                     ))}
                                 </div>

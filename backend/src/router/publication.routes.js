@@ -5,7 +5,7 @@ import { fileUploadMiddleware } from "../middlewares/fileUpload.middleware.js";
 
 export const publicationRoutes = Router();
 
-publicationRoutes.post('/', validarJWT, fileUploadMiddleware, publicationCtrl.uploadPublication);
+publicationRoutes.post('/', validarJWT, fileUploadMiddleware('file'), publicationCtrl.uploadPublication);
 publicationRoutes.get('/', validarJWT, publicationCtrl.getAllPublications);
 publicationRoutes.get('/user', validarJWT, publicationCtrl.getUserPublications);
 publicationRoutes.put('/:id', validarJWT, publicationCtrl.updatePublication);

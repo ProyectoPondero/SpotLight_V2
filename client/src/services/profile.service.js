@@ -26,14 +26,10 @@ export const getProfile = async () => {
 
 // Modificar perfil
 export const modifyProfile = async (formData) => {
-    console.log(formData);
     return fetchData(URL, {
         method: "PUT",
-        body: JSON.stringify(formData),
+        body: formData,
         credentials: "include",
-        headers: {
-            "Content-Type": "application/json"
-        }
     });
 };
 

@@ -5,7 +5,6 @@ export const profileCtrl = {};
 profileCtrl.getProfile = async (req, res) => {
     try {
         const profile = await profileServices.getProfile(req.user._id);
-        console.log(profile)
         res.status(200).json(profile);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -13,17 +12,8 @@ profileCtrl.getProfile = async (req, res) => {
 };
 
 profileCtrl.updateProfile = async (req, res) => {
-    console.log(req.body)
-    const doc = {
-        name: req.body.nombre,
-        description: req.body.descripcion,
-        address: req.body.direccion,
-        phoneNumber: req.body.telefono,
-        email: req.body.email,
-        avatar: req.body.fotoPerfil
-    }
     try {
-        const profile = await profileServices.updateProfile(req.user._id, doc);
+        const profile = await profileServices.updateProfile(req.user._id, req.body, req.file);
         res.status(200).json(profile);
     } catch (error) {
         res.status(500).json({ message: error.message });
