@@ -7,6 +7,7 @@ import { Home } from "../views/home/Home";
 import { Perfil } from "../views/profile/Perfil";
 import { Soporte } from "../views/support/Soporte";
 import { Convocatorias } from "../views/convocations/Convocatorias";
+import { Faq } from "../views/faqs/Faq";
 
 const AppRouter = () => {
     return (
@@ -24,6 +25,8 @@ const AppRouter = () => {
                     <Route path="/support" element={<Soporte />} />
                     <Route path="/profile" element={<Perfil />} />
                     <Route path="/convocations" element={<Convocatorias />} />
+                    <Route path="/faq" element={<Faq />} />
+
                 </Route>
             </Routes>
         </BrowserRouter>
