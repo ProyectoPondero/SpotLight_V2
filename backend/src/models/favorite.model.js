@@ -9,7 +9,7 @@ const favoriteSchema = new Schema({
     publicationId: {
         type: Schema.Types.ObjectId,
         ref: "publication",
-        required: true
+        require: true
     }
 })
 
