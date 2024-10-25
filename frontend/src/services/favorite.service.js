@@ -26,3 +26,10 @@ export const saveFavorite = async (publicationId) => {
     });
 };
 
+export const getFavorites = async () => {
+    return fetchData(URL, {
+        method: "GET",
+        credentials: "include" // Enviar las cookies del usuario autenticado
+    });
+};
+

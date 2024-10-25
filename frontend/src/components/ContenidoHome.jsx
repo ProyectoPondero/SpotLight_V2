@@ -13,8 +13,10 @@ export const ContenidoHome = () => {
         setRefreshFlag(!refreshFlag);
     };
 
-    // Función para manejar el guardado de favoritos
-    const handleSaveFavorite = async (publicationId) => {
+    const handleSaveFavorite = async (e, publicationId) => {
+
+        e.preventDefault()
+
         try {
             const response = await saveFavorite(publicationId);
             console.log("Respuesta del servidor:", response);
@@ -58,7 +60,7 @@ export const ContenidoHome = () => {
                                         <button>
                                             <i className="fa-solid fa-heart text-xl text-red-600 dark:text-gray-400 hover:text-blue-400 dark:hover:text-blue-400"></i>
                                         </button>
-                                        <button onClick={() => handleSaveFavorite(publication._id)}>
+                                        <button onClick={(e) => handleSaveFavorite(e, publication._id)}>
                                             <i className="fa-solid fa-star text-xl text-yellow-500"></i>
                                         </button>
                                     </article>

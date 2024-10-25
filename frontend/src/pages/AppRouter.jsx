@@ -8,6 +8,7 @@ import { Perfil } from "../views/profile/Perfil";
 import { Soporte } from "../views/support/Soporte";
 import { Convocatorias } from "../views/convocations/Convocatorias";
 import { Faq } from "../views/faqs/Faq";
+import { Favorites } from "../views/favorites/favorites";
 
 const AppRouter = () => {
     return (
@@ -26,6 +27,9 @@ const AppRouter = () => {
                     <Route path="/profile" element={<Perfil />} />
                     <Route path="/convocations" element={<Convocatorias />} />
                     <Route path="/faq" element={<Faq />} />
+                    <Route path="/favorites" element={<Favorites />} />
+
+
 
                 </Route>
             </Routes>
