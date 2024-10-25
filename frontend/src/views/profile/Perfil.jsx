@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Header } from "../../components/Header";
 import { ModalPerfil } from "./ModalPerfil";
 import { SocialLink } from "./SocialLink";
-import { getProfile } from "../../services/profile.service";
+import { useProfile } from "../../contexts/profile/profileContext.jsx";
 
 export const Perfil = () => {
   const [info, setInfo] = useState({
@@ -16,11 +16,17 @@ export const Perfil = () => {
     },
   });
 
+  const { getProfileData } = useProfile();
+
+  console.log(info.avatar.url);
+
+  const fetchProfileData = async () => {
+    const response = await getProfileData();
+    setInfo(response);
+  };
+
   useEffect(() => {
-    (async () => {
-      const response = await getProfile();
-      setInfo(response);
-    })();
+    fetchProfileData();
   }, []);
 
   return (
@@ -35,7 +41,7 @@ export const Perfil = () => {
                   <div className="w-24 h-24 rounded-full overflow-hidden shadow-lg dark:bg-white border-2">
                     <img
                       src={
-                        info.avatar
+                        info?.avatar
                           ? info.avatar.url
                           : "https://via.placeholder.com/150"
                       }
@@ -47,25 +53,25 @@ export const Perfil = () => {
               <div className="mt-3 p-1 dark:bg-gray-900">
                 <div className="text-center">
                   <h3 className="text-2xl font-bold text-gray-800 dark:text-white">
-                    {info.name}
+                    {info?.name}
                   </h3>
                   <p className="text-black mt-2 dark:text-white">
-                    {info.description}
+                    {info?.description}
                   </p>
                 </div>
                 <div className="mt-8 flex flex-col md:flex-row justify-evenly">
                   <ul className="text-gray-700 space-y-4 md:w-1/2 dark:bg-gray-900 dark:text-white bg-white p-6 rounded-lg">
                     <li className="flex items-center">
                       <i className="fas fa-map-marker-alt mr-2 text-blue-500"></i>
-                      <span>Dirección: {info.address}</span>
+                      <span>Dirección: {info?.address}</span>
                     </li>
                     <li className="flex items-center">
                       <i className="fas fa-phone-alt mr-2 text-green-500"></i>
-                      <span>Teléfono: {info.phoneNumber}</span>
+                      <span>Teléfono: {info?.phoneNumber}</span>
                     </li>
                     <li className="flex items-center">
                       <i className="fas fa-envelope mr-2 text-purple-500"></i>
-                      <span>Email: {info.email}</span>
+                      <span>Email: {info?.email}</span>
                     </li>
                   </ul>
                   <div className="p-4">

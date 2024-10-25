@@ -28,13 +28,13 @@ profileServices.updateProfile = async (userId, profile, avatar) => {
     };
 
     await fs.unlink(avatar.path);
-    const updateProfile = await profileModel.updateOne(
+    const updateProfile = await profileModel.findOneAndUpdate(
       { user: userId },
       newProfile,
       { new: true }
-    );
+    ).exec()
 
-    if (updateProfile.modifiedCount === 0) {
+    if (!updateProfile) {
       throw new Error("Error al actualizar el perfil");
     }
 

@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { modifyProfile } from "../../services/profile.service";
+import { useProfile } from "../../contexts/profile/profileContext.jsx";
 import { useEffect } from "react";
 
 export const ModalPerfil = ({ info }) => {
@@ -18,13 +18,15 @@ export const ModalPerfil = ({ info }) => {
     },
   });
 
+  const { modifyProfileData } = useProfile();
+
   useEffect(() => {
     reset({
-      name: info.name,
-      description: info.description,
-      address: info.address,
-      phoneNumber: info.phoneNumber,
-      email: info.email,
+      name: info?.name,
+      description: info?.description,
+      address: info?.address,
+      phoneNumber: info?.phoneNumber,
+      email: info?.email,
     });
   }, [info]);
 
@@ -43,18 +45,7 @@ export const ModalPerfil = ({ info }) => {
         formData.append("avatar", data.avatar[0]); // El archivo se encuentra en la primera posición
       }
 
-      const response = await fetch("http://localhost:3368/profile", {
-        method: "PUT",
-        body: formData, // Enviar formData en lugar de JSON
-        credentials: "include",
-      });
-
-      if (!response.ok) {
-        throw new Error(`Error: ${response.statusText}`);
-      }
-
-      const profile = await response.json();
-      console.log(profile);
+      await modifyProfileData(formData);
 
       // Cerrar el modal si la actualización fue exitosa
       document.getElementById("my_modal_2").close();
@@ -138,21 +129,21 @@ export const ModalPerfil = ({ info }) => {
             />
           </div>
 
-        <div className="mt-6 flex justify-end space-x-2">
-          <button
-            type="button"
-            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition duration-200"
-            onClick={handleCancel}
-          >
-            Cancelar
-          </button>
-          <button
-            type="submit"
-            className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition duration-200"
-          >
-            Guardar
-          </button>
-        </div>
+          <div className="mt-6 flex justify-end space-x-2">
+            <button
+              type="button"
+              className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition duration-200"
+              onClick={handleCancel}
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition duration-200"
+            >
+              Guardar
+            </button>
+          </div>
         </form>
 
       </div>
