@@ -29,6 +29,7 @@ app.use(express.static(path.join(path.resolve(), "temp")));
 app.use('/api/user', authRoutes);
 app.use('/publication', publicationRoutes);
 app.use('/profile', profileRoutes);
+app.use('/favorites', profileRoutes);
 
 // Server
 app.listen(PORT, () => {
