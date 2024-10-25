@@ -23,3 +23,8 @@ export async function uploadAvatar(filePath) {
         folder: 'Spotlight/avatars'
     });
 };
+
+export async function deleteAvatar(public_id) {
+    console.log(public_id);
+    return await cloudinary.uploader.destroy(public_id);
+};
