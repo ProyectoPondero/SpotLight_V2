@@ -5,14 +5,14 @@ export const profileReducer = (state, action) => {
         case profileTypes.getProfile: {
             return {
                 ...state,
-                profile: action.payload.data,
+                profile: action.payload,
             };
         }
 
         case profileTypes.modifyProfile: {
             return {
                 ...state,
-                profile: action.payload.data,
+                profile: action.payload,
             };
         }
 

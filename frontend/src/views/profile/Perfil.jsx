@@ -1,32 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Header } from "../../components/Header";
 import { ModalPerfil } from "./ModalPerfil";
 import { SocialLink } from "./SocialLink";
 import { useProfile } from "../../contexts/profile/profileContext.jsx";
 
 export const Perfil = () => {
-  const [info, setInfo] = useState({
-    name: "",
-    description: "",
-    address: "",
-    phoneNumber: "",
-    email: "",
-    avatar: {
-      url: "",
-    },
-  });
 
-  const { getProfileData } = useProfile();
-
-  console.log(info.avatar.url);
-
-  const fetchProfileData = async () => {
-    const response = await getProfileData();
-    setInfo(response);
-  };
+  const { state: { profile }, getProfileData } = useProfile();
 
   useEffect(() => {
-    fetchProfileData();
+    getProfileData();
   }, []);
 
   return (
@@ -41,8 +24,8 @@ export const Perfil = () => {
                   <div className="w-24 h-24 rounded-full overflow-hidden shadow-lg dark:bg-white border-2">
                     <img
                       src={
-                        info?.avatar
-                          ? info.avatar.url
+                        profile?.avatar
+                          ? profile.avatar.url
                           : "https://via.placeholder.com/150"
                       }
                       alt="Foto de perfil"
@@ -53,25 +36,25 @@ export const Perfil = () => {
               <div className="mt-3 p-1 dark:bg-gray-900">
                 <div className="text-center">
                   <h3 className="text-2xl font-bold text-gray-800 dark:text-white">
-                    {info?.name}
+                    {profile?.name}
                   </h3>
                   <p className="text-black mt-2 dark:text-white">
-                    {info?.description}
+                    {profile?.description}
                   </p>
                 </div>
                 <div className="mt-8 flex flex-col md:flex-row justify-evenly">
                   <ul className="text-gray-700 space-y-4 md:w-1/2 dark:bg-gray-900 dark:text-white bg-white p-6 rounded-lg">
                     <li className="flex items-center">
                       <i className="fas fa-map-marker-alt mr-2 text-blue-500"></i>
-                      <span>Dirección: {info?.address}</span>
+                      <span>Dirección: {profile?.address}</span>
                     </li>
                     <li className="flex items-center">
                       <i className="fas fa-phone-alt mr-2 text-green-500"></i>
-                      <span>Teléfono: {info?.phoneNumber}</span>
+                      <span>Teléfono: {profile?.phoneNumber}</span>
                     </li>
                     <li className="flex items-center">
                       <i className="fas fa-envelope mr-2 text-purple-500"></i>
-                      <span>Email: {info?.email}</span>
+                      <span>Email: {profile?.email}</span>
                     </li>
                   </ul>
                   <div className="p-4">
@@ -86,7 +69,7 @@ export const Perfil = () => {
                     </button>
                   </div>
                 </div>
-                <ModalPerfil info={info} />
+                <ModalPerfil profile={profile} />
                 <SocialLink />
               </div>
             </section>
