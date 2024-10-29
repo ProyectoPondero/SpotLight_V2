@@ -22,7 +22,7 @@ export const Perfil = () => {
               <div className="sticky">
                 <div className="p-2 flex justify-center items-center -bottom-12">
                   <div className="w-24 h-24 rounded-full overflow-hidden shadow-lg dark:bg-white border-2">
-                    <img
+                    <img className="w-full h-full"
                       src={
                         profile?.avatar
                           ? profile.avatar.url
