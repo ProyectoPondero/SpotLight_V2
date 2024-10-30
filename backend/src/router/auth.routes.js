@@ -10,5 +10,3 @@ authRoutes.post('/register', authCtrl.register);
 authRoutes.post('/login', authCtrl.login);
 authRoutes.get('/session', validarJWT, authCtrl.session);
 authRoutes.post('/logout', authCtrl.logout);
-// En auth.routes.js
-authRoutes.get('/user', validarJWT, authCtrl.getUserDetails);

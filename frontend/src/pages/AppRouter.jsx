@@ -28,9 +28,6 @@ const AppRouter = () => {
                     <Route path="/convocations" element={<Convocatorias />} />
                     <Route path="/faq" element={<Faq />} />
                     <Route path="/favorites" element={<Favorites />} />
-
-
-
                 </Route>
             </Routes>
         </BrowserRouter>

@@ -2,6 +2,7 @@ import express from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import cors from 'cors';
+import path from 'node:path';
 import cookieParser from 'cookie-parser';
 import { validateOrigins } from './configs/cors.config.js';
 import { corsMiddleware } from './middlewares/cors.middleware.js';
@@ -16,19 +17,20 @@ import { favoriteRoute } from './router/favorites.routes.js';
 const app = express();
 
 // Middlewares
-app.use(express.urlencoded({ extended: false }));
 app.use(cors(validateOrigins));
 app.use(corsMiddleware);
+app.use(helmet());
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(cookieParser());
-app.use(helmet());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(path.resolve(), "temp")));
 
-// Rutas
+// Ruras
 app.use('/api/user', authRoutes);
 app.use('/publication', publicationRoutes);
 app.use('/profile', profileRoutes);
-app.use("/favorites", favoriteRoute)
+app.use('/favorites', favoriteRoute );
 
 // Server
 app.listen(PORT, () => {

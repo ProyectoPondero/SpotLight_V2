@@ -48,31 +48,6 @@ export const sessionUser = async () => {
     });
 };
 
-// Validar la sesion del usuario
-export const sessionName = async () => {
-    const response = await fetchData(URL + `session/`, {
-        method: "GET",
-        credentials: "include"
-    });
-
-    // Asegúrate de que la respuesta tenga los datos del usuario
-    if (response && response.userName) {
-        return response.userName;  // Retorna el nombre del usuario
-    }
-    
-    throw new Error("No se pudo obtener el nombre del usuario");
-};
-
-
-
-// Desloguear usuario
-export const logoutUser = async () => {
-    return fetchData(URL + `logout/`, {
-        method: "POST",
-        credentials: "include"
-    });
-};
-
 // user.service.js
 export const getUserInfo = async () => {
     const response = await fetchData(URL + `session/`, {
@@ -87,6 +62,15 @@ export const getUserInfo = async () => {
             email: response.user.email
         };  // Retorna un objeto con el nombre y el correo
     }
-    
+
     throw new Error("No se pudo obtener la información del usuario");
 };
+
+// Desloguear usuario
+export const logoutUser = async () => {
+    return fetchData(URL + `logout/`, {
+        method: "POST",
+        credentials: "include"
+    });
+};
+
