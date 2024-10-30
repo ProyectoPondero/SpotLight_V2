@@ -11,6 +11,7 @@ import { publicationRoutes } from './router/publication.routes.js';
 import { profileRoutes } from './router/profile.routes.js';
 import { connectDB } from "./dataBase/dataBase.js";
 import { PORT } from './configs/env.config.js';
+import { favoriteRoute } from './router/favorites.routes.js';
 
 // Inicializacion
 const app = express();
@@ -29,6 +30,7 @@ app.use(express.static(path.join(path.resolve(), "temp")));
 app.use('/api/user', authRoutes);
 app.use('/publication', publicationRoutes);
 app.use('/profile', profileRoutes);
+app.use('/favorites', favoriteRoute );
 
 // Server
 app.listen(PORT, () => {
