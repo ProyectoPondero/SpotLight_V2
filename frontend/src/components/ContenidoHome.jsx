@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import FormUploadfile from './FormUploadfile.jsx';
 import { useUserInfo } from '../hooks/useUserInfo.js';
 import { usePublications } from '../hooks/usePublications.js';
+import { useDeleteFavorites } from "../hooks/hook.Favorites.js";
 
 export const ContenidoHome = () => {
     const [refreshFlag, setRefreshFlag] = useState(false);
@@ -25,6 +26,7 @@ export const ContenidoHome = () => {
         }
     };
 
+    const { handleDeleteFavorite } = useDeleteFavorites()
 
     return (
         <>
@@ -56,7 +58,7 @@ export const ContenidoHome = () => {
                                         <button>
                                             <i className="fa-solid fa-heart text-xl text-red-600 dark:text-gray-400 hover:text-blue-400 dark:hover:text-blue-400"></i>
                                         </button>
-                                        <button onClick={(e) => handleSaveFavorite(e, publication._id)}>
+                                        <button onClick={(e) => { handleSaveFavorite(e, publication._id), handleDeleteFavorite(e, publication._id) }}>
                                             <i className="fa-solid fa-star text-xl text-yellow-500"></i>
                                         </button>
                                     </article>

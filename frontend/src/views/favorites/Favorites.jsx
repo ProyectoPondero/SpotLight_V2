@@ -6,33 +6,34 @@ import { Footer } from "../../components/Footer.jsx";
 export const Favorites = () => {
   const [favorites, setFavorites] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchFavorites = async () => {
       try {
-        const data = await getFavorites(); // Obtener los favoritos desde el servicio
-        setFavorites(data); // Guardar los favoritos en el estado
+        const data = await getFavorites();
+        setFavorites(data);
       } catch (error) {
-        setError(error); // Manejar errores
+        console.log(error);
       } finally {
-        setLoading(false); // Detener el estado de carga
+        setLoading(false);
       }
     };
 
-    fetchFavorites(); // Llamar a la función al montar el componente
+    fetchFavorites();
   }, []);
 
   if (loading) return <p>Cargando favoritos...</p>;
-  if (error) return <p>Error al cargar favoritos: {error.message}</p>;
+
+
 
   return (
     <>
       <Header />
+      <p>JAJAJAJAJAJ</p>
       <main className="w-full min-h-screen dark:bg-gray-800">
         <ul className="w-full min-h-screen flex justify-center flex-col items-center pt-24 " >
           {favorites.length === 0 ? (
-            <p>No tienes publicaciones favoritas.</p>
+            <p className="text-2xl text-white">No tienes publicaciones favoritas.</p>
           ) : (
             favorites.map((favorite, index) => (
               <article key={index} className="border w-5/12 border-gray-300 dark:border-gray-700 rounded-lg p-4 mb-4 bg-white dark:bg-gray-800 shadow-md flex flex-col">
