@@ -9,6 +9,7 @@ import { Soporte } from "../views/support/Soporte";
 import { Convocatorias } from "../views/convocations/Convocatorias";
 import { Faq } from "../views/faqs/Faq";
 import { Favorites } from "../views/favorites/favorites";
+import { About } from "../views/about/About";
 
 const AppRouter = () => {
     return (
@@ -28,6 +29,7 @@ const AppRouter = () => {
                     <Route path="/convocations" element={<Convocatorias />} />
                     <Route path="/faq" element={<Faq />} />
                     <Route path="/favorites" element={<Favorites />} />
+                    <Route path="/about" element={<About />} />
                 </Route>
             </Routes>
         </BrowserRouter>
