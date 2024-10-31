@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Header } from "../../components/Header";
 import { ModalPerfil } from "./ModalPerfil";
 import { SocialLink } from "./SocialLink";
-import { useProfile } from "../../contexts/profile/profileContext.jsx";
+import { useProfile } from "../../contexts/profile/profileContextProvider.jsx";
 
 export const Perfil = () => {
 
