@@ -29,6 +29,7 @@ export const Register = () => {
         navigate("/");
       }
     } catch (error) {
+      alert("Ese usuario o correo electrónico ya se encuentra registrado")
       console.error("Error:", error);
     }
   };

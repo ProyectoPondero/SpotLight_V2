@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from 'react';
+import { createContext, useContext, useEffect, useReducer } from 'react';
 import { getProfile, modifyProfile } from '../../services/profile.service.js';
 import { profileReducer } from './profileReducer.js';
 import { profileTypes } from './profileTypes.js'
@@ -40,6 +40,10 @@ export const ProfileProvider = ({ children }) => {
             console.error('Error al modificar el perfil:', error);
         }
     };
+
+    useEffect(() => {
+        getProfileData();
+    }, []);
 
     return (
         <ProfileContext.Provider value={{ state, getProfileData, modifyProfileData }}>

@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { useProfile } from "../../contexts/profile/profileContext.jsx";
 import { useEffect } from "react";
 
-export const ModalPerfil = ({ info }) => {
+export const ModalPerfil = ({ profile }) => {
   const {
     register,
     handleSubmit,
@@ -22,13 +22,13 @@ export const ModalPerfil = ({ info }) => {
 
   useEffect(() => {
     reset({
-      name: info?.name,
-      description: info?.description,
-      address: info?.address,
-      phoneNumber: info?.phoneNumber,
-      email: info?.email,
+      name: profile?.name,
+      description: profile?.description,
+      address: profile?.address,
+      phoneNumber: profile?.phoneNumber,
+      email: profile?.email,
     });
-  }, [info]);
+  }, [profile]);
 
   const onSubmit = async (data) => {
     try {

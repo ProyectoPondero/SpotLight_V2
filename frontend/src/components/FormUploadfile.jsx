@@ -1,7 +1,8 @@
+// src/components/FormUploadfile.jsx
 import { useState } from 'react';
 import { uploadPublication } from '../services/publication.service.js';
 
-export default function FormUploadfile() {
+export default function FormUploadfile({ onNewPublication }) {
     const [file, setFile] = useState(null);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -16,7 +17,9 @@ export default function FormUploadfile() {
 
         try {
             const data = await uploadPublication(formData);
-            console.log(data);
+            
+            // Notifica al componente padre sobre la nueva publicación
+            onNewPublication(data);
         } catch (error) {
             console.error('Error al realizar la publicación:', error);
         }
@@ -27,6 +30,7 @@ export default function FormUploadfile() {
             className="dark:bg-gray-800 bg-gray-200 shadow-2xl rounded px-4 pt-6 pb-2 w-auto xl:w-9/12 md:w-9/12 flex flex-col"
             onSubmit={handleSubmit}
         >
+            {/* El formulario para subir el archivo y detalles */}
             <div className="mb-4">
                 <input
                     type="text"
