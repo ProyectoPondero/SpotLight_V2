@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { authContext } from "../../contexts/user/userContextProvider";
 import { Link, useNavigate } from "react-router-dom";
 import "./login.css";
@@ -29,9 +29,7 @@ export const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await authLogin(form);
-    console.log(response);
     if (response) {
-      alert(response?.data.userName);
       return navigate("/home");
     }
   };

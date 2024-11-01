@@ -40,7 +40,7 @@ export const session = async () => {
 
 export const logout = async () => {
     try {
-        const response = await fetchData(URL + 'logout', 'GET');
+        const response = await fetchData(URL + 'logout', 'POST');
         return response;
     } catch (error) {
         throw error;

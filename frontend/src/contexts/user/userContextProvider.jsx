@@ -23,10 +23,6 @@ export const UserContextProvider = ({ children }) => {
                 });
                 toast.success(`Bienvenido ${response.data.userName}`);
                 return response;
-            } else {
-                dispatch({
-                    type: userType.LOGOUT,
-                });
             }
         } catch (error) {
             console.error("Error al iniciar sesión:", error);
@@ -37,7 +33,6 @@ export const UserContextProvider = ({ children }) => {
         try {
             const response = await session();
             if (response.user) {
-                console.log("Entro");
                 dispatch({
                     type: userType.LOGIN,
                     payload: { data: response.user },
@@ -69,8 +64,6 @@ export const UserContextProvider = ({ children }) => {
             throw new Error("Error al cerrar sesión");
         }
     };
-
-    console.log({ state });
 
     useEffect(() => {
         authSession();
