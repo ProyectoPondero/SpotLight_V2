@@ -1,5 +1,5 @@
-import { createContext, useContext, useReducer } from 'react';
-import { login, logout } from '../../api/authFetch.js';
+import { createContext, useContext, useEffect, useReducer } from 'react';
+import { login, session, logout } from '../../api/authFetch.js';
 import { userType } from './userTypes';
 import { userReducer } from './userReducer';
 import toast from 'react-hot-toast';
@@ -8,21 +8,12 @@ const UserContext = createContext();
 
 export const UserContextProvider = ({ children }) => {
     const initialState = {
-        user: null,
-        isLogged: false,
-        isLoading: false,
+        user: undefined,
     };
 
     const [state, dispatch] = useReducer(userReducer, initialState);
 
-    const handleLoading = async () => {
-        dispatch({
-            type: authTypes.LOADING
-        });
-    };
-
     const authLogin = async (user) => {
-        handleLoading();
         try {
             const response = await login(user);
             if (response) {
@@ -30,36 +21,41 @@ export const UserContextProvider = ({ children }) => {
                     type: userType.LOGIN,
                     payload: response
                 });
-                handleLoading();
-                return toast.success(`Bienvenido ${response.data.userName}`);
+                toast.success(`Bienvenido ${response.data.userName}`);
+                return response;
+            } else {
+                dispatch({
+                    type: userType.LOGOUT,
+                });
             }
-            handleLoading();
         } catch (error) {
-            handleLoading();
             console.error("Error al iniciar sesión:", error);
         }
     };
 
     const authSession = async () => {
-        handleLoading();
         try {
             const response = await session();
-            if (response.ok) {
+            if (response.user) {
+                console.log("Entro");
                 dispatch({
                     type: userType.LOGIN,
-                    payload: response
+                    payload: { data: response.user },
                 });
-                handleLoading();
+            } else {
+                dispatch({
+                    type: userType.LOGOUT,
+                });
             }
-            handleLoading();
         } catch (error) {
-            handleLoading();
             console.error("Error al obtener la sesión:", error);
+            dispatch({
+                type: userType.LOGOUT,
+            });
         }
     };
 
     const authLogout = async () => {
-        handleLoading();
         try {
             const response = await logout();
             if (response.ok) {
@@ -67,15 +63,18 @@ export const UserContextProvider = ({ children }) => {
                 dispatch({
                     type: userType.LOGOUT,
                 });
-                handleLoading();
             }
-            handleLoading();
         } catch (error) {
-            handleLoading();
             console.error("Error al cerrar sesión:", error);
             throw new Error("Error al cerrar sesión");
         }
     };
+
+    console.log({ state });
+
+    useEffect(() => {
+        authSession();
+    }, []);
 
     return (
         <UserContext.Provider value={{ state, authLogin, authSession, authLogout }}>

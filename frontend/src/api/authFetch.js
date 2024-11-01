@@ -26,6 +26,11 @@ export const login = async (data) => {
 export const session = async () => {
     try {
         const response = await fetchData(URL + 'session', 'GET');
+
+        if (!response.ok) {
+            return { user: null };
+        }
+
         const user = await response.json();
         return user;
     } catch (error) {

@@ -1,7 +1,7 @@
 import './App.css';
 import AppRouter from './pages/AppRouter.jsx';
 import { Toaster } from 'react-hot-toast';
-import { UserContextProvider } from './contexts/UserContexProvider.jsx';
+import { UserContextProvider } from './contexts/user/userContextProvider.jsx';
 import { ProfileProvider } from './contexts/profile/profileContextProvider.jsx';
 
 function App() {

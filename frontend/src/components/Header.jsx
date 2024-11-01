@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { UserContext } from '../contexts/UserContext.jsx';
+import React, { useState, useEffect } from 'react';
+import { authContext } from '../contexts/user/userContextProvider.jsx';
 import { Link, useNavigate } from 'react-router-dom';
 import Dropdown from './Dropdown.jsx';
 
 export const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const [theme, setTheme] = useState(() => window.localStorage.getItem('theme') || 'light');
-    const { logout } = useContext(UserContext);
+    const { authLogout } = authContext();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -28,7 +28,7 @@ export const Header = () => {
     };
 
     const logoutButton = async () => {
-        await logout();
+        await authLogout();
         return navigate('/');
     };
 

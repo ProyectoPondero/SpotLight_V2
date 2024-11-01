@@ -7,7 +7,6 @@ export const userReducer = (state, action) => {
             return {
                 ...state,
                 user: action.payload.data,
-                isLogged: true,
             };
         }
 
@@ -22,7 +21,6 @@ export const userReducer = (state, action) => {
             return {
                 ...state,
                 user: action.payload.data,
-                isLogged: true,
             };
         }
 
@@ -30,7 +28,6 @@ export const userReducer = (state, action) => {
             return {
                 ...state,
                 user: null,
-                isLogged: false,
             };
         }
 

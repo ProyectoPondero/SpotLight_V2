@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PrivateRoutes from "./PrivateRoutes";
-import PublicRoutes from "./PublicRoutes";
 import { Login } from "../views/login/Login";
 import { Register } from "../views/register/Register";
 import { Home } from "../views/home/Home";
@@ -15,10 +14,8 @@ const AppRouter = () => {
         <BrowserRouter>
             <Routes>
                 {/* Rutas públicas: Accesibles solo si el usuario NO está autenticado */}
-                <Route element={<PublicRoutes />}>
-                    <Route path="/" element={<Login />} />
-                    <Route path="/register" element={<Register />} />
-                </Route>
+                <Route path="/" element={<Login />} />
+                <Route path="/register" element={<Register />} />
 
                 {/* Rutas privadas: Solo accesibles si el usuario está autenticado */}
                 <Route element={<PrivateRoutes />}>

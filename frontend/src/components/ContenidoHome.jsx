@@ -1,13 +1,17 @@
 import { saveFavorite } from "../services/favorite.service.js";
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import FormUploadfile from './FormUploadfile.jsx';
-import { useUserInfo } from '../hooks/useUserInfo.js';
 import { usePublications } from '../hooks/usePublications.js';
+import { useProfile } from "../contexts/profile/profileContextProvider.jsx";
 
 export const ContenidoHome = () => {
     const [refreshFlag, setRefreshFlag] = useState(false);
     const { publications: initialPublications, loading, error } = usePublications(refreshFlag);
-    const { fotoPerfil } = useUserInfo(); // Usar el hook para obtener la foto de perfil
+    const { state: { profile }, getProfileData } = useProfile();
+
+    useEffect(() => {
+        getProfileData();
+    }, []);
 
     const handleNewPublication = () => {
         setRefreshFlag(!refreshFlag);
@@ -39,7 +43,11 @@ export const ContenidoHome = () => {
                         initialPublications.map((publication, index) => (
                             <article key={index} className="border border-gray-300 dark:border-gray-700 rounded-lg p-4 mb-4 bg-white dark:bg-gray-800 shadow-md">
                                 <div className=' p-2 flex flex-row items-center gap-2 rounded-sm'>
-                                    <img className='w-12 h-12 rounded-full' src={fotoPerfil} alt="Foto de perfil" />
+                                    <img className='w-12 h-12 rounded-full' src={
+                                        profile?.avatar
+                                            ? profile.avatar.url
+                                            : "https://via.placeholder.com/150"
+                                    } alt="Foto de perfil" />
                                     <h1 className='font-bold text-black text-lg dark:text-gray-200'>{"@" + publication.author}</h1>
                                 </div>
                                 <h2 className="text-xl font-semibold mb-2 dark:text-gray-300 break-words">{publication.title}</h2>
