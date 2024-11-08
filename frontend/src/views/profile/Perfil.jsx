@@ -3,7 +3,7 @@ import { Header } from "../../components/Header";
 import { ModalPerfil } from "./ModalPerfil";
 import { SocialLink } from "./SocialLink";
 import { useProfile } from "../../contexts/profile/profileContext.jsx";
-import { GetPublic } from "./GetPublic.jsx";
+import GetPublic from "./GetPublic.jsx";
 
 export const Perfil = () => {
 
@@ -16,7 +16,7 @@ export const Perfil = () => {
   return (
     <>
       <Header />
-      <div className="flex justify-center">
+      <div className="flex justify-center ">
         <main className="flex justify-center bg-gray-200 min-h-screen w-screen">
           <div className="container mx-auto p-4 mt-28">
             <section className="bg-white shadow-2xl rounded-lg overflow-hidden dark:bg-gray-900">
@@ -34,7 +34,7 @@ export const Perfil = () => {
                   </div>
                 </div>
               </div>
-              <div className="mt-3 p-1 dark:bg-gray-900">
+              <div className="mt-3 p-1 dark:bg-gray-900 ">
                 <div className="text-center">
                   <h3 className="text-2xl font-bold text-gray-800 dark:text-white">
                     {profile?.name}
