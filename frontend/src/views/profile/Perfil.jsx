@@ -3,6 +3,7 @@ import { Header } from "../../components/Header";
 import { ModalPerfil } from "./ModalPerfil";
 import { SocialLink } from "./SocialLink";
 import { useProfile } from "../../contexts/profile/profileContext.jsx";
+import { GetPublic } from "./GetPublic.jsx";
 
 export const Perfil = () => {
 
@@ -73,6 +74,7 @@ export const Perfil = () => {
                 <SocialLink />
               </div>
             </section>
+            <GetPublic />
           </div>
         </main>
       </div>
