@@ -9,6 +9,7 @@ import { Soporte } from "../views/support/Soporte";
 import { Convocatorias } from "../views/convocations/Convocatorias";
 import { Faq } from "../views/faqs/Faq";
 import { Favorites } from "../views/favorites/Favorites.jsx";
+import { Categories } from "../views/categories/Categories.jsx";
 
 const AppRouter = () => {
     return (
@@ -28,6 +29,8 @@ const AppRouter = () => {
                     <Route path="/convocations" element={<Convocatorias />} />
                     <Route path="/faq" element={<Faq />} />
                     <Route path="/favorites" element={<Favorites />} />
+                    <Route path="/categories" element={<Categories />} />
+
                 </Route>
             </Routes>
         </BrowserRouter>

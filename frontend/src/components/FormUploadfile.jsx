@@ -58,7 +58,7 @@ export default function FormUploadfile({ onNewPublication }) {
                         onChange={(e) => setCategory(e.target.value)}
                     >
                         <option value="deafult">Selecciona una categoría</option>
-                        <option value="Tecnolgía">Tecnología</option>
+                        <option value="Tecnología">Tecnología</option>
                         <option value="Deportes">Deportes</option>
                         <option value="Educación">Educación</option>
                         <option value="Gaming">Gaming</option>

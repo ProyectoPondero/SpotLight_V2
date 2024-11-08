@@ -63,7 +63,7 @@ export const ContenidoHome = () => {
                                 </div>
                                 <form action="" className='p-2'>
                                     <article className='w-full flex justify-between items-center'>
-                                        <p className="text-green-800 font-bold">Categoria: <span className="text-white">{publication.category}</span></p>
+                                        <p className="text-red-500 font-bold">Categoria: <span className="text-green-700 dark:text-white">{publication.category}</span></p>
                                         <button onClick={(e) => handleSaveFavorite(e, publication._id)}>
                                             <i className="fa-solid fa-star text-xl text-yellow-500"></i>
                                         </button>
