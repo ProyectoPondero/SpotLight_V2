@@ -23,16 +23,16 @@ export const ContenidoHome = () => {
         }
     };
 
-    const DeleteFavorite = async (e, publicationId) => {
-        e.preventDefault();
-        try {
-            const response = await deleteFavorites(publicationId);
-            console.log("Respuesta del servidor:", response);
-            return { publicationId };
-        } catch (error) {
-            console.log("Error al borrar la publicación");
-        }
-    };
+    // const DeleteFavorite = async (e, publicationId) => {
+    //     e.preventDefault();
+    //     try {
+    //         const response = await deleteFavorites(publicationId);
+    //         console.log("Respuesta del servidor:", response);
+    //         return { publicationId };
+    //     } catch (error) {
+    //         console.log("Error al borrar la publicación");
+    //     }
+    // };
 
     return (
         <>
@@ -63,10 +63,8 @@ export const ContenidoHome = () => {
                                 </div>
                                 <form action="" className='p-2'>
                                     <article className='w-full flex justify-between items-center'>
-                                        <button>
-                                            <i className="fa-solid fa-heart text-xl text-red-600 dark:text-gray-400 hover:text-blue-400 dark:hover:text-blue-400"></i>
-                                        </button>
-                                        <button onClick={(e) => { handleSaveFavorite(e, publication._id); DeleteFavorite(e, publication._id) }}>
+                                        <p className="text-green-800 font-bold">Categoria: <span className="text-white">{publication.category}</span></p>
+                                        <button onClick={(e) => handleSaveFavorite(e, publication._id)}>
                                             <i className="fa-solid fa-star text-xl text-yellow-500"></i>
                                         </button>
                                     </article>

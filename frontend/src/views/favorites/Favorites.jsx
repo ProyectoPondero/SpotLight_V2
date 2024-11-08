@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { getFavorites, deleteFavorites } from "../../services/favorite.service.js";
 import { Header } from "../../components/Header.jsx";
 import { Footer } from "../../components/Footer.jsx";
@@ -13,7 +13,7 @@ export const Favorites = () => {
         const data = await getFavorites();
         setFavorites(data);
       } catch (error) {
-        console.log(error);
+        console.log("Error al obtener favoritos:", error);
       } finally {
         setLoading(false);
       }
@@ -22,14 +22,14 @@ export const Favorites = () => {
     fetchFavorites();
   }, []);
 
-  const handleDeleteFavorite = async (e, favoriteId) => {
+  const handleDeleteFavorite = async (e, publicationId) => {
     e.preventDefault();
     try {
-      const response = await deleteFavorites(favoriteId);
-      console.log("Respuesta del servidor:", response);
-      return { favoriteId };
+      await deleteFavorites(publicationId); // Llama al servicio de eliminación
+      setFavorites((prevFavorites) => prevFavorites.filter((fav) => fav.publicationId._id !== publicationId)); // Actualiza el estado local
+      console.log("Publicación eliminada de favoritos:", publicationId);
     } catch (error) {
-      console.log("Error al borrar la publicación");
+      console.log("Error al borrar la publicación:", error);
     }
   };
 
@@ -64,7 +64,7 @@ export const Favorites = () => {
                   )}
                 </div>
                 <button
-                  onClick={(e) => handleDeleteFavorite(e, favorite._id)}
+                  onClick={(e) => handleDeleteFavorite(e, favorite.publicationId._id)}
                   className="mt-4 text-red-500 hover:text-red-700">
                   Eliminar de favoritos
                 </button>

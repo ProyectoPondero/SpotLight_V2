@@ -8,7 +8,7 @@ import { Perfil } from "../views/profile/Perfil";
 import { Soporte } from "../views/support/Soporte";
 import { Convocatorias } from "../views/convocations/Convocatorias";
 import { Faq } from "../views/faqs/Faq";
-import { Favorites } from "../views/favorites/favorites";
+import { Favorites } from "../views/favorites/Favorites.jsx";
 
 const AppRouter = () => {
     return (
