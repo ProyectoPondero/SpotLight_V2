@@ -14,9 +14,9 @@ export const Aside = () => {
                         <i className="fa-solid fa-star text-red-500"></i>
                         <li className='hidden lg:block'>Favoritos</li>
                     </Link>
-                    <Link to="/contactos" className='flex justify-center items-center gap-2 hover:text-xl hover:bg-gray-300 p-1 dark:hover:bg-gray-800 rounded'>
+                    <Link to="/categories" className='flex justify-center items-center gap-2 hover:text-xl hover:bg-gray-300 p-1 dark:hover:bg-gray-800 rounded'>
                         <i className="fa-solid fa-address-book text-red-500"></i>
-                        <li className='hidden lg:block'>Contactos</li>
+                        <li className='hidden lg:block'>Categorias</li>
                     </Link>
                     <Link to="/privacidad" className='flex justify-center items-center gap-2 hover:text-xl hover:bg-gray-300 p-1 dark:hover:bg-gray-800 rounded'>
                         <i className="fa-solid fa-book text-red-500"></i>

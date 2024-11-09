@@ -7,11 +7,11 @@ export const publicationCtrl = {};
 publicationCtrl.uploadPublication = async (req, res) => {
     try {
         const user = req.user; // Obtener el usuario autenticado
-        const { title, description } = req.body; // Obtener los datos de la publicación
+        const { title, description, category } = req.body; // Obtener los datos de la publicación
         const file = await req.file; // Obtener el archivo
 
         // Llamar al servicio para manejar la lógica de la subida de la publicación
-        const newPublication = await publicationService.uploadPublication(user, title, description, file);
+        const newPublication = await publicationService.uploadPublication(user, title, description, file, category);
 
         // Enviar una respuesta de éxito al cliente con la nueva publicación
         return res.status(200).send({ message: "Publicación subida exitosamente", newPublication });

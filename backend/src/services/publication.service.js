@@ -6,7 +6,7 @@ import fs from "fs-extra";
 export const publicationService = {};
 
 // Subir una nueva publicación
-publicationService.uploadPublication = async (user, title, description, file) => {
+publicationService.uploadPublication = async (user, title, description, file, category) => {
     try {
         // Subir el archivo a la nube
         const result = await uploadFile(file.path);
@@ -19,6 +19,7 @@ publicationService.uploadPublication = async (user, title, description, file) =>
             description,
             public_id: result.public_id,
             secure_url: result.secure_url,
+            category
         });
 
         // Guardar la nueva publicación en la base de datos

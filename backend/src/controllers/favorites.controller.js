@@ -21,7 +21,7 @@ export const saveFavorites = async (req, res) => {
             publicationId: publicationId
         });
 
-        if(favorite){
+        if (favorite) {
             console.log("Ya se encuentra en favoritos")
         }
 
@@ -33,6 +33,21 @@ export const saveFavorites = async (req, res) => {
         res.status(500).json({ message: "Error al guardar el favorito" });
     }
 };
+
+export const deleteFavorite = async (req, res) => {
+    try {
+        const { id, id2 } = req.params
+
+        const existingFavorite = await favoriteModel.findOne({ publicationId: id, favoriteId: id2 });
+        if (!existingFavorite) {
+            return res.status(404).json({ message: "Esta publicación no se encuentra en favoritos" });
+        }
+        const suprFavorite = await favoriteModel.findByIdAndDelete(existingFavorite._id);
+        res.status(200).json("Se eliminó de favoritos");
+    } catch (error) {
+        res.status(500).json({ message: "Error al eliminar el favorito" });
+    }
+}
 
 export const getFavorites = async (req, res) => {
     try {
@@ -54,4 +69,3 @@ export const getFavorites = async (req, res) => {
         res.status(500).json({ message: "Error al obtener los favoritos" });
     }
 };
-

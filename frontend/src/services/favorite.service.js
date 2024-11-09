@@ -33,3 +33,12 @@ export const getFavorites = async () => {
     });
 };
 
+export const deleteFavorites = async (publicationId) => {
+    return fetchData(`${URL}${publicationId}`, {
+        method: "DELETE",
+        credentials: "include"
+    });
+};
+
+
+

@@ -1,4 +1,4 @@
-import { saveFavorite } from "../services/favorite.service.js";
+import { saveFavorite, deleteFavorites } from "../services/favorite.service.js";
 import React, { useState } from 'react';
 import FormUploadfile from './FormUploadfile.jsx';
 import { useUserInfo } from '../hooks/useUserInfo.js';
@@ -14,9 +14,7 @@ export const ContenidoHome = () => {
     };
 
     const handleSaveFavorite = async (e, publicationId) => {
-
-        e.preventDefault()
-
+        e.preventDefault();
         try {
             const response = await saveFavorite(publicationId);
             console.log("Respuesta del servidor:", response);
@@ -25,6 +23,16 @@ export const ContenidoHome = () => {
         }
     };
 
+    // const DeleteFavorite = async (e, publicationId) => {
+    //     e.preventDefault();
+    //     try {
+    //         const response = await deleteFavorites(publicationId);
+    //         console.log("Respuesta del servidor:", response);
+    //         return { publicationId };
+    //     } catch (error) {
+    //         console.log("Error al borrar la publicación");
+    //     }
+    // };
 
     return (
         <>
@@ -38,24 +46,24 @@ export const ContenidoHome = () => {
                     ) : initialPublications.length > 0 ? (
                         initialPublications.map((publication, index) => (
                             <article key={index} className="border border-gray-300 dark:border-gray-700 rounded-lg p-4 mb-4 bg-white dark:bg-gray-800 shadow-md">
-                                <div className=' p-2 flex flex-row items-center gap-2 rounded-sm'>
+                                <div className='p-2 flex flex-row items-center gap-2 rounded-sm'>
                                     <img className='w-12 h-12 rounded-full' src={fotoPerfil} alt="Foto de perfil" />
                                     <h1 className='font-bold text-black text-lg dark:text-gray-200'>{"@" + publication.author}</h1>
                                 </div>
                                 <h2 className="text-xl font-semibold mb-2 dark:text-gray-300 break-words">{publication.title}</h2>
                                 <p className="text-gray-700 dark:text-gray-400 mb-4 break-words">{publication.description}</p>
                                 <div className='w-full flex justify-center'>
-                                    <img
-                                        src={publication.secure_url}
-                                        alt={publication.title}
-                                        className=" rounded-lg w-full"
-                                    />
+                                    {publication.secure_url.match(/\.(mp4|webm|ogg|ogv)$/i) ? (
+                                        <video src={publication.secure_url} controls className="rounded-lg w-full">
+                                            Tu navegador no soporta el video.
+                                        </video>
+                                    ) : (
+                                        <img src={publication.secure_url} alt={publication.title} className="rounded-lg w-full" />
+                                    )}
                                 </div>
                                 <form action="" className='p-2'>
                                     <article className='w-full flex justify-between items-center'>
-                                        <button>
-                                            <i className="fa-solid fa-heart text-xl text-red-600 dark:text-gray-400 hover:text-blue-400 dark:hover:text-blue-400"></i>
-                                        </button>
+                                        <p className="text-red-500 font-bold">Categoria: <span className="text-green-700 dark:text-white">{publication.category}</span></p>
                                         <button onClick={(e) => handleSaveFavorite(e, publication._id)}>
                                             <i className="fa-solid fa-star text-xl text-yellow-500"></i>
                                         </button>

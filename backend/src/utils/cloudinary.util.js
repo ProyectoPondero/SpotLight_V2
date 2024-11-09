@@ -10,7 +10,8 @@ cloudinary.config({
 
 export async function uploadFile(filePath) {
     return await cloudinary.uploader.upload(filePath, {
-        folder: 'Spotlight'
+        folder: 'Spotlight',
+        resource_type: 'auto'
     });
 };
 
