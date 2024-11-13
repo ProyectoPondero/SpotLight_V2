@@ -77,11 +77,15 @@ export const Favorites = () => {
                     />
                   )}
                 </div>
-                <button
-                  onClick={(e) => handleDeleteFavorite(e, favorite.publicationId._id)}
-                  className="mt-4 text-red-500 hover:text-red-700">
-                  Eliminar de favoritos
-                </button>
+                <div className="flex justify-center items-center">
+                  <button
+                    onClick={(e) => handleDeleteFavorite(e, favorite.publicationId._id)}
+                    className="flex justify-center text-center mt-4  w-5/12  text-black rounded-xl bg-red-700">
+                    Eliminar de favoritos
+                  </button>
+
+                </div>
+
               </article>
             ))
           )}

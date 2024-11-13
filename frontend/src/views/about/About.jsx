@@ -38,7 +38,7 @@ export const About = () => {
                 <img
                   src="/src/assets/images/EMILIO.png"
                   alt="Emilio"
-                  className="rounded-full w-32 h-32 object-cover sm:w-40 sm:h-40 md:w-48 md:h-48"
+                  className="rounded-full w-32 h-32 object-cover sm:w-40 sm:h-40 md:w-48 md:h-48 p-2"
                 />
                 <br />
                 <p className="text-center font-bold rounded-xl shadow-sm border-2 hover:scale-110 transition duration-300 dark:text-white">
@@ -52,7 +52,7 @@ export const About = () => {
                 <img
                   src="/src/assets/images/CRIS.png"
                   alt="Cris"
-                  className="rounded-full w-32 h-32 object-cover sm:w-40 sm:h-40 md:w-48 md:h-48"
+                  className="rounded-full w-32 h-32 object-cover sm:w-40 sm:h-40 md:w-48 md:h-48 p-2"
                 />
                 <br />
                 <p className="text-center font-bold rounded-xl shadow-sm border-2 hover:scale-110 transition duration-300 dark:text-white">
@@ -66,7 +66,7 @@ export const About = () => {
                 <img
                   src="/src/assets/images/MARCE.png"
                   alt="Marce"
-                  className="rounded-full w-32 h-32 object-cover sm:w-40 sm:h-40 md:w-48 md:h-48"
+                  className="rounded-full w-32 h-32 object-cover sm:w-40 sm:h-40 md:w-48 md:h-48 p-2"
                 />
                 <br />
                 <p className="text-center font-bold rounded-xl shadow-sm border-2 hover:scale-110 transition duration-300 dark:text-white">

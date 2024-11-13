@@ -60,7 +60,7 @@ const GetPublic = () => {
             },
             credentials: "include"
         }
-        ).then((res))
+        ).then((res) => res.json()).then((data) => console.log(data)).catch((err) => console.log(err))
         // try {
         //     await modifyPublication(publicationId, formData);
         //     setEditingPublication(null);
