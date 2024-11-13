@@ -42,18 +42,18 @@ export const Categories = () => {
             <Header />
             <main className="w-full min-h-screen dark:bg-gray-800">
                 <div className="pt-24 px-4">
-                    <h1 className="text-white font-bold text-2xl mb-4">Selecciona una Categoría</h1>
+                    <h1 className="text-white text-center  font-bold text-2xl mb-4">Selecciona una Categoría</h1>
 
                     {/* Botones de categorías */}
-                    <div className="flex flex-wrap gap-2 mb-4">
-                        <button onClick={() => handleCategoryClick('')} className="py-2 px-4 bg-green-800 text-white rounded">Todas</button>
-                        <button onClick={() => handleCategoryClick('Tecnología')} className="py-2 px-4 bg-blue-500 text-white rounded">Tecnología</button>
-                        <button onClick={() => handleCategoryClick('Deportes')} className="py-2 px-4 bg-red-500 text-white rounded">Deportes</button>
-                        <button onClick={() => handleCategoryClick('Educación')} className="py-2 px-4 bg-gray-600 text-white rounded">Educación</button>
-                        <button onClick={() => handleCategoryClick('Gaming')} className="py-2 px-4 bg-violet-500 text-white rounded">Gaming</button>
-                        <button onClick={() => handleCategoryClick('Ciencias')} className="py-2 px-4 bg-blue-900 text-white rounded">Ciencias</button>
-                        <button onClick={() => handleCategoryClick('Música')} className="py-2 px-4 bg-pink-500 text-white rounded">Música</button>
-                        <button onClick={() => handleCategoryClick('Sociales')} className="py-2 px-4 bg-orange-400 text-white rounded">Sociales</button>
+                    <div className="flex justify-center flex-wrap gap-2 mb-4">
+                        <button onClick={() => handleCategoryClick('')} className="py-2 px-4 bg-green-800 text-white rounded hover:bg-green-700 duration-700  ">Todas</button>
+                        <button onClick={() => handleCategoryClick('Tecnología')} className="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-800 duration-700  ">Tecnología</button>
+                        <button onClick={() => handleCategoryClick('Deportes')} className="py-2 px-4 bg-red-500 text-white rounded hover:bg-red-800 duration-700 ">Deportes</button>
+                        <button onClick={() => handleCategoryClick('Educación')} className="py-2 px-4 bg-gray-600 text-white rounded hover:bg-gray-400 duration-700 ">Educación</button>
+                        <button onClick={() => handleCategoryClick('Gaming')} className="py-2 px-4 bg-violet-500 text-white rounded  hover:bg-violet-900 duration-700">Gaming</button>
+                        <button onClick={() => handleCategoryClick('Ciencias')} className="py-2 px-4 bg-blue-900 text-white rounded  hover:bg-blue-400 duration-700">Ciencias</button>
+                        <button onClick={() => handleCategoryClick('Música')} className="py-2 px-4 bg-pink-500 text-white rounded  hover:bg-pink-800 duration-700">Música</button>
+                        <button onClick={() => handleCategoryClick('Sociales')} className="py-2 px-4 bg-orange-400 text-white rounded  hover:bg-orange-700 duration-700">Sociales</button>
                     </div>
 
                     {/* Mostrar publicaciones filtradas */}
@@ -64,12 +64,12 @@ export const Categories = () => {
                             publications.map((publication, index) => (
                                 <li key={index} className="border border-gray-300 dark:border-gray-700 rounded-lg p-4 mb-4 bg-white dark:bg-gray-800 shadow-md w-3/4">
                                     <div className='flex flex-row items-center gap-2'>
-                                    <img className='w-12 h-12 rounded-full' src={
-                                        profile?.avatar
-                                            ? profile.avatar.url
-                                            : "https://via.placeholder.com/150"
-                                    } alt="Foto de perfil" />
-                                    <h1 className='text-xl font-bold dark:text-white'>@{publication.author}</h1>
+                                        <img className='w-12 h-12 rounded-full' src={
+                                            profile?.avatar
+                                                ? profile.avatar.url
+                                                : "https://via.placeholder.com/150"
+                                        } alt="Foto de perfil" />
+                                        <h1 className='text-xl font-bold dark:text-white'>@{publication.author}</h1>
                                     </div>
                                     <h2 className="text-xl font-semibold mb-2 dark:text-gray-300">{publication.title}</h2>
                                     <p className="text-gray-700 dark:text-gray-400 mb-4">{publication.description}</p>
