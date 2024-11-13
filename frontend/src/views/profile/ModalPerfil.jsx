@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useProfile } from "../../contexts/profile/profileContext.jsx";
+import { useProfile } from "../../contexts/profile/profileContextProvider";
 import { useEffect } from "react";
 
 export const ModalPerfil = ({ profile }) => {

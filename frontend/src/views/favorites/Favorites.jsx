@@ -2,10 +2,17 @@ import { useState, useEffect } from "react";
 import { getFavorites, deleteFavorites } from "../../services/favorite.service.js";
 import { Header } from "../../components/Header.jsx";
 import { Footer } from "../../components/Footer.jsx";
+import { useProfile } from "../../contexts/profile/profileContextProvider.jsx";
 
 export const Favorites = () => {
   const [favorites, setFavorites] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { state: { profile }, getProfileData } = useProfile();
+
+  useEffect(() => {
+    getProfileData();
+  }, []);
+
 
   useEffect(() => {
     const fetchFavorites = async () => {
@@ -45,9 +52,16 @@ export const Favorites = () => {
           ) : (
             favorites.map((favorite, index) => (
               <article key={index} className="border w-5/12 border-gray-300 dark:border-gray-700 rounded-lg p-4 mb-4 bg-white dark:bg-gray-800 shadow-md flex flex-col">
-                <p className="dark:text-white font-bold text-xl">{"@" + favorite.publicationId.author}</p>
-                <h3 className="break-words dark:text-white font-bold">{favorite.publicationId.title}</h3>
-                <p className="break-words">{favorite.publicationId.description}</p>
+                <div className="flex flex-row gap-2 items-center">
+                  <img className='w-12 h-12 rounded-full' src={
+                    profile?.avatar
+                      ? profile.avatar.url
+                      : "https://via.placeholder.com/150"
+                  } alt="Foto de perfil" />
+                  <p className="dark:text-white font-bold text-xl">{"@" + favorite.publicationId.author}</p>
+                </div>
+                <h3 className="text-xl font-semibold mb-2 dark:text-gray-300 break-words">{favorite.publicationId.title}</h3>
+                <p className="text-gray-700 dark:text-gray-400 mb-4 break-words">{favorite.publicationId.description}</p>
                 <br />
                 <div className='w-full flex justify-center'>
                   {/* Verificación para cargar video o imagen */}

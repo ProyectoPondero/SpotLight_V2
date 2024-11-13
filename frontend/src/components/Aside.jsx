@@ -7,7 +7,7 @@ export const Aside = () => {
             <div className='sticky top-28 h-80 w-11/12 col-span-1 shadow-2xl dark:bg-gray-900 rounded bg-gray-200'>
                 <ul className='h-full flex flex-col font-bold text-gray-900 text-lg md:text-lg sm:text-xl justify-evenly items-center dark:text-white md:items-center lg:items-start px-2'>
                     <Link to="/faq" className='flex justify-center items-center gap-2 hover:text-xl hover:bg-gray-300 p-1 dark:hover:bg-gray-800 rounded'>
-                        <i className="fa-solid fa-box-archive text-red-500"></i>
+                        <i className="fa-solid fa-circle-question text-red-500"></i>
                         <li className='hidden lg:block'>Faq</li>
                     </Link>
                     <Link to="/favorites" className='flex justify-center items-center gap-2 hover:text-xl hover:bg-gray-300 p-1 dark:hover:bg-gray-800 rounded'>
@@ -15,7 +15,7 @@ export const Aside = () => {
                         <li className='hidden lg:block'>Favoritos</li>
                     </Link>
                     <Link to="/categories" className='flex justify-center items-center gap-2 hover:text-xl hover:bg-gray-300 p-1 dark:hover:bg-gray-800 rounded'>
-                        <i className="fa-solid fa-address-book text-red-500"></i>
+                        <i className="fa-solid fa-list text-red-500"></i>
                         <li className='hidden lg:block'>Categorias</li>
                     </Link>
                     <Link to="/privacidad" className='flex justify-center items-center gap-2 hover:text-xl hover:bg-gray-300 p-1 dark:hover:bg-gray-800 rounded'>
