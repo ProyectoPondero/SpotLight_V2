@@ -1,5 +1,5 @@
-import { useContext, useState } from "react";
-import { UserContext } from "../../contexts/UserContext";
+import { useState } from "react";
+import { authContext } from "../../contexts/user/UserContexProvider";
 import { Link, useNavigate } from "react-router-dom";
 import "./login.css";
 
@@ -23,14 +23,13 @@ export const Login = () => {
   };
 
   // Obtener la función login del contexto de usuario
-  const { login } = useContext(UserContext);
+  const { authLogin } = authContext();
 
   // Manejar el envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await login(form);
+    const response = await authLogin(form);
     if (response) {
-      alert(response.data.userName);
       return navigate("/home");
     }
   };

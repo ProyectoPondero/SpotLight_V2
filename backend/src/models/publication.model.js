@@ -25,6 +25,10 @@ const publicationSchema = new Schema({
     secure_url: {
         type: String,
         require: true
+    },
+    category: {
+        type: String,
+        require: true
     }
 });
 

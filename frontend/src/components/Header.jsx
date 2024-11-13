@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { UserContext } from '../contexts/UserContext.jsx';
+import React, { useState, useEffect } from 'react';
+import { authContext } from '../contexts/user/UserContexProvider.jsx';
 import { Link, useNavigate } from 'react-router-dom';
 import Dropdown from './Dropdown.jsx';
 
 export const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const [theme, setTheme] = useState(() => window.localStorage.getItem('theme') || 'light');
-    const { logout } = useContext(UserContext);
+    const { authLogout } = authContext();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -28,7 +28,7 @@ export const Header = () => {
     };
 
     const logoutButton = async () => {
-        await logout();
+        await authLogout();
         return navigate('/');
     };
 
@@ -49,7 +49,7 @@ export const Header = () => {
                 <div className='hidden md:flex w-4/5 justify-between md:items-end'>
                     <ul className='flex text-lg gap-1 font-bold dark:text-gray-100 relative top-1'>
                         <li className='rounded px-2 flex items-end hover:bg-gray-300 dark:hover:bg-gray-800 dark:hover:text-yellow-500 hover:font-bold py-1'>
-                            <Link to="/">Home</Link>
+                            <Link to="/home">Home</Link>
                         </li>
                         <li className='rounded px-2 flex items-end hover:bg-gray-300 dark:hover:bg-gray-800 dark:hover:text-yellow-500 hover:font-bold py-1'>
                             <Link to="/messagge">Mensajes</Link>
