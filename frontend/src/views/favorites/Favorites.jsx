@@ -61,7 +61,7 @@ export const Favorites = () => {
                   <p className="dark:text-white font-bold text-xl">{"@" + profile.name}</p>
                 </div>
                 <h3 className="text-xl font-semibold mb-2 dark:text-gray-300 break-words">{favorite.publicationId.title}</h3>
-                <p className="text-gray-700 dark:text-gray-400 mb-4 break-words">{favorite.publicationId.description}</p>
+                <p className=" dark:text-white mb-4 break-words">{favorite.publicationId.description}</p>
                 <br />
                 <div className='w-full flex justify-center'>
                   {/* Verificación para cargar video o imagen */}
@@ -80,7 +80,7 @@ export const Favorites = () => {
                 <div className="flex justify-center items-center">
                   <button
                     onClick={(e) => handleDeleteFavorite(e, favorite.publicationId._id)}
-                    className="flex justify-center text-center mt-4  w-5/12  text-black rounded-xl bg-red-700">
+                    className="flex justify-center text-center mt-4  w-5/12  text-black rounded-xl bg-red-700 hover:scale-105 transition duration-500 ">
                     Eliminar de favoritos
                   </button>
 
