@@ -58,13 +58,6 @@ const Dropdown = () => {
                             Convocatorias
                         </Link>
                         <Link
-                            to="/comunidad"
-                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                            role="menuitem"
-                        >
-                            Comunidad
-                        </Link>
-                        <Link
                             to="/about"
                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             role="menuitem"
