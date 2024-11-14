@@ -47,9 +47,9 @@ export default function FormUploadfile({ onNewPublication }) {
                     onChange={(e) => setDescription(e.target.value)}
                 />
                 {/* Dropdown para seleccionar categoría */}
-                <div className="mb-4">
-                    <label className="block text-white font-bold mb-2" htmlFor="category">
-                        Categoría
+                <div className="mb-4 rounded-xl p-2 ">
+                    <label className="block  font-bold mb-2 dark:text-white  " htmlFor="category">
+                        Seleccione una categoría
                     </label>
                     <select
                         id="category"
@@ -57,7 +57,7 @@ export default function FormUploadfile({ onNewPublication }) {
                         value={category}
                         onChange={(e) => setCategory(e.target.value)}
                     >
-                        <option value="deafult">Selecciona una categoría</option>
+                        <option value="deafult">.......</option>
                         <option value="Tecnología">Tecnología</option>
                         <option value="Deportes">Deportes</option>
                         <option value="Educación">Educación</option>

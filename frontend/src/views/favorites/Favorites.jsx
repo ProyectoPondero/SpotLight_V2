@@ -58,7 +58,7 @@ export const Favorites = () => {
                       ? profile.avatar.url
                       : "https://via.placeholder.com/150"
                   } alt="Foto de perfil" />
-                  <p className="dark:text-white font-bold text-xl">{"@" + favorite.publicationId.author}</p>
+                  <p className="dark:text-white font-bold text-xl">{"@" + profile.name}</p>
                 </div>
                 <h3 className="text-xl font-semibold mb-2 dark:text-gray-300 break-words">{favorite.publicationId.title}</h3>
                 <p className="text-gray-700 dark:text-gray-400 mb-4 break-words">{favorite.publicationId.description}</p>

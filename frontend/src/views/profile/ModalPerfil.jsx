@@ -1,8 +1,18 @@
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import { useProfile } from "../../contexts/profile/profileContext.jsx";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { validateEmail, validateName, validatePhone } from "../../validation/validations.js";
+import toast from "react-hot-toast";
 
 export const ModalPerfil = ({ profile }) => {
+  const [error, setError] = useState("")
+  const [loading, setLoading] = useState(false);
+
+  const eñol = (error) => {
+    throw new Error(error);
+
+  }
+
   const {
     register,
     handleSubmit,
@@ -32,12 +42,37 @@ export const ModalPerfil = ({ profile }) => {
 
   const onSubmit = async (data) => {
     try {
+      console.log("hola")
+      setLoading(true)
       // Crear una instancia de FormData
       const formData = new FormData();
 
       // Agregar cada campo del formulario a formData
       for (const key in data) {
-        formData.append(key, data[key]);
+        try {
+
+        } catch (error) {
+
+        }
+        switch (key) {
+          case "name":
+            validateName(data[key]) ?
+              formData.append(key, data[key]) : eñol('El nombre no es válido');
+            break;
+          case "phoneNumber":
+            validatePhone(data[key]) ?
+              formData.append(key, data[key]) : eñol('El teléfono no es válido');
+            break;
+          case "email":
+            validateEmail(data[key]) ?
+              formData.append(key, data[key]) :
+              eñol('El email no es válido');
+            break;
+          default:
+            formData.append(key, data[key])
+            break;
+        }
+
       }
 
       // Si el campo de avatar tiene un archivo, lo agregamos a formData
@@ -50,7 +85,11 @@ export const ModalPerfil = ({ profile }) => {
       // Cerrar el modal si la actualización fue exitosa
       document.getElementById("my_modal_2").close();
     } catch (error) {
-      console.error("Error al modificar el perfil:", error);
+      setError(error.message);
+      toast.error("Error al modificar el perfil");
+    }
+    finally {
+      setLoading(false);
     }
   };
 
@@ -92,8 +131,7 @@ export const ModalPerfil = ({ profile }) => {
             <input
               type="text"
               {...register("address")}
-              className="w-full border rounded p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+              className="w-full border rounded p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" />
           </div>
 
           <div>
@@ -129,17 +167,20 @@ export const ModalPerfil = ({ profile }) => {
             />
           </div>
 
+          {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
           <div className="mt-6 flex justify-end space-x-2">
             <button
               type="button"
-              className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition duration-200"
+              className="bg-red-500 disabled:bg-red-100 text-white px-4 py-2 rounded hover:bg-red-600 transition duration-200"
               onClick={handleCancel}
+              disabled={loading ? true : false}
             >
               Cancelar
             </button>
             <button
               type="submit"
-              className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition duration-200"
+              className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 disabled:bg-green-100 transition duration-200"
+              disabled={loading ? "true" : false}
             >
               Guardar
             </button>

@@ -42,7 +42,7 @@ export const Categories = () => {
             <Header />
             <main className="w-full min-h-screen dark:bg-gray-800">
                 <div className="pt-24 px-4">
-                    <h1 className="text-white text-center  font-bold text-2xl mb-4">Selecciona una Categoría</h1>
+                    <h1 className="dark:text-white text-center  font-bold text-2xl mb-4 ">Selecciona una Categoría</h1>
 
                     {/* Botones de categorías */}
                     <div className="flex justify-center flex-wrap gap-2 mb-4">
@@ -69,10 +69,10 @@ export const Categories = () => {
                                                 ? profile.avatar.url
                                                 : "https://via.placeholder.com/150"
                                         } alt="Foto de perfil" />
-                                        <h1 className='text-xl font-bold dark:text-white'>@{publication.author}</h1>
+                                        <h1 className='text-xl font-bold dark:text-white break-words '>@{profile.name}</h1>
                                     </div>
-                                    <h2 className="text-xl font-semibold mb-2 dark:text-gray-300">{publication.title}</h2>
-                                    <p className="text-gray-700 dark:text-gray-400 mb-4">{publication.description}</p>
+                                    <h2 className="text-xl font-semibold mb-2 dark:text-gray-300 break-words">{publication.title}</h2>
+                                    <p className="text-gray-900 dark:text-gray-200 mb-4 break-words">{publication.description}</p>
                                     <div className='w-full flex justify-center'>
                                         {publication.secure_url.match(/\.(mp4|webm|ogg|ogv)$/i) ? (
                                             <video src={publication.secure_url} controls className="rounded-lg w-full">
@@ -86,7 +86,7 @@ export const Categories = () => {
                                 </li>
                             ))
                         ) : (
-                            <p className="text-white">No hay publicaciones disponibles para esta categoría.</p>
+                            <p className="dark:text-white">No hay publicaciones disponibles para esta categoría.</p>
                         )}
                     </ul>
                 </div>

@@ -42,12 +42,12 @@ export const ContenidoHome = () => {
                         initialPublications.map((publication, index) => (
                             <article key={index} className="border border-gray-300 dark:border-gray-700 rounded-lg p-4 mb-4 bg-white dark:bg-gray-800 shadow-md">
                                 <div className='p-2 flex flex-row items-center gap-2 rounded-sm'>
-                                    <img className='w-12 h-12 rounded-full' src={
+                                    <img className='w-12 h-12 rounded-full -' src={
                                         profile?.avatar
                                             ? profile.avatar.url
                                             : "https://via.placeholder.com/150"
                                     } alt="Foto de perfil" />
-                                    <h1 className='font-bold text-black text-lg dark:text-gray-200'>{"@" + publication.author}</h1>
+                                    <h1 className='font-bold text-black text-lg dark:text-gray-200'>{"@" + profile.name}</h1>
                                 </div>
                                 <h2 className="text-xl font-semibold mb-2 dark:text-gray-300 break-words">{publication.title}</h2>
                                 <p className="text-gray-700 dark:text-gray-400 mb-4 break-words">{publication.description}</p>
@@ -57,7 +57,7 @@ export const ContenidoHome = () => {
                                             Tu navegador no soporta el video.
                                         </video>
                                     ) : (
-                                        <img src={publication.secure_url} alt={publication.title} className="rounded-lg w-full" />
+                                        <img src={publication.secure_url} alt={publication.title} className="rounded-lg max-h-96s h-96" />
                                     )}
                                 </div>
                                 <form action="" className='p-2'>

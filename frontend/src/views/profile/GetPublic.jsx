@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { getPublicationsByUser, deletePublication } from "../../services/publication.service.js";
+import { useProfile } from '../../contexts/profile/profileContext.jsx';
 
 const GetPublic = () => {
     const [publications, setPublications] = useState([]);
     const [editingPublication, setEditingPublication] = useState(null);
     const [editData, setEditData] = useState({ title: '', description: '' });
+    const { state: { profile }, getProfileData } = useProfile();
+
+    useEffect(() => {
+        getProfileData();
+    }, []);
 
     const getPublications = async () => {
         try {
@@ -60,14 +66,21 @@ const GetPublic = () => {
             },
             credentials: "include"
         }
-        ).then((res) => res.json()).then((data) => console.log(data)).catch((err) => console.log(err))
-        // try {
-        //     await modifyPublication(publicationId, formData);
-        //     setEditingPublication(null);
-        //     setEditData({ title: '', description: '' });
-        // } catch (error) {
-        //     console.error('Error updating publication:', error);
-        // }
+        ).then((res) => {
+            if (res.ok) {
+                return res.json();
+            }
+
+        })
+            .then((res) => {
+                console.log(res);
+                getPublications();
+                setEditingPublication(null);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+
     };
 
     return (
@@ -107,9 +120,9 @@ const GetPublic = () => {
                         </form>
                     ) : (
                         <>
-                            <h1 className='font-bold dark:text-white '>{'@' + pub.author}</h1>
-                            <h2 className='font-bold dark:text-white '>{pub.title}</h2>
-                            <p className='font-bold dark:text-white '>{pub.description}</p>
+                            <h1 className='font-bold dark:text-white break-words '>{'@' + profile.name}</h1>
+                            <h2 className='font-bold dark:text-white break-words '>{pub.title}</h2>
+                            <p className='font-bold dark:text-white break-words '>{pub.description}</p>
                             {pub.secure_url.match(/.(mp4|webm|ogg|ogv)$/i) ? (
                                 <video src={pub.secure_url} controls className="rounded-lg w-full">
                                     Tu navegador no soporta el video.
@@ -126,7 +139,7 @@ const GetPublic = () => {
                             <br />
                             <div className="flex w-full items-center justify-center rounded-xl gap-4">
                                 <button
-                                    className="border rounded-xl bg-green-500 p-1 w-3/12"
+                                    className=" rounded-xl bg-green-500 p-1 w-3/12"
                                     onClick={() => startEditing(pub)}
                                 >
                                     Editar
@@ -135,7 +148,7 @@ const GetPublic = () => {
                                     className="p-1 w-3/12 rounded-xl bg-red-600"
                                     onClick={(e) => handleDeletePub(e, pub._id)}
                                 >
-                                    Borrar publicacion
+                                    Borrar
                                 </button>
                             </div>
                         </>
