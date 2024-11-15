@@ -13,7 +13,6 @@ export const Favorites = () => {
     getProfileData();
   }, []);
 
-
   useEffect(() => {
     const fetchFavorites = async () => {
       try {
@@ -32,66 +31,101 @@ export const Favorites = () => {
   const handleDeleteFavorite = async (e, publicationId) => {
     e.preventDefault();
     try {
-      await deleteFavorites(publicationId); // Llama al servicio de eliminación
-      setFavorites((prevFavorites) => prevFavorites.filter((fav) => fav.publicationId._id !== publicationId)); // Actualiza el estado local
+      await deleteFavorites(publicationId);
+      setFavorites((prevFavorites) => prevFavorites.filter((fav) => fav.publicationId._id !== publicationId));
       console.log("Publicación eliminada de favoritos:", publicationId);
     } catch (error) {
       console.log("Error al borrar la publicación:", error);
     }
   };
 
-  if (loading) return <p>Cargando favoritos...</p>;
-
   return (
     <>
       <Header />
-      <main className="w-full min-h-screen dark:bg-gray-800">
-        <ul className="w-full min-h-screen flex justify-center flex-col items-center pt-24">
-          {favorites.length === 0 ? (
-            <p className="text-2xl text-white">No tienes publicaciones favoritas.</p>
+      <main className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+          <div className="text-center mb-12">
+            <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+              Mis Favoritos
+            </h1>
+            <p className="text-lg text-gray-600 dark:text-gray-300">
+              Colección de publicaciones que te han inspirado
+            </p>
+          </div>
+
+          {loading ? (
+            <div className="flex justify-center items-center py-20">
+              <div className="animate-spin rounded-full h-12 w-12 border-4 border-purple-500 border-t-transparent"></div>
+            </div>
+          ) : favorites.length === 0 ? (
+            <div className="text-center py-20 bg-white dark:bg-gray-800 rounded-xl shadow-sm">
+              <p className="text-xl text-gray-600 dark:text-gray-300">
+                No tienes publicaciones favoritas aún.
+              </p>
+            </div>
           ) : (
-            favorites.map((favorite, index) => (
-              <article key={index} className="border w-5/12 border-gray-300 dark:border-gray-700 rounded-lg p-4 mb-4 bg-white dark:bg-gray-800 shadow-md flex flex-col">
-                <div className="flex flex-row gap-2 items-center">
-                  <img className='w-12 h-12 rounded-full' src={
-                    profile?.avatar
-                      ? profile.avatar.url
-                      : "https://via.placeholder.com/150"
-                  } alt="Foto de perfil" />
-                  <p className="dark:text-white font-bold text-xl">{"@" + profile.name}</p>
-                </div>
-                <h3 className="text-xl font-semibold mb-2 dark:text-gray-300 break-words">{favorite.publicationId.title}</h3>
-                <p className=" dark:text-white mb-4 break-words">{favorite.publicationId.description}</p>
-                <br />
-                <div className='w-full flex justify-center'>
-                  {/* Verificación para cargar video o imagen */}
-                  {favorite.publicationId.secure_url.match(/\.(mp4|webm|ogg|ogv)$/i) ? (
-                    <video src={favorite.publicationId.secure_url} controls className="rounded-lg w-full">
-                      Tu navegador no soporta el video.
-                    </video>
-                  ) : (
-                    <img
-                      src={favorite.publicationId.secure_url}
-                      alt={favorite.publicationId.title}
-                      className="rounded-lg w-full"
-                    />
-                  )}
-                </div>
-                <div className="flex justify-center items-center">
-                  <button
-                    onClick={(e) => handleDeleteFavorite(e, favorite.publicationId._id)}
-                    className="flex justify-center text-center mt-4  w-5/12  text-black rounded-xl bg-red-700 hover:scale-105 transition duration-500 ">
-                    Eliminar de favoritos
-                  </button>
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {favorites.map((favorite, index) => (
+                <article
+                  key={index}
+                  className="bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-xl 
+                    transition-all duration-300 overflow-hidden transform hover:-translate-y-1"
+                >
+                  <div className="p-6 space-y-6">
+                    <div className="flex items-center space-x-4">
+                      <img
+                        className="w-12 h-12 rounded-full object-cover ring-2 ring-purple-500"
+                        src={profile?.avatar?.url || "https://via.placeholder.com/150"}
+                        alt="Foto de perfil"
+                      />
+                      <h3 className="font-semibold text-gray-900 dark:text-white">
+                        @{favorite.publicationId.author}
+                      </h3>
+                    </div>
 
-                </div>
+                    <div>
+                      <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                        {favorite.publicationId.title}
+                      </h2>
+                      <p className="text-gray-600 dark:text-gray-300 line-clamp-3">
+                        {favorite.publicationId.description}
+                      </p>
+                    </div>
 
-              </article>
-            ))
+                    <div className="rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-700">
+                      {favorite.publicationId.secure_url.match(/\.(mp4|webm|ogg|ogv)$/i) ? (
+                        <video
+                          src={favorite.publicationId.secure_url}
+                          controls
+                          className="w-full h-64 object-cover"
+                        >
+                          Tu navegador no soporta el video.
+                        </video>
+                      ) : (
+                        <img
+                          src={favorite.publicationId.secure_url}
+                          alt={favorite.publicationId.title}
+                          className="w-full h-64 object-cover transition-transform duration-300 hover:scale-105"
+                        />
+                      )}
+                    </div>
+
+                    <button
+                      onClick={(e) => handleDeleteFavorite(e, favorite.publicationId._id)}
+                      className="w-full py-2.5 px-4 bg-red-600 hover:bg-red-700 text-white font-medium 
+                        rounded-lg transition-all duration-300 transform hover:scale-[1.02] 
+                        focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                    >
+                      Eliminar de favoritos
+                    </button>
+                  </div>
+                </article>
+              ))}
+            </div>
           )}
-        </ul>
-        <Footer />
+        </div>
       </main>
+      <Footer />
     </>
   );
 };

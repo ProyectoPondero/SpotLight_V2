@@ -70,7 +70,6 @@ const GetPublic = () => {
             if (res.ok) {
                 return res.json();
             }
-
         })
             .then((res) => {
                 console.log(res);
@@ -80,81 +79,107 @@ const GetPublic = () => {
             .catch((error) => {
                 console.error(error);
             });
-
     };
 
     return (
-        <div className="flex flex-col-reverse p-10 gap-5 w-full items-center">
-            {publications.map((pub) => (
-                <article
-                    className="border border-gray-300 dark:border-gray-700 rounded-lg p-4 mb-4 bg-white dark:bg-gray-800 shadow-md w-6/12"
-                    key={pub._id}
-                >
-                    {editingPublication === pub._id ? (
-                        <form onSubmit={(e) => handleUpdatePub(e, pub._id)}>
-                            <input
-                                type="text"
-                                name="title"
-                                value={editData.title}
-                                onChange={handleEditChange}
-                                className="w-full mb-2 p-2 border"
-                                placeholder="Título"
-                            />
-                            <textarea
-                                name="description"
-                                value={editData.description}
-                                onChange={handleEditChange}
-                                className="w-full mb-2 p-2 border"
-                                placeholder="Descripción"
-                            />
-                            <button type="submit" className="btn bg-green-500 border rounded-xl p-2 btn-primary">
-                                Guardar
-                            </button>
-                            <button
-                                type="button"
-                                className="p-2 border rounded-xl bg-gray-400   ml-2"
-                                onClick={() => setEditingPublication(null)}
-                            >
-                                Cancelar
-                            </button>
-                        </form>
-                    ) : (
-                        <>
-                            <h1 className='font-bold dark:text-white break-words '>{'@' + profile.name}</h1>
-                            <h2 className='font-bold dark:text-white break-words '>{pub.title}</h2>
-                            <p className='font-bold dark:text-white break-words '>{pub.description}</p>
-                            {pub.secure_url.match(/.(mp4|webm|ogg|ogv)$/i) ? (
-                                <video src={pub.secure_url} controls className="rounded-lg w-full">
-                                    Tu navegador no soporta el video.
-                                </video>
-
-                            ) : (
-                                <img
-                                    className="rounded-lg w-full"
-                                    src={pub.secure_url}
-
-                                    alt={pub.title}
+        <div className="max-w-3xl mx-auto py-8 px-4">
+            <div className="space-y-6">
+                {publications.map((pub) => (
+                    <article
+                        key={pub._id}
+                        className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl dark:shadow-gray-900/30"
+                    >
+                        {editingPublication === pub._id ? (
+                            <form onSubmit={(e) => handleUpdatePub(e, pub._id)} className="p-6 space-y-4">
+                                <input
+                                    type="text"
+                                    name="title"
+                                    value={editData.title}
+                                    onChange={handleEditChange}
+                                    className="w-full px-4 py-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-all duration-200"
+                                    placeholder="Título"
                                 />
-                            )}
-                            <br />
-                            <div className="flex w-full items-center justify-center rounded-xl gap-4">
-                                <button
-                                    className=" rounded-xl bg-green-500 p-1 w-3/12"
-                                    onClick={() => startEditing(pub)}
-                                >
-                                    Editar
-                                </button>
-                                <button
-                                    className="p-1 w-3/12 rounded-xl bg-red-600"
-                                    onClick={(e) => handleDeletePub(e, pub._id)}
-                                >
-                                    Borrar
-                                </button>
+                                <textarea
+                                    name="description"
+                                    value={editData.description}
+                                    onChange={handleEditChange}
+                                    className="w-full px-4 py-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-all duration-200 min-h-[100px]"
+                                    placeholder="Descripción"
+                                />
+                                <div className="flex gap-3">
+                                    <button
+                                        type="submit"
+                                        className="px-6 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl hover:from-green-600 hover:to-emerald-700 transition-all duration-200 shadow-md hover:shadow-lg"
+                                    >
+                                        Guardar
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className="px-6 py-2 bg-gradient-to-r from-gray-400 to-gray-500 text-white rounded-xl hover:from-gray-500 hover:to-gray-600 transition-all duration-200 shadow-md hover:shadow-lg"
+                                        onClick={() => setEditingPublication(null)}
+                                    >
+                                        Cancelar
+                                    </button>
+                                </div>
+                            </form>
+                        ) : (
+                            <div className="flex flex-col">
+                                <div className="p-6">
+                                    <div className="flex items-center space-x-3 mb-4">
+                                        <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center text-white font-semibold">
+                                            {profile.name.charAt(0).toUpperCase()}
+                                        </div>
+                                        <span className="text-gray-700 dark:text-gray-200 font-medium">
+                                            @{profile.name}
+                                        </span>
+                                    </div>
+                                    <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                                        {pub.title}
+                                    </h2>
+                                    <p className="text-gray-600 dark:text-gray-300 mb-4">
+                                        {pub.description}
+                                    </p>
+                                </div>
+
+                                <div className="relative w-full aspect-video bg-gray-100 dark:bg-gray-900">
+                                    {pub.secure_url.match(/.(mp4|webm|ogg|ogv)$/i) ? (
+                                        <video
+                                            src={pub.secure_url}
+                                            controls
+                                            className="w-full h-full object-cover"
+                                        >
+                                            Tu navegador no soporta el video.
+                                        </video>
+                                    ) : (
+                                        <img
+                                            className="w-full h-full object-cover"
+                                            src={pub.secure_url}
+                                            alt={pub.title}
+                                        />
+                                    )}
+                                </div>
+
+                                <div className="p-6 bg-gray-50 dark:bg-gray-800/50">
+                                    <div className="flex justify-center gap-4">
+                                        <button
+                                            onClick={() => startEditing(pub)}
+                                            className="px-6 py-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl hover:from-blue-600 hover:to-indigo-700 transition-all duration-200 shadow-md hover:shadow-lg flex-1 max-w-[150px]"
+                                        >
+                                            Editar
+                                        </button>
+                                        <button
+                                            onClick={(e) => handleDeletePub(e, pub._id)}
+                                            className="px-6 py-2 bg-gradient-to-r from-red-500 to-rose-600 text-white rounded-xl hover:from-red-600 hover:to-rose-700 transition-all duration-200 shadow-md hover:shadow-lg flex-1 max-w-[150px]"
+                                        >
+                                            Borrar
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-                        </>
-                    )}
-                </article>
-            ))}
+                        )}
+                    </article>
+                ))}
+            </div>
         </div>
     );
 };

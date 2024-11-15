@@ -1,5 +1,6 @@
 import { deleteFile, uploadFile } from "../utils/cloudinary.util.js";
 import { publicationModel } from "../models/publication.model.js";
+import { profileModel } from "../models/profile.model.js";
 import fs from "fs-extra";
 
 // Servicio de publicaciones
@@ -11,10 +12,14 @@ publicationService.uploadPublication = async (user, title, description, file, ca
         // Subir el archivo a la nube
         const result = await uploadFile(file.path);
 
+        // Buscar el perfil del usuario autenticado
+        const userProfile = await profileModel.findOne({ user: user._id });
+        if (!userProfile) throw new Error("Perfil no encontrado para el usuario.");
+
         // Crear una nueva instancia del modelo de publicación con los datos proporcionados
         const newPublication = new publicationModel({
             user: user._id,
-            author: user.userName,
+            author: userProfile.name, // Asignar el nombre del perfil
             title,
             description,
             public_id: result.public_id,

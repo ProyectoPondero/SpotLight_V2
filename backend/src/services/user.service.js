@@ -31,12 +31,12 @@ userService.createProfile = async (_id, userName, email) => {
     try {
         const newProfile = await profileModel.create({
             name: userName,
-            description: null,
-            address: null,
-            phoneNumber: null,
+            description: "",
+            address: "",
+            phoneNumber: "",
             email: email,
             user: _id,
-            avatar: null
+            avatar: ""
         });
         if (!newProfile) {
             throw new Error('No se a podido crear el perfil');

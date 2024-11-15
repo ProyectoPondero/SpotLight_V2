@@ -1,33 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import { Header } from '../../components/Header.jsx';
 import { Footer } from '../../components/Footer.jsx';
-import emailjs from 'emailjs-com'; // Importar EmailJS
+import emailjs from 'emailjs-com';
 import { getUserInfo } from '../../services/auth.service.js';
 
 export const Soporte = () => {
     const [asunto, setAsunto] = useState('');
     const [mensaje, setMensaje] = useState('');
     const [terminos, setTerminos] = useState(false);
-    const [email, setEmail] = useState(''); // Estado para el correo del usuario
+    const [email, setEmail] = useState('');
     const [name, setUsername] = useState('');
-    const [loading, setLoading] = useState(true); // Estado de carga
-    const [error, setError] = useState(null); // Estado de error
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchUserInfo = async () => {
             try {
-                const { userName, email } = await getUserInfo(); // Llama a la función para obtener el nombre y el correo
-                setEmail(email); // Establece el correo del usuario en el estado
-                setUsername(userName); // Establece el nombre del usuario en el estado
+                const { userName, email } = await getUserInfo();
+                setEmail(email);
+                setUsername(userName);
             } catch (err) {
                 console.error(err);
-                setError(err.message); // Maneja el error
+                setError(err.message);
             } finally {
-                setLoading(false); // Cambia el estado de carga
+                setLoading(false);
             }
         };
 
-        fetchUserInfo(); // Llama a la función al montar el componente
+        fetchUserInfo();
     }, []);
 
     const handleSubmit = (e) => {
@@ -39,13 +39,13 @@ export const Soporte = () => {
         }
 
         const templateParams = {
-            subject: asunto,  
+            subject: asunto,
             message: mensaje,
-            from_name: email || "Usuario Anónimo",  // Usa el correo del usuario o un valor por defecto
-            to_name: name,  
+            from_name: email || "Usuario Anónimo",
+            to_name: name,
         };
 
-        emailjs.send("service_yi0vspu", "template_j952r6v", templateParams, "011krJV2xhHHrPVQb") 
+        emailjs.send("service_yi0vspu", "template_j952r6v", templateParams, "011krJV2xhHHrPVQb")
             .then((response) => {
                 console.log('Correo enviado con éxito!', response.status, response.text);
                 setAsunto('');
@@ -54,74 +54,106 @@ export const Soporte = () => {
             }, (err) => {
                 console.error('Error al enviar correo:', err);
             });
-        };
-        
-        if (loading) {
-            return <p>Cargando información del usuario...</p>; // Mensaje mientras se carga
+    };
+
+    if (loading) {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-slate-100 to-slate-200 dark:from-gray-800 dark:to-gray-900">
+                <div className="animate-pulse text-xl font-semibold text-gray-700 dark:text-gray-300">
+                    Cargando información del usuario...
+                </div>
+            </div>
+        );
     }
 
     if (error) {
-        return <p>Error al obtener la información: {error}</p>; // Muestra el error si ocurre
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-slate-100 to-slate-200 dark:from-gray-800 dark:to-gray-900">
+                <div className="text-red-600 dark:text-red-400 text-xl font-semibold">
+                    Error al obtener la información: {error}
+                </div>
+            </div>
+        );
     }
 
     return (
         <>
             <Header />
-            <div className="flex justify-center">
-                <main className="bg-slate-200 dark:bg-gray-400 min-h-screen w-screen">
-                    <div className='pt-24 min-h-screen p-2 bg-hero-pattern bg-cover'>
-                        <div className='mt-20 flex justify-center'>
-                            <div className='flex border-3 rounded bg-gray-50 justify-center h-96 p-4 py-0 dark:bg-gray-700'>
-                                <img className='rounded w-3/6 h-5/6 hidden md:block' src="/src/assets/images/soporte.png" alt="" />
-                                <form className='flex flex-col h-auto py-12 justify-around md:px-8 sm:p-4 lg:px-2' onSubmit={handleSubmit}>
-                                    <article className='flex flex-col gap-2 h-auto'>
-                                        <label className='font-semibold text-lg dark:text-slate-100' htmlFor="asunto">¿Cuál es tu asunto?</label>
-                                        <select 
-                                            className='p-2 lg:w-auto md:w-auto sm:w-auto border shadow border-gray-300' 
-                                            value={asunto} 
-                                            onChange={(e) => setAsunto(e.target.value)} 
+            <main className="min-h-screen bg-gradient-to-b from-slate-100 to-slate-200 dark:from-gray-800 dark:to-gray-900">
+                <div className="container mx-auto px-4 pt-24">
+                    <div className="max-w-4xl mx-auto mt-12">
+                        <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden">
+                            <div className="grid md:grid-cols-2 gap-0">
+                                <div className="relative hidden md:block">
+                                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20" />
+                                    <img
+                                        className="h-full w-full object-cover"
+                                        src="/src/assets/images/soporte.png"
+                                        alt="Soporte"
+                                    />
+                                </div>
+
+                                <form onSubmit={handleSubmit} className="p-6 space-y-6">
+                                    <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                                        ¿Cómo podemos ayudarte?
+                                    </h2>
+
+                                    <div className="space-y-2">
+                                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                            ¿Cuál es tu asunto?
+                                        </label>
+                                        <select
+                                            value={asunto}
+                                            onChange={(e) => setAsunto(e.target.value)}
                                             required
+                                            className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-colors duration-200"
                                         >
                                             <option value="">Seleccionar...</option>
                                             <option value="Sugerencia">Sugerencia</option>
                                             <option value="Reporte">Reporte</option>
                                             <option value="Consultas">Consultas</option>
                                         </select>
-                                    </article>
-                                    <article className='flex flex-col gap-2'>
-                                        <label className='font-semibold text-lg dark:text-slate-200' htmlFor="mensaje">¿En qué piensas?</label>
-                                        <textarea 
-                                            className='h-24 border shadow-md p-2 border-gray-700 rounded' 
-                                            value={mensaje} 
-                                            onChange={(e) => setMensaje(e.target.value)} 
-                                            required
-                                        />
-                                    </article>
-                                    <article className='flex items-center gap-1'>
-                                        <input 
-                                            type="checkbox" 
-                                            id="checkbox1" 
-                                            name="checkbox1" 
-                                            checked={terminos} 
-                                            onChange={() => setTerminos(!terminos)} 
-                                            required
-                                        />
-                                        <label className='dark:text-slate-200' htmlFor="checkbox1">He leído y acepto los términos y condiciones</label>
-                                    </article>
-                                    <div>
-                                        <button 
-                                            type="submit" 
-                                            className='bg-gray-700 hover:bg-gray-600 text-white w-full py-2 rounded font-bold dark:bg-gray-300 dark:text-gray-900 dark:hover:bg-gray-400'
-                                        >
-                                            Enviar
-                                        </button>
                                     </div>
+
+                                    <div className="space-y-2">
+                                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                            ¿En qué piensas?
+                                        </label>
+                                        <textarea
+                                            value={mensaje}
+                                            onChange={(e) => setMensaje(e.target.value)}
+                                            required
+                                            className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-colors duration-200 min-h-[120px] resize-none"
+                                            placeholder="Escribe tu mensaje aquí..."
+                                        />
+                                    </div>
+
+                                    <div className="flex items-center space-x-2">
+                                        <input
+                                            type="checkbox"
+                                            id="terminos"
+                                            checked={terminos}
+                                            onChange={() => setTerminos(!terminos)}
+                                            required
+                                            className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-400 dark:border-gray-600"
+                                        />
+                                        <label htmlFor="terminos" className="text-sm text-gray-600 dark:text-gray-400">
+                                            He leído y acepto los términos y condiciones
+                                        </label>
+                                    </div>
+
+                                    <button
+                                        type="submit"
+                                        className="w-full px-6 py-3 text-white font-medium rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:ring-4 focus:ring-blue-500/50 dark:focus:ring-blue-400/50 transition-all duration-200 transform hover:scale-[1.02]"
+                                    >
+                                        Enviar mensaje
+                                    </button>
                                 </form>
                             </div>
                         </div>
                     </div>
-                </main>
-            </div>
+                </div>
+            </main>
             <Footer />
         </>
     );
