@@ -5,7 +5,8 @@ export default function FormUploadfile({ onNewPublication }) {
     const [file, setFile] = useState(null);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [category, setCategory] = useState('');  // Estado para el dropdown
+    const [category, setCategory] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -14,21 +15,27 @@ export default function FormUploadfile({ onNewPublication }) {
         formData.append('file', file);
         formData.append('title', title);
         formData.append('description', description);
-        formData.append('category', category);  // Añadir categoría al FormData
+        formData.append('category', category);
+        setLoading(true);
 
         try {
             const data = await uploadPublication(formData);
-
-            // Notifica al componente padre sobre la nueva publicación
-            onNewPublication(data);
+            onNewPublication(data); // Notifica al componente padre
         } catch (error) {
             console.error('Error al realizar la publicación:', error);
+        } finally {
+            setLoading(false);
+            setCategory('');
+            setTitle('');
+            setDescription('');
+            setFile(null);
+
         }
     };
 
     return (
         <form
-            className="dark:bg-gray-800 bg-gray-200 shadow-2xl rounded px-4 pt-6 pb-2 w-auto xl:w-9/12 md:w-9/12 flex flex-col"
+            className="bg-gray-200 dark:bg-gray-800 shadow-2xl rounded px-4 pt-6 pb-2 w-auto xl:w-9/12 md:w-9/12 flex flex-col"
             onSubmit={handleSubmit}
         >
             {/* Campos de título y descripción */}
@@ -36,28 +43,31 @@ export default function FormUploadfile({ onNewPublication }) {
                 <input
                     type="text"
                     placeholder="Título"
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-black dark:text-white font-bold bg-white dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
+                    className="shadow border rounded w-full py-2 px-3 text-black dark:text-white bg-white dark:bg-gray-700 font-bold leading-tight focus:outline-none focus:ring focus:ring-red-500 mb-4"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                 />
                 <textarea
                     placeholder="Descripción"
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-black dark:text-white font-bold bg-white dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    className="shadow border rounded w-full py-2 px-3 text-black dark:text-white bg-white dark:bg-gray-700 font-bold leading-tight focus:outline-none focus:ring focus:ring-red-500"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                 />
                 {/* Dropdown para seleccionar categoría */}
-                <div className="mb-4 rounded-xl p-2 ">
-                    <label className="block  font-bold mb-2 dark:text-white  " htmlFor="category">
+                <div className="mb-4 rounded-xl p-2">
+                    <label
+                        className="block font-bold mb-2 text-black dark:text-white"
+                        htmlFor="category"
+                    >
                         Seleccione una categoría
                     </label>
                     <select
                         id="category"
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-black dark:text-white font-bold bg-white dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        className="shadow border rounded w-full py-2 px-3 text-black dark:text-white bg-white dark:bg-gray-700 font-bold leading-tight focus:outline-none focus:ring focus:ring-red-500"
                         value={category}
                         onChange={(e) => setCategory(e.target.value)}
                     >
-                        <option value="deafult">.......</option>
+                        <option value="default">.......</option>
                         <option value="Tecnología">Tecnología</option>
                         <option value="Deportes">Deportes</option>
                         <option value="Educación">Educación</option>
@@ -75,7 +85,7 @@ export default function FormUploadfile({ onNewPublication }) {
                     onChange={(e) => setFile(e.target.files[0])}
                 />
             </div>
-            <div className="flex justify-between">
+            <div className="flex justify-between items-center">
                 <label
                     htmlFor="file-upload"
                     className="bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 rounded cursor-pointer shadow transition duration-200"
@@ -84,9 +94,36 @@ export default function FormUploadfile({ onNewPublication }) {
                 </label>
                 <button
                     type="submit"
-                    className="bg-red-600 hover:bg-red-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    className="bg-red-500 text-white px-4 py-2 rounded flex items-center justify-center hover:bg-red-400 disabled:bg-red-300 transition duration-200"
+                    disabled={loading}
                 >
-                    Publicar
+                    {loading ? (
+                        <>
+                            <svg
+                                className="animate-spin h-5 w-5 mr-2 text-white"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                            >
+                                <circle
+                                    className="opacity-25"
+                                    cx="12"
+                                    cy="12"
+                                    r="10"
+                                    stroke="currentColor"
+                                    strokeWidth="4"
+                                ></circle>
+                                <path
+                                    className="opacity-75"
+                                    fill="currentColor"
+                                    d="M4 12a8 8 0 018-8v8H4z"
+                                ></path>
+                            </svg>
+                            Publicando...
+                        </>
+                    ) : (
+                        "Publicar"
+                    )}
                 </button>
             </div>
         </form>
