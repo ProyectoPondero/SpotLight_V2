@@ -16,9 +16,9 @@ export const Soporte = () => {
     useEffect(() => {
         const fetchUserInfo = async () => {
             try {
-                const { userName, email } = await getUserInfo();
+                const { username, email } = await getUserInfo();
                 setEmail(email);
-                setUsername(userName);
+                setUsername(username);
             } catch (err) {
                 console.error(err);
                 setError(err.message);

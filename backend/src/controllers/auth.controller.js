@@ -5,10 +5,10 @@ export const authCtrl = {};
 
 // Registrar nuevo usuario
 authCtrl.register = async (req, res) => {
-    const { userName, email, password } = req.body;
+    const { username, email, password } = req.body;
     try {
         const newUser = await userService.createUser({
-            userName,
+            username,
             email,
             password
         });
@@ -17,7 +17,7 @@ authCtrl.register = async (req, res) => {
             return res.status(400).json({ message: newUser.message });
         }
         //Generar el perfil del usuario
-        await userService.createProfile(newUser._id, newUser.userName, newUser.email);
+        await userService.createProfile(newUser._id, newUser.username, newUser.email);
         // Si el usuario fue creado
         res.status(201).json({
             message: 'Usuario creado correctamente',
@@ -39,14 +39,15 @@ authCtrl.login = async (req, res) => {
         if (user instanceof Error) {
             return res.status(400).json({ message: user.message });
         }
-        // Generar token JWT
-        const token = await generarJWT(user._id);
-        // Almacenar el token en una cookie segura
-        res.cookie('authToken', token, {
-            httpOnly: true, // La cookie no es accesible desde JavaScript
-            secure: false, // Cambiar a true en producción con HTTPS
-            maxAge: 3600000 // Expiración en milisegundos (1 hora)
+
+        const token = await generarJWT(user);
+
+        res.cookie('token', token, {
+            httpOnly: false, // The cookie only accessible by the web server //! Cambiar a true luego de probar
+            secure: false,  // Set to true if your website is served over HTTPS //! Cambiar a true en caso de usar https
+            maxAge: 60 * 60 * 1000 // 1 hour
         });
+
         // Si el usuario existe
         res.status(200).json({
             message: 'Usuario logeado correctamente',
@@ -61,13 +62,32 @@ authCtrl.login = async (req, res) => {
 
 // Endpoint para validar la sesión
 authCtrl.session = async (req, res) => {
-    return res.json({ message: 'Acceso permitido a área protegida', user: req.user });
+    try {
+        const user = req.user;
+
+        const token = await generarJWT(user);
+
+        res.cookie('token', token, {
+            httpOnly: true, // The cookie only accessible by the web server //! Cambiar a true luego de probar
+            secure: false,  // Set to true if your website is served over HTTPS //! Cambiar a true en caso de usar https
+            maxAge: 60 * 60 * 1000 // 1 hour
+        });
+
+        res.status(200).json({
+            user,
+            message: 'User retrieved successfully.'
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: 'An error occurred. Please try again later.'
+        });
+    }
 };
 
 // Endpoint de cierre de sesión (logout)
-authCtrl.logout = async (req, res) => {
+authCtrl.logout = async (_req, res) => {
     try {
-        res.clearCookie('authToken');
+        res.clearCookie('token');
         return res.json({ message: 'Cierre de sesión exitoso' });
     } catch (error) {
         console.error(error);

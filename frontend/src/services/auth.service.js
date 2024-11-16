@@ -1,6 +1,6 @@
 import { API_URL } from "../config/env.config.js";
 
-const URL = API_URL + `api/user/`;
+const URL = API_URL + `api/`;
 
 // Función auxiliar para manejar las solicitudes fetch
 const fetchData = async (endpoint, options) => {
@@ -17,10 +17,10 @@ const fetchData = async (endpoint, options) => {
 };
 
 // Registrar usuario
-export const registerUser = async ({ userName, email, password }) => {
+export const registerUser = async ({ username, email, password }) => {
     return fetchData(URL + `register/`, {
         method: "POST",
-        body: JSON.stringify({ userName, email, password }),
+        body: JSON.stringify({ username, email, password }),
         headers: {
             "Content-Type": "application/json",
         },
@@ -58,7 +58,7 @@ export const getUserInfo = async () => {
     // Asegúrate de que la respuesta tenga el nombre del usuario y el email
     if (response && response.user) {
         return {
-            userName: response.user.userName,
+            username: response.user.username,
             email: response.user.email
         };  // Retorna un objeto con el nombre y el correo
     }

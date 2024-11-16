@@ -16,12 +16,13 @@ export const UserContextProvider = ({ children }) => {
     const authLogin = async (user) => {
         try {
             const response = await login(user);
+            console.log(response);
             if (response) {
                 dispatch({
                     type: userType.LOGIN,
                     payload: response
                 });
-                toast.success(`Bienvenido ${response.data.userName}`);
+                toast.success(`Bienvenido ${response.data.username}!`);
                 return response;
             }
         } catch (error) {
@@ -54,7 +55,7 @@ export const UserContextProvider = ({ children }) => {
         try {
             const response = await logout();
             if (response.ok) {
-                toast.success(`Hasta luego ${state.user.userName}`);
+                toast.success(`Hasta luego ${state.user.username}!`);
                 dispatch({
                     type: userType.LOGOUT,
                 });

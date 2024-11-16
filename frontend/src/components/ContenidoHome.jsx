@@ -21,7 +21,6 @@ export const ContenidoHome = () => {
         e.preventDefault();
         try {
             const response = await saveFavorite(publicationId);
-            console.log("Respuesta del servidor:", response);
         } catch (error) {
             console.error("Error al guardar la publicación en favoritos:", error);
         }
@@ -70,7 +69,7 @@ export const ContenidoHome = () => {
                                             </h3>
                                             <span className="text-sm text-gray-500 dark:text-gray-400">
                                                 {new Date().toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' })}
-                                            </span> 
+                                            </span>
                                         </div>
                                     </div>
 

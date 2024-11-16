@@ -46,8 +46,8 @@ profileServices.updateProfile = async (userId, profile, avatar) => {
     };
 
     // Actualizar el nombre de usuario en userModel si el nombre cambiÃ³
-    if (profile.name && profile.name !== findUser.userName) {
-      findUser.userName = profile.name;
+    if (profile.name && profile.name !== findUser.username) {
+      findUser.username = profile.name;
       await findUser.save();
 
       // Actualizar el campo 'author' en las publicaciones del usuario

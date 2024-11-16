@@ -7,7 +7,7 @@ import { userModel } from '../models/user.model.js';
 export const validarJWT = async (req, res, next) => {
     try {
         // console.log(req.cookies); // Imprime las cookies de la solicitud para depuración
-        const token = req.cookies.authToken; // Obtiene el token JWT de las cookies de la solicitud
+        const token = req.cookies.token; // Obtiene el token JWT de las cookies de la solicitud
         if (!token) {
             return res.status(403).json({ message: 'Token no proporcionado' });
         }
@@ -15,9 +15,9 @@ export const validarJWT = async (req, res, next) => {
         const decoded = jwt.verify(token, JWT_KEY);
         await connectDB();
         // Buscar al usuario en la base de datos usando Mongoose
-        const user = await userModel.findById(decoded.userId);
+        const user = await userModel.findById(decoded.user._id);
         if (!user) {
-            return res.status(401).json({ message: 'Token inválido' });
+            return res.status(401).json({ message: 'Usuario no autorizado!' });
         }
         // Agrega el usuario a la solicitud para que esté disponible en los siguientes middleware
         req.user = user;

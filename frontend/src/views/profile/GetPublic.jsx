@@ -72,7 +72,6 @@ const GetPublic = () => {
             }
         })
             .then((res) => {
-                console.log(res);
                 getPublications();
                 setEditingPublication(null);
             })

@@ -13,7 +13,7 @@ userService.createUser = async (user) => {
         }
         const hastPassword = await bcryptHelper.hashPassword(user.password);
         const newUser = await userModel.create({
-            userName: user.userName,
+            username: user.username,
             email: user.email,
             password: hastPassword
         });
@@ -27,10 +27,10 @@ userService.createUser = async (user) => {
 };
 
 // Crear perfil de usuario
-userService.createProfile = async (_id, userName, email) => {
+userService.createProfile = async (_id, username, email) => {
     try {
         const newProfile = await profileModel.create({
-            name: userName,
+            name: username,
             description: "",
             address: "",
             phoneNumber: "",

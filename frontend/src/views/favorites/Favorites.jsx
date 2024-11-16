@@ -33,7 +33,6 @@ export const Favorites = () => {
     try {
       await deleteFavorites(publicationId);
       setFavorites((prevFavorites) => prevFavorites.filter((fav) => fav.publicationId._id !== publicationId));
-      console.log("Publicación eliminada de favoritos:", publicationId);
     } catch (error) {
       console.log("Error al borrar la publicación:", error);
     }

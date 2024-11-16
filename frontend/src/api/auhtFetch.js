@@ -1,7 +1,7 @@
 import { API_URL } from '../config/env.config.js';
 import { fetchData } from '../utilities/fetch.utility.js';
 
-const URL = API_URL + `api/user/`;
+const URL = API_URL + `api/`;
 
 export const register = async (data) => {
     try {
@@ -40,7 +40,7 @@ export const session = async () => {
 
 export const logout = async () => {
     try {
-        const response = await fetchData(URL + 'logout', 'POST');
+        const response = await fetchData(URL + 'logout', 'GET');
         return response;
     } catch (error) {
         throw error;

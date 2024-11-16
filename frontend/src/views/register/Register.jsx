@@ -42,13 +42,13 @@ export const Register = () => {
       >
         <h2 className="text-2xl font-bold mb-6 text-center text-white">Registro</h2>
         <div className="mb-4">
-          <label className="block text-gray-300 text-sm font-bold mb-2" htmlFor="userName">
+          <label className="block text-gray-300 text-sm font-bold mb-2" htmlFor="username">
             Nombre de usuario
           </label>
           <input
             type="text"
-            name="userName"
-            id="userName"
+            name="username"
+            id="username"
             onChange={handleChange}
             className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-700 text-white"
           />

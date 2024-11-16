@@ -42,7 +42,6 @@ export const ModalPerfil = ({ profile }) => {
 
   const onSubmit = async (data) => {
     try {
-      console.log("hola")
       setLoading(true)
       // Crear una instancia de FormData
       const formData = new FormData();
@@ -180,7 +179,7 @@ export const ModalPerfil = ({ profile }) => {
             <button
               type="submit"
               className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 disabled:bg-green-100 transition duration-200"
-              disabled={loading ? "true" : false}
+              disabled={loading ? true : false}
             >
               Guardar
             </button>
