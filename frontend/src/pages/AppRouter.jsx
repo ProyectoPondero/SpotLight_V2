@@ -3,6 +3,7 @@ import PrivateRoutes from "./PrivateRoutes";
 import { Login } from "../views/login/Login";
 import { Register } from "../views/register/Register";
 import { Home } from "../views/home/Home";
+import { Chat } from "../views/chat/Chat";
 import { Perfil } from "../views/profile/Perfil";
 import { Soporte } from "../views/support/Soporte";
 import { Convocatorias } from "../views/convocations/Convocatorias";
@@ -23,6 +24,7 @@ const AppRouter = () => {
                 {/* Rutas privadas: Solo accesibles si el usuario está autenticado */}
                 <Route element={<PrivateRoutes />}>
                     <Route path="/home" element={<Home />} />
+                    <Route path="/chat" element={<Chat />} />
                     <Route path="/support" element={<Soporte />} />
                     <Route path="/profile" element={<Perfil />} />
                     <Route path="/convocations" element={<Convocatorias />} />

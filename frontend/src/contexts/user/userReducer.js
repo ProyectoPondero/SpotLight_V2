@@ -6,7 +6,7 @@ export const userReducer = (state, action) => {
         case userType.LOGIN: {
             return {
                 ...state,
-                user: action.payload.data,
+                user: action.payload.user,
             };
         }
 
@@ -20,7 +20,7 @@ export const userReducer = (state, action) => {
         case userType.SESSION: {
             return {
                 ...state,
-                user: action.payload.data,
+                user: action.payload.user,
             };
         }
 

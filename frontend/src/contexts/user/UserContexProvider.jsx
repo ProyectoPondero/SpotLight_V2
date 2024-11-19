@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useReducer } from 'react';
-import { login, session, logout } from '../../api/auhtFetch.js';
+import { loginService, sessionService, logoutService } from '../../api/API.service.js';
 import { userType } from './userTypes';
 import { userReducer } from './userReducer';
 import toast from 'react-hot-toast';
@@ -15,14 +15,14 @@ export const UserContextProvider = ({ children }) => {
 
     const authLogin = async (user) => {
         try {
-            const response = await login(user);
+            const response = await loginService(user);
             console.log(response);
             if (response) {
                 dispatch({
                     type: userType.LOGIN,
                     payload: response
                 });
-                toast.success(`Bienvenido ${response.data.username}!`);
+                toast.success(`Bienvenido ${response.user.username}!`);
                 return response;
             }
         } catch (error) {
@@ -32,11 +32,11 @@ export const UserContextProvider = ({ children }) => {
 
     const authSession = async () => {
         try {
-            const response = await session();
+            const response = await sessionService();
             if (response.user) {
                 dispatch({
-                    type: userType.LOGIN,
-                    payload: { data: response.user },
+                    type: userType.SESSION,
+                    payload: response,
                 });
             } else {
                 dispatch({
@@ -53,7 +53,7 @@ export const UserContextProvider = ({ children }) => {
 
     const authLogout = async () => {
         try {
-            const response = await logout();
+            const response = await logoutService();
             if (response.ok) {
                 toast.success(`Hasta luego ${state.user.username}!`);
                 dispatch({

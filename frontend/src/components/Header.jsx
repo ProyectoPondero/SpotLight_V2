@@ -52,7 +52,7 @@ export const Header = () => {
                             <Link to="/home">Home</Link>
                         </li>
                         <li className='rounded px-2 flex items-end hover:bg-gray-300 dark:hover:bg-gray-800 dark:hover:text-yellow-500 hover:font-bold py-1'>
-                            <Link to="/messagge">Mensajes</Link>
+                            <Link to="/chat">Mensajes</Link>
                         </li>
                         <li className='rounded px-2 flex items-end hover:bg-gray-300 dark:hover:bg-gray-800 dark:hover:text-yellow-500 hover:font-bold py-1'>
                             <Link to="/support">Soporte</Link>

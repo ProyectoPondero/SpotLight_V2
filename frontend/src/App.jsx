@@ -3,6 +3,8 @@ import AppRouter from './pages/AppRouter.jsx';
 import { Toaster } from 'react-hot-toast';
 import { UserContextProvider } from './contexts/user/UserContexProvider.jsx';
 import { ProfileProvider } from './contexts/profile/profileContext.jsx';
+import { ChatContextProvider } from './contexts/chat/chatContextProvider.jsx';
+import { SocketContextProvider } from './contexts/socket/socketContextProvider.jsx';
 
 function App() {
   return (
@@ -13,9 +15,13 @@ function App() {
         toastOptions={{ duration: 3000 }}
       />
       <UserContextProvider>
-        <ProfileProvider>
-          <AppRouter />
-        </ProfileProvider>
+        <ChatContextProvider>
+          <SocketContextProvider>
+            <ProfileProvider>
+              <AppRouter />
+            </ProfileProvider>
+          </SocketContextProvider>
+        </ChatContextProvider>
       </UserContextProvider>
     </>
   );
