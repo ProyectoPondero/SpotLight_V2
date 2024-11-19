@@ -1,13 +1,13 @@
 import { API_URL } from '../config/env.config';
 import { fetchData } from '../utilities/fetch.utility';
 
-const URL = API_URL + `api/`;
+const URL = API_URL + `api`;
 
 export const registerService = async (user) => {
     try {
         const response = await fetchData(`${URL}/register`, 'POST', user);
-        const user = await response.json();
-        return user;
+        const data = await response.json();
+        return data;
     } catch (error) {
         console.log({ 'Error al registrar usuario': error });
     }
@@ -16,8 +16,8 @@ export const registerService = async (user) => {
 export const loginService = async (user) => {
     try {
         const response = await fetchData(`${URL}/login`, 'POST', user);
-        const user = await response.json();
-        return user;
+        const data = await response.json();
+        return data;
     } catch (error) {
         console.error({ 'Error al logear usuario': error });
     }
@@ -30,8 +30,8 @@ export const sessionService = async () => {
             return { user: null };
         }
 
-        const user = await response.json();
-        return user;
+        const data = await response.json();
+        return data;
     } catch (error) {
         console.error({ 'Error al obtener sesion': error });
     }

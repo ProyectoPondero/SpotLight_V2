@@ -16,13 +16,12 @@ export const UserContextProvider = ({ children }) => {
     const authLogin = async (user) => {
         try {
             const response = await loginService(user);
-            console.log(response);
             if (response) {
                 dispatch({
                     type: userType.LOGIN,
                     payload: response
                 });
-                toast.success(`Bienvenido ${response.user.username}!`);
+                toast.success(`Bienvenido ${response.data.username}!`);
                 return response;
             }
         } catch (error) {
