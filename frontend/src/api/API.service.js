@@ -20,6 +20,7 @@ export const loginService = async (user) => {
         return data;
     } catch (error) {
         console.error({ 'Error al logear usuario': error });
+        toast.error("Error al iniciar sesión. Por favor, inténtelo de nuevo.");
     }
 }
 
