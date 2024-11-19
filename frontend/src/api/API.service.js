@@ -49,8 +49,8 @@ export const logoutService = async () => {
 export const getMessagesService = async (_id) => {
     try {
         const response = await fetchData(`${URL}/messages/${_id}`, 'GET');
-        const messages = await response.json();
-        return messages;
+        const data = await response.json();
+        return data;
     } catch (error) {
         console.error({ 'Error al obtener mensajes': error });
     }

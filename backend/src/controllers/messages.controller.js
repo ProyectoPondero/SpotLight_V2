@@ -1,4 +1,5 @@
 import { messageModel } from '../models/message.model.js';
+import { profileModel } from '../models/profile.model.js';
 
 export const messagesCtrl = {};
 
@@ -15,9 +16,16 @@ messagesCtrl.getMessages = async (req, res) => {
         })
             .sort({ createdAt: 'asc' });
 
+        const profiles = await profileModel.find({
+            $or: [
+                { user: id },
+                { user: messageFrom },
+            ],
+        });
 
         res.status(200).json({
             messages,
+            profiles,
         });
     } catch (error) {
         res.status(500).json({

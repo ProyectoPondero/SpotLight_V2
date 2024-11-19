@@ -11,7 +11,10 @@ export const SidebarChat = () => {
     return (
         <div className="h-screen bg-gray-800 text-white">
             <Link to='/home' className="p-4 border-b border-gray-700">
-                <h2 className="ms-2 text-xl font-semibold">Chats</h2>
+                <div className='flex items-center font-bold ms-2 dark:text-gray-100'>
+                    <img className='h-10 md:h-12 p-1' src="/spotlight.ico" alt="icon Spot" />
+                    <h1 className='p-2 pl-2 md:text-2xl sm:text-xl'>Spotlight</h1>
+                </div>
             </Link>
             <div>
                 {chatState.users
