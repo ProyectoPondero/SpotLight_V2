@@ -16,9 +16,9 @@ export const Soporte = () => {
     useEffect(() => {
         const fetchUserInfo = async () => {
             try {
-                const { username, email } = await getUserInfo();
+                const { userName, email } = await getUserInfo();
                 setEmail(email);
-                setUsername(username);
+                setUsername(userName);
             } catch (err) {
                 console.error(err);
                 setError(err.message);
@@ -45,7 +45,7 @@ export const Soporte = () => {
             to_name: name,
         };
 
-        emailjs.send("service_yi0vspu", "template_j952r6v", templateParams, "011krJV2xhHHrPVQb")
+        emailjs.send("service_4msaut8", "template_sf5usqw", templateParams, "vK2lTVRTUDOgwkfQE")
             .then((response) => {
                 console.log('Correo enviado con éxito!', response.status, response.text);
                 setAsunto('');
@@ -154,7 +154,6 @@ export const Soporte = () => {
                     </div>
                 </div>
             </main>
-            <Footer />
         </>
     );
 };

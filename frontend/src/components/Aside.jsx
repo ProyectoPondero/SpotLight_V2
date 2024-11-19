@@ -6,9 +6,9 @@ export const Aside = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
 
     const images = [
-        'https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg',
-        'https://img.freepik.com/premium-photo/detailed-photo-chameleons-eyes_129172-1195.jpg?w=360',
-        'https://img.freepik.com/premium-photo/beautiful-photo-is-must-everyday-work-ai-generated-best-wonderful-photo-images-very-nice_1089151-1199.jpg',
+        'https://www.cultura.gob.ar/media/uploads/sinfonica-juvenil-nacional-jose-de-san-martin-3-de-septiembre_principal.jpg',
+        'https://www.cultura.gob.ar/media/uploads/curso_virtual.jpg',
+        'https://www.cultura.gob.ar/media/uploads/2019-09-17_taller-laura-yusem_foto-romina-santarelli.jpg',
     ];
 
     const handleNext = () => {

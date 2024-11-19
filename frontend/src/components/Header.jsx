@@ -2,12 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { authContext } from '../contexts/user/UserContexProvider.jsx';
 import { Link, useNavigate } from 'react-router-dom';
 import Dropdown from './Dropdown.jsx';
+import { useProfile } from '../contexts/profile/profileContext.jsx';
 
 export const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const [theme, setTheme] = useState(() => window.localStorage.getItem('theme') || 'light');
     const { authLogout } = authContext();
     const navigate = useNavigate();
+    const { state: { profile }, getProfileData } = useProfile();
+
+    useEffect(() => {
+        getProfileData();
+    }, []);
 
     useEffect(() => {
         if (theme === 'dark') {
@@ -64,7 +70,10 @@ export const Header = () => {
 
                     <div className='flex items-center gap-4'>
                         <button className='px-2 rounded-full h-8 flex items-center'>
-                            <Link to="/profile">
+                            <Link className='flex items-center gap-2 pr-2 border-r border-l p-1 dark:border-white border-black' to="/profile">
+                                <h1 className="font-bold text-md p-1 dark:text-white">
+                                    {profile?.name}
+                                </h1>
                                 <i className="fa-solid fa-user text-gray-500 hover:text-black dark:hover:text-white text-2xl"></i>
                             </Link>
                         </button>
@@ -95,7 +104,7 @@ export const Header = () => {
                             <Link to="/support">Soporte</Link>
                         </li>
                         <li className='rounded px-2 flex items-end hover:bg-gray-300 dark:hover:bg-gray-800 dark:hover:text-yellow-500 font-bold py-1'>
-                            <Link to="/messagge">Mensajes</Link>
+                            <Link to="/chat">Mensajes</Link>
                         </li>
                         <li className='rounded p-2 font-bold'>
                             <Dropdown />

@@ -12,7 +12,6 @@ export const UserContextProvider = ({ children }) => {
     };
 
     const [state, dispatch] = useReducer(userReducer, initialState);
-    console.log(state);
     const authLogin = async (user) => {
         try {
             const response = await loginService(user);
