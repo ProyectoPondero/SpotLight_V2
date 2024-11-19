@@ -12,7 +12,7 @@ export const UserContextProvider = ({ children }) => {
     };
 
     const [state, dispatch] = useReducer(userReducer, initialState);
-
+    console.log(state);
     const authLogin = async (user) => {
         try {
             const response = await loginService(user);
@@ -22,10 +22,12 @@ export const UserContextProvider = ({ children }) => {
                     payload: response
                 });
                 toast.success(`Bienvenido ${response.data.username}!`);
+                await authSession();
                 return response;
             }
         } catch (error) {
             console.error("Error al iniciar sesión:", error);
+            toast.error("Error al iniciar sesión. Por favor, inténtelo de nuevo.");
         }
     };
 
@@ -61,7 +63,7 @@ export const UserContextProvider = ({ children }) => {
             }
         } catch (error) {
             console.error("Error al cerrar sesión:", error);
-            throw new Error("Error al cerrar sesión");
+            toast.error("Error al cerrar sesión. Por favor, inténtelo de nuevo.");
         }
     };
 
