@@ -9,6 +9,8 @@ export const ChatBubble = ({ message }) => {
 
     const isLoggedUser = message.from === state.user._id;
 
+    const myAvatar = profile?.avatar ? profile.avatar.url : "https://via.placeholder.com/150";
+
     return (
 
         <li className={`flex items-end mb-4 ${isLoggedUser ? 'justify-end' : 'justify-start'}`}>
@@ -19,7 +21,7 @@ export const ChatBubble = ({ message }) => {
                 {message.message}
             </div>
             {isLoggedUser && (
-                <img src={profile?.avatar ? profile.avatar.url : "https://via.placeholder.com/150"} alt="profile" className="w-8 h-8 rounded-full ml-2" />
+                <img src={myAvatar} alt="profile" className="w-8 h-8 rounded-full ml-2" />
             )}
         </li>
 

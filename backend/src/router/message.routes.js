@@ -5,3 +5,4 @@ import { messagesCtrl } from '../controllers/messages.controller.js';
 export const messageRouter = Router();
 
 messageRouter.get('/:from', validarJWT, messagesCtrl.getMessages);
+messageRouter.get('/avatar/:id', validarJWT, messagesCtrl.getAvatar);

@@ -16,16 +16,16 @@ messagesCtrl.getMessages = async (req, res) => {
         })
             .sort({ createdAt: 'asc' });
 
-        const profiles = await profileModel.find({
-            $or: [
-                { user: id },
-                { user: messageFrom },
-            ],
-        });
+        // const profiles = await profileModel.find({
+        //     $or: [
+        //         { user: id },
+        //         { user: messageFrom },
+        //     ],
+        // });
 
         res.status(200).json({
             messages,
-            profiles,
+            // profiles,
         });
     } catch (error) {
         res.status(500).json({
@@ -34,3 +34,25 @@ messagesCtrl.getMessages = async (req, res) => {
         });
     }
 };
+
+messagesCtrl.getAvatar = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const profile = await profileModel.findOne({ user: id });
+
+        if (!profile) {
+            return res.status(404).json({
+                message: 'Profile not found',
+            });
+        }
+
+        res.status(200).json({
+            avatar: profile.avatar,
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: 'Error retrieving avatar',
+            error,
+        });
+    }
+}

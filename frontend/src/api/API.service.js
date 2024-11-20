@@ -56,3 +56,13 @@ export const getMessagesService = async (_id) => {
         console.error({ 'Error al obtener mensajes': error });
     }
 }
+
+export const getAvatarService = async (_id) => {
+    try {
+        const response = await fetchData(`${URL}/messages/avatar/${_id}`, 'GET');
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error({ 'Error al obtener avatar': error });
+    }
+}
