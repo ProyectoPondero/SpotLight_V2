@@ -29,7 +29,11 @@ const publicationSchema = new Schema({
     category: {
         type: String,
         require: true
-    }
+    },
+    avatar: {
+        type: String,
+        require: false
+    },
 });
 
 export const publicationModel = model('publication', publicationSchema);

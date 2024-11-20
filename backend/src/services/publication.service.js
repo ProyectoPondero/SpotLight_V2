@@ -24,7 +24,8 @@ publicationService.uploadPublication = async (user, title, description, file, ca
             description,
             public_id: result.public_id,
             secure_url: result.secure_url,
-            category
+            category,
+            avatar: userProfile.avatar.url,
         });
 
         // Guardar la nueva publicación en la base de datos

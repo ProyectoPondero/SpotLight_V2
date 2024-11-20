@@ -58,7 +58,7 @@ export const ContenidoHome = () => {
                                         <div className="relative">
                                             <img
                                                 className="w-12 h-12 rounded-full object-cover ring-2 ring-gray-100 dark:ring-gray-700"
-                                                src={profile?.avatar ? profile.avatar.url : "https://via.placeholder.com/150"}
+                                                src={publication.avatar ? publication.avatar : "https://via.placeholder.com/150"}
                                                 alt="Foto de perfil"
                                             />
                                             <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white dark:border-gray-800" />

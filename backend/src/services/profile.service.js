@@ -53,7 +53,16 @@ profileServices.updateProfile = async (userId, profile, avatar) => {
       // Actualizar el campo 'author' en las publicaciones del usuario
       await publicationModel.updateMany(
         { user: userId }, // Filtrar publicaciones por usuario
-        { author: profile.name } // Nuevo nombre del autor
+        {
+          author: profile.name, // Nuevo nombre del autor
+          avatar: newAvatar.url  // Nuevo avatar en las publicaciones
+        }
+      );
+    } else {
+      // Si no hubo cambio en el nombre, solo actualiza el avatar en las publicaciones
+      await publicationModel.updateMany(
+        { user: userId }, // Filtrar publicaciones por usuario
+        { avatar: newAvatar.url } // Actualizar solo el avatar
       );
     }
 

@@ -88,7 +88,7 @@ export const Categories = () => {
                                             <div className="flex items-center space-x-4">
                                                 <img
                                                     className="w-12 h-12 rounded-full object-cover ring-2 ring-purple-500"
-                                                    src={profile?.avatar?.url || "https://via.placeholder.com/150"}
+                                                    src={publication.avatar ? publication.avatar : "https://via.placeholder.com/150"}
                                                     alt="Foto de perfil"
                                                 />
                                                 <div>
