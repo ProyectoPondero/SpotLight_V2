@@ -5,7 +5,6 @@ import { SendMessage } from "./SendMessage";
 export const InboxChats = () => {
 
     const { chatState } = useChatContext();
-
     return (
 
         <div className="h-screen bg-gray-900 text-white p-4 flex flex-col">
@@ -18,6 +17,7 @@ export const InboxChats = () => {
                         <ChatBubble
                             key={message._id}
                             message={message}
+                            id={message.from}
                         />
                     ))}
             </ul>

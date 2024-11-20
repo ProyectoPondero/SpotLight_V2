@@ -1,12 +1,14 @@
 import { useChatContext } from "../contexts/chat/chatContextProvider";
 import { chatTypes } from "../contexts/chat/chatTypes";
-import { getMessagesService } from "../api/API.service";
+import { getMessagesService, getAvatarService } from "../api/API.service";
 import { scrollToBottom } from "../helpers/scrollToBottom";
+import { useEffect, useState } from "react";
 
 export const SidebarChatItem = ({ user }) => {
 
     const { chatState, dispatch } = useChatContext();
     const { chatActive } = chatState;
+    const [avatar, setAvatar] = useState('');
     const selectChat = async () => {
 
         dispatch({
@@ -27,11 +29,18 @@ export const SidebarChatItem = ({ user }) => {
 
     };
 
+    useEffect(() => {
+        (async () => {
+            const response = await getAvatarService(user._id);
+            setAvatar(response.avatar.url);
+        })()
+    }, []);
+
     return (
         <div onClick={selectChat}
             className={`flex items-center p-2 shadow-lg transition-colors duration-700 ${(user._id == chatActive) ? 'bg-gray-900' : ''}`}>
             <div className="relative">
-                <img src={"https://via.placeholder.com/150"} alt={`${user.username} profile`} className="w-10 h-10 rounded-full" />
+                <img src={avatar} alt={`${user.username} profile`} className="w-10 h-10 rounded-full" />
                 <span className={`absolute bottom-0 right-0 w-3 h-3 rounded-full ${user.online ? 'bg-green-500' : 'bg-gray-500'}`}></span>
             </div>
             <div className="ml-4">
