@@ -10,9 +10,9 @@ const CATEGORIES = [
     { id: 'Deportes', label: 'Deportes', color: 'bg-red-600 hover:bg-red-700' },
     { id: 'Educación', label: 'Educación', color: 'bg-slate-600 hover:bg-slate-700' },
     { id: 'Gaming', label: 'Gaming', color: 'bg-violet-600 hover:bg-violet-700' },
-    { id: 'Ciencias', label: 'Ciencias', color: 'bg-cyan-600 hover:bg-cyan-700' },
+    { id: 'Arte', label: 'Arte', color: 'bg-cyan-600 hover:bg-cyan-700' },
     { id: 'Música', label: 'Música', color: 'bg-pink-600 hover:bg-pink-700' },
-    { id: 'Sociales', label: 'Sociales', color: 'bg-amber-600 hover:bg-amber-700' }
+    { id: 'Teatro', label: 'Teatro', color: 'bg-amber-600 hover:bg-amber-700' }
 ];
 
 export const Categories = () => {

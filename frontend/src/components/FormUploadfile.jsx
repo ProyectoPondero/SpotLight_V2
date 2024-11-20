@@ -72,9 +72,9 @@ export default function FormUploadfile({ onNewPublication }) {
                         <option value="Deportes">Deportes</option>
                         <option value="Educación">Educación</option>
                         <option value="Gaming">Gaming</option>
-                        <option value="Ciencias">Ciencias</option>
+                        <option value="Arte">Arte</option>
                         <option value="Música">Música</option>
-                        <option value="Sociales">Sociales</option>
+                        <option value="Teatro">Teatro</option>
                     </select>
                 </div>
                 {/* Input de archivo */}

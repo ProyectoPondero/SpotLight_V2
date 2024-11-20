@@ -16,7 +16,7 @@ export const storage = multer.diskStorage({
 });
 
 // Límites de tamaño de archivo (25 MB)
-const maxMB = 25;
+const maxMB = 150;
 export const limits = {
     fileSize: 1024 * 1024 * maxMB
 };
